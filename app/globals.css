@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* ===== Дизайн-токены "Дизайн-лаборатории" ===== */
+  --color-cosmic-black: #0a0a0f;
+  --color-egyptian-gold: #c9a96e;
+  --color-neon-cyan: #00e5ff;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== Глобальные правила против overflow ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  background-color: var(--color-cosmic-black);
+  color: #ededed;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Flexbox-элементы с текстом */
+.flex-item {
+  min-width: 0;
+}
+
+/* Типографика через clamp() */
+.text-hero {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.text-section-title {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+/* Адаптивные сетки */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Адаптивные изображения */
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+}
