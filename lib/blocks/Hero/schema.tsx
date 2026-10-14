@@ -38,7 +38,7 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     title: "Создай промо-страницу мечты",
     subtitle: "Визуальный редактор, Pollinations-картинки и готовая посадочная за минуты.",
     ctaText: "Начать бесплатно",
-    ctaHref: "#lead-form",
+    ctaHref: "#register",
     align: "center",
     imageMode: "none",
     imageUrl: "",

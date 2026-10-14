@@ -13,10 +13,10 @@ export const CtaSchema: ComponentConfig<CtaProps> = {
     buttonHref: { type: "text", label: "Ссылка кнопки" },
   },
   defaultProps: {
-    title: "Готов запустить свою промо-страницу?",
-    subtitle: "Оставь заявку и получи доступ к конструктору уже сейчас.",
-    buttonText: "Оставить заявку",
-    buttonHref: "#lead-form",
+    title: "Готов зарегистрироваться?",
+    subtitle: "Кнопка ведёт к виджету TimePad прямо на странице.",
+    buttonText: "Зарегистрироваться",
+    buttonHref: "#register",
   },
   render: (props) => (
     <CtaBlock

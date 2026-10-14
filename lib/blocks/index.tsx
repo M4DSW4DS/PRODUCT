@@ -5,7 +5,7 @@ import { HeroSchema } from "./Hero/schema";
 import { TimerSchema } from "./Timer/schema";
 import { FeaturesSchema } from "./Features/schema";
 import { GallerySchema } from "./Gallery/schema";
-import { FormSchema } from "./Form/schema";
+import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
 import { CtaSchema } from "./CTA/schema";
 
@@ -22,7 +22,7 @@ export const blocksConfig: Config = {
     Timer: TimerSchema,
     Features: FeaturesSchema,
     Gallery: GallerySchema,
-    Form: FormSchema,
+    PartnerWidget: PartnerWidgetSchema,
     Faq: FaqSchema,
     Cta: CtaSchema,
   },
@@ -34,7 +34,7 @@ export const blocksConfig: Config = {
       components: ["Features", "Gallery", "Faq"],
     },
     "Интерактив": {
-      components: ["Timer", "Form"],
+      components: ["Timer", "PartnerWidget"],
     },
   },
   root: {
