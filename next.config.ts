@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Standalone-сборка: ONREZA автоопределяет её и запускает .next/standalone/server.js.
+  output: "standalone",
   reactStrictMode: true,
   images: {
     remotePatterns: [
