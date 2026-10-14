@@ -1,0 +1,17 @@
+{
+  "root": {
+    "props": {}
+  },
+  "content": [
+    {
+      "type": "Heading",
+      "props": {
+        "id": "Heading-1",
+        "title": "Дизайн-лаборатория",
+        "level": "h1",
+        "align": "center"
+      }
+    }
+  ],
+  "zones": {}
+}
