@@ -20,6 +20,18 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
         { label: "Центр", value: "center" },
       ],
     },
+    imageMode: {
+      type: "radio",
+      label: "Фон",
+      options: [
+        { label: "Без фона", value: "none" },
+        { label: "Своя ссылка", value: "url" },
+        { label: "AI (Pollinations)", value: "ai" },
+      ],
+    },
+    imageUrl: { type: "text", label: "URL фона" },
+    imagePrompt: { type: "textarea", label: "Промпт фона (AI)" },
+    imageSeed: { type: "number", label: "Seed фона" },
   },
   defaultProps: {
     eyebrow: "Дизайн-лаборатория",
@@ -28,6 +40,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     ctaText: "Начать бесплатно",
     ctaHref: "#lead-form",
     align: "center",
+    imageMode: "none",
+    imageUrl: "",
+    imagePrompt: "",
+    imageSeed: 42,
   },
   render: (props) => (
     <HeroBlock
@@ -37,6 +53,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
       ctaText={props.ctaText}
       ctaHref={props.ctaHref}
       align={props.align}
+      imageMode={props.imageMode}
+      imageUrl={props.imageUrl}
+      imagePrompt={props.imagePrompt}
+      imageSeed={props.imageSeed}
     />
   ),
 };

@@ -20,20 +20,43 @@ export const GallerySchema: ComponentConfig<GalleryProps> = {
       type: "array",
       label: "Изображения",
       arrayFields: {
+        mode: {
+          type: "radio",
+          label: "Источник",
+          options: [
+            { label: "Своя ссылка", value: "url" },
+            { label: "AI (Pollinations)", value: "ai" },
+          ],
+        },
         src: { type: "text", label: "URL изображения" },
+        prompt: { type: "textarea", label: "Промпт для AI" },
+        seed: { type: "number", label: "Seed" },
         alt: { type: "text", label: "Alt-текст" },
       },
-      getItemSummary: (item, index) => item.alt || `Изображение ${(index ?? 0) + 1}`,
-      defaultItemProps: () => ({ src: "", alt: "" }),
+      getItemSummary: (item, index) =>
+        item.alt || item.prompt || `Изображение ${(index ?? 0) + 1}`,
+      defaultItemProps: () => ({
+        mode: "url" as const,
+        src: "",
+        prompt: "",
+        seed: 42,
+        alt: "",
+      }),
     },
   },
   defaultProps: {
     title: "Галерея",
     columns: "3",
     images: [
-      { src: "", alt: "Пример 1" },
-      { src: "", alt: "Пример 2" },
-      { src: "", alt: "Пример 3" },
+      { mode: "url", src: "", prompt: "", seed: 42, alt: "Пример 1" },
+      {
+        mode: "ai",
+        src: "",
+        prompt: "египетская пирамида на закате, золотой свет, кинематографично",
+        seed: 42,
+        alt: "AI-пример",
+      },
+      { mode: "url", src: "", prompt: "", seed: 42, alt: "Пример 3" },
     ],
   },
   render: (props) => (

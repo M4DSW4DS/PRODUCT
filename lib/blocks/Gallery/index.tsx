@@ -1,5 +1,14 @@
+import { pollinationsImageUrl } from "../../core/pollinations";
+
 export type GalleryImage = {
+  /** Источник картинки: "url" — своя ссылка, "ai" — генерация Pollinations по промпту */
+  mode: "url" | "ai";
+  /** URL картинки в режиме "url" */
   src: string;
+  /** Текстовый промпт в режиме "ai" */
+  prompt: string;
+  /** seed для воспроизводимой генерации (одинаковый seed → одна и та же картинка) */
+  seed: number;
   alt: string;
 };
 
@@ -23,21 +32,29 @@ export function GalleryBlock({ title, columns, images }: GalleryProps) {
           {title}
         </h2>
         <div className={`grid gap-4 ${gridCols}`}>
-          {(images ?? []).map((img, i) =>
-            img.src ? (
+          {(images ?? []).map((img, i) => {
+            const src =
+              img.mode === "ai"
+                ? pollinationsImageUrl(img.prompt, {
+                    width: 768,
+                    height: 576,
+                    seed: img.seed,
+                  })
+                : img.src;
+            return src ? (
               <figure
                 key={i}
                 className="overflow-hidden rounded-xl border border-white/10 bg-white/5"
               >
                 <img
-                  src={img.src}
+                  src={src}
                   alt={img.alt || `Изображение ${i + 1}`}
                   className="w-full h-full object-cover aspect-[4/3]"
                   loading="lazy"
                 />
               </figure>
-            ) : null
-          )}
+            ) : null;
+          })}
         </div>
       </div>
     </section>
