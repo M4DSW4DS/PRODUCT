@@ -3,7 +3,7 @@ import { blocksConfig } from "@/lib/blocks";
 import { getPageData } from "@/lib/core/page-store";
 
 /**
- * Страница рендерится из опубликованного контента (KV, Этап 5)
+ * Страница рендерится из опубликованного контента (PostgreSQL)
  * с fallback на content/page.json. force-dynamic: всегда свежие данные.
  * Мы — витрина, не оператор ПД: сбор персональных данных на сайте
  * не производится, регистрация — в iframe-виджете TimePad (см. футер).

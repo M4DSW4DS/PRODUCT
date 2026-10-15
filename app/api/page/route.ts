@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { Data } from "@puckeditor/core";
 import { getPageData, savePageData } from "@/lib/core/page-store";
 
-/** GET /api/page — текущие опубликованные данные страницы (KV, иначе page.json). */
+/** GET /api/page — текущие опубликованные данные страницы (PostgreSQL, иначе page.json). */
 export async function GET() {
   try {
     const data = await getPageData();

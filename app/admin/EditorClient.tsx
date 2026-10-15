@@ -51,7 +51,7 @@ export default function EditorClient({ initialData }: { initialData: Data }) {
         throw new Error(body?.error || `HTTP ${res.status}`);
       }
       // eslint-disable-next-line no-console
-      console.info("[DesignLab] опубликовано в KV");
+      console.info("[DesignLab] опубликовано в PostgreSQL");
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       // eslint-disable-next-line no-console
