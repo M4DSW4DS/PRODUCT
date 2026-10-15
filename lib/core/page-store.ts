@@ -20,6 +20,50 @@ declare global {
   var __designLabPgSchemaReady: boolean | undefined;
 }
 
+/**
+ * Нормализует DATABASE_URL: кодирует «сырой» пароль через encodeURIComponent.
+ * Спецсимволы в пароле (`#`, `/`, `?`, пробел, `%` и т.п.) ломают парсер URL
+ * внутри postgres.js → ошибка «Invalid URL». Разбираем строку вручную (не через
+ * new URL — битая строка как раз через него и не проходит). Уже percent-encoded
+ * пароль раскодируется и кодируется заново — двойного кодирования нет.
+ * postgres.js после парсинга делает decodeURIComponent(password), т.е.
+ * аутентификация получает исходный пароль.
+ */
+function encodeDatabasePassword(raw: string): string {
+  const schemeEnd = raw.indexOf("://");
+  if (schemeEnd === -1) return raw;
+  const scheme = raw.slice(0, schemeEnd + 3);
+  const rest = raw.slice(schemeEnd + 3);
+
+  const firstAt = rest.indexOf("@");
+  if (firstAt === -1) return raw; // нет userinfo — пароля нет
+
+  // Конец authority — первый «/?#» после первого «@». Разделители ДО первого «@»
+  // могут быть частью сырого пароля и не должны резать строку.
+  const delim = rest.slice(firstAt + 1).search(/[/?#]/);
+  const tailStart = delim === -1 ? rest.length : firstAt + 1 + delim;
+
+  const authority = rest.slice(0, tailStart);
+  const tail = rest.slice(tailStart);
+  const sep = authority.lastIndexOf("@"); // «@» в пароле допустим — хост его не содержит
+  const userInfo = authority.slice(0, sep);
+  const host = authority.slice(sep + 1);
+
+  const colon = userInfo.indexOf(":");
+  if (colon === -1) return raw; // только пользователь, без пароля
+  const user = userInfo.slice(0, colon);
+  const password = userInfo.slice(colon + 1);
+  if (!password) return raw;
+
+  let plain: string;
+  try {
+    plain = decodeURIComponent(password);
+  } catch {
+    plain = password; // «сырой» % без валидной escape-последовательности
+  }
+  return `${scheme}${user}:${encodeURIComponent(plain)}@${host}${tail}`;
+}
+
 /** Ленивый singleton-клиент (переживает HMR в dev). Бросает без DATABASE_URL. */
 function getSql(): SqlClient {
   const url = process.env.DATABASE_URL;
@@ -29,7 +73,9 @@ function getSql(): SqlClient {
     );
   }
   if (!globalThis.__designLabPg) {
-    globalThis.__designLabPg = postgres(url, { max: 5 });
+    globalThis.__designLabPg = postgres(encodeDatabasePassword(url), {
+      max: 5,
+    });
   }
   return globalThis.__designLabPg;
 }
