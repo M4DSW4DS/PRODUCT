@@ -4,7 +4,6 @@ import { HeadingSchema } from "./Heading/schema";
 import { HeroSchema } from "./Hero/schema";
 import { TimerSchema } from "./Timer/schema";
 import { FeaturesSchema } from "./Features/schema";
-import { GallerySchema } from "./Gallery/schema";
 import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
 import { CtaSchema } from "./CTA/schema";
@@ -21,7 +20,6 @@ export const blocksConfig: Config = {
     Hero: HeroSchema,
     Timer: TimerSchema,
     Features: FeaturesSchema,
-    Gallery: GallerySchema,
     PartnerWidget: PartnerWidgetSchema,
     Faq: FaqSchema,
     Cta: CtaSchema,
@@ -31,7 +29,7 @@ export const blocksConfig: Config = {
       components: ["Heading", "Hero", "Cta"],
     },
     "Контент": {
-      components: ["Features", "Gallery", "Faq"],
+      components: ["Features", "Faq"],
     },
     "Интерактив": {
       components: ["Timer", "PartnerWidget"],
