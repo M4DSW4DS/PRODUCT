@@ -40,10 +40,20 @@ async function ensureSchema(sql: SqlClient): Promise<void> {
   await sql`
     CREATE TABLE IF NOT EXISTS page_content (
       id TEXT PRIMARY KEY,
-      content JSONB NOT NULL,
-      updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      data JSONB NOT NULL,
+      updated_at TIMESTAMPTZ DEFAULT now()
     )
   `;
+  // Совместимость: прошлая версия хранила JSON в колонке `content` —
+  // переименовываем её в `data`, если таблица уже создана со старой схемой.
+  const cols = await sql<{ column_name: string }[]>`
+    SELECT column_name FROM information_schema.columns
+    WHERE table_name = 'page_content' AND column_name IN ('content', 'data')
+  `;
+  const names = cols.map((c) => c.column_name);
+  if (names.includes("content") && !names.includes("data")) {
+    await sql`ALTER TABLE page_content RENAME COLUMN content TO data`;
+  }
   globalThis.__designLabPgSchemaReady = true;
 }
 
@@ -56,11 +66,11 @@ export async function getPageData(): Promise<Data> {
   try {
     const sql = getSql();
     await ensureSchema(sql);
-    const rows = await sql<{ content: Data }[]>`
-      SELECT content FROM page_content WHERE id = ${PAGE_KEY}
+    const rows = await sql<{ data: Data }[]>`
+      SELECT data FROM page_content WHERE id = ${PAGE_KEY}
     `;
-    if (rows.length > 0 && rows[0].content) {
-      return rows[0].content;
+    if (rows.length > 0 && rows[0].data) {
+      return rows[0].data;
     }
   } catch (err) {
     console.error(
@@ -79,9 +89,9 @@ export async function savePageData(data: Data): Promise<void> {
   const sql = getSql();
   await ensureSchema(sql);
   await sql`
-    INSERT INTO page_content (id, content)
+    INSERT INTO page_content (id, data)
     VALUES (${PAGE_KEY}, ${JSON.stringify(data)}::jsonb)
     ON CONFLICT (id)
-    DO UPDATE SET content = EXCLUDED.content, updated_at = now()
+    DO UPDATE SET data = EXCLUDED.data, updated_at = now()
   `;
 }
