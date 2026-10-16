@@ -1,0 +1,12 @@
+# Правила проекта «Луксор 2027»
+
+- Запрещено собирать персональные данные (нет форм, нет полей email/phone)
+- Сбор ПД только через iframe TimePad в блоке PartnerWidget
+- /lib/core — не трогать без явного запроса
+- Tailwind v4: только @theme в globals.css, без tailwind.config.js
+- Puck: импорты только из @puckeditor/core (не @measured/puck)
+- Puck RSC: Render из @puckeditor/core/rsc для app/page.tsx
+- Puck client: 'use client' + force-dynamic для /admin
+- Mobile-first: clamp() для типографики, min-width: 0 для flex
+- Коммит после каждого завершённого блока
+- Не логировать секреты (DATABASE_URL, ADMIN_TOKEN)

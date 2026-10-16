@@ -13,7 +13,7 @@
         "ctaText": "Зарегистрироваться",
         "ctaHref": "#register",
         "align": "center",
-        "imageMode": "ai",
+        "imageMode": "none",
         "imageUrl": "",
         "imagePrompt": "космическая дизайн-лаборатория, неоновый циан и египетское золото, туманности, футуристичный интерьер, кинематографичный свет, 3d render",
         "imageSeed": 7

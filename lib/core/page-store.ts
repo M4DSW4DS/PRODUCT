@@ -66,11 +66,6 @@ function encodeDatabasePassword(raw: string): string {
 
 /** Ленивый singleton-клиент (переживает HMR в dev). Бросает без DATABASE_URL. */
 function getSql(): SqlClient {
-  // TODO(debug): временный лог для отладки подключения — удалить после проверки.
-  console.log(
-    "DATABASE_URL prefix:",
-    process.env.DATABASE_URL?.substring(0, 30)
-  );
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(

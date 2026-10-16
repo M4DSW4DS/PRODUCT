@@ -56,7 +56,12 @@ export function HeroBlock({
             aria-hidden="true"
           />
         </>
-      ) : null}
+      ) : (
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-cosmic-black via-cosmic-black to-egyptian-gold/15"
+          aria-hidden="true"
+        />
+      )}
       <div className={`relative z-10 flex flex-col gap-6 ${alignCls}`}>
         <span className="text-neon-cyan uppercase tracking-[0.2em] text-sm font-semibold">
           {eyebrow}
