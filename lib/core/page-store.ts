@@ -104,20 +104,62 @@ async function ensureSchema(sql: SqlClient): Promise<void> {
 }
 
 /**
+ * Если записи нет или в ней пустой/битый контент — вставляет дефолт
+ * из content/page.json. Чинит «пустой холст» /admin без ручных SQL.
+ * Возвращает данные для показа или null (тогда возьмём page.json).
+ */
+async function seedDefaultIfNeeded(
+  sql: SqlClient,
+  current: Data | null
+): Promise<Data | null> {
+  const contentOk =
+    !!current && Array.isArray(current.content) && current.content.length > 0;
+  if (contentOk) return current;
+
+  const reason = current ? "пустой или битый контент" : "записи нет";
+  const seeded = pageFallback as unknown as Data;
+  try {
+    await sql`
+      INSERT INTO page_content (id, data)
+      VALUES (${PAGE_KEY}, ${JSON.stringify(seeded)}::jsonb)
+      ON CONFLICT (id)
+      DO UPDATE SET data = EXCLUDED.data, updated_at = now()
+    `;
+    console.warn(
+      `[page-store] ${reason} — вставлен дефолт из page.json ` +
+        `(${seeded.content.length} блоков)`
+    );
+    return seeded;
+  } catch (err) {
+    console.error(`[page-store] не удалось вставить дефолт (${reason}):`, err);
+    return null;
+  }
+}
+
+/**
  * Читает опубликованные данные страницы из PostgreSQL.
- * Fallback — content/page.json (DATABASE_URL не задан, БД недоступна
- * или ещё ничего не публиковали).
+ * Пустая/битая запись или её отсутствие → авто-сид из page.json.
+ * Fallback — content/page.json (DATABASE_URL не задан или БД недоступна).
+ * Логирует исход каждый вызов (диагностика «что вернул /admin»).
  */
 export async function getPageData(): Promise<Data> {
   try {
     const sql = getSql();
     await ensureSchema(sql);
-    const rows = await sql<{ data: Data }[]>`
+    const rows = await sql<{ data: Data | null }[]>`
       SELECT data FROM page_content WHERE id = ${PAGE_KEY}
     `;
-    if (rows.length > 0 && rows[0].data) {
-      return rows[0].data;
+    const current = rows.length > 0 ? (rows[0].data ?? null) : null;
+    const healed = await seedDefaultIfNeeded(sql, current);
+    if (healed) {
+      console.info(
+        `[page-store] page "${PAGE_KEY}": ${healed.content?.length ?? 0} blocks`
+      );
+      return healed;
     }
+    console.warn(
+      "[page-store] БД не дала данные и сид не прошёл — берём page.json"
+    );
   } catch (err) {
     console.error(
       "[page-store] чтение из PostgreSQL не удалось, берём page.json:",
