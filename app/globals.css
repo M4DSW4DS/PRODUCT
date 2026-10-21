@@ -15,7 +15,7 @@
   --font-size-body: clamp(1rem, 1.5vw, 1.25rem);
   --font-size-hud: clamp(0.65rem, 0.8vw, 0.75rem);
 
-  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
 }

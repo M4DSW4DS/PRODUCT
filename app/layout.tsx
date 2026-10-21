@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import { LenisProvider } from "@/lib/core/providers/LenisProvider";
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
   subsets: ["latin", "cyrillic"],
   weight: ["400", "700"],
-  variable: "--font-cormorant",
+  variable: "--font-playfair",
 });
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${cormorant.variable} ${inter.variable} ${mono.variable} grain-pending`}
+      className={`${playfair.variable} ${inter.variable} ${mono.variable} grain-pending`}
     >
       <body>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
