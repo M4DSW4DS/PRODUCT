@@ -34,3 +34,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# build / dev logs
+*.log
+build.log
+dev.err.log
+dev.out.log
+pw_browser.log
+pw_install.log
+
+# screenshots / capture scripts
+screenshot*.png
+screenshot*.js
+
+# next.js / dependencies (unanchored)
+.next/
+node_modules/
