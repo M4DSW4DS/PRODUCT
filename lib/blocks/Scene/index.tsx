@@ -69,9 +69,10 @@ export function Scene({
         <Image
           src={backgroundImage}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
           sizes="100vw"
-          priority
+          className="object-cover"
+          priority={false}
         />
       ) : (
         <div
