@@ -18,8 +18,8 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Дизайн-лаборатория",
-  description: "Сайт-конструктор промо-кампаний",
+  title: "Luxor 2027 — Солнце над Египтом угаснет",
+  description: "2 августа 2027. Полное солнечное затмение. Луксор, Египет. 6 минут 23 секунды полной фазы.",
 };
 
 export default function RootLayout({
