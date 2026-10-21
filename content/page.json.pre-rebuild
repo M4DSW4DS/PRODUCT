@@ -52,7 +52,7 @@
           {
             "icon": "⚡",
             "title": "50 минут — готовая страница",
-            "description": "Собери страницу из семи готовых блоков, не трогая ни строчки кода."
+            "description": "Собери лендинг из семи готовых блоков, не трогая ни строчки кода."
           },
           {
             "icon": "🎨",
@@ -86,7 +86,7 @@
       "props": {
         "id": "PartnerWidget-1",
         "title": "Регистрация на событие",
-        "subtitle": "Виджет TimePad: билеты, оплата и согласие на обработку персональных данных — внутри виджета TimePad — оператор ПД на стороне сервиса.",
+        "subtitle": "Виджет TimePad: билеты, оплата и согласие на обработку персональных данных — внутри виджета, у оператора.",
         "src": "",
         "height": "620",
         "fallbackUrl": "https://timepad.ru/",
@@ -122,6 +122,118 @@
         "subtitle": "Виджет TimePad откроется прямо на странице — подтверждение придёт на твою почту.",
         "buttonText": "Зарегистрироваться",
         "buttonHref": "#register"
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-01",
+        "variant": "mystery",
+        "overlay": "dusk",
+        "eyebrow": "Scene 01 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "gold",
+        "backgroundImage": "/scenes/scene-01-mystery.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-02",
+        "variant": "truth",
+        "overlay": "none",
+        "eyebrow": "Scene 02 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "cyan",
+        "backgroundImage": "/scenes/scene-02-truth.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-03",
+        "variant": "key",
+        "overlay": "none",
+        "eyebrow": "Scene 03 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "orange",
+        "backgroundImage": "/scenes/scene-03-key.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-04",
+        "variant": "elements",
+        "overlay": "none",
+        "eyebrow": "Scene 04 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "gold",
+        "backgroundImage": "/scenes/scene-04-elements.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-05",
+        "variant": "keepers",
+        "overlay": "none",
+        "eyebrow": "Scene 05 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "cyan",
+        "backgroundImage": "/scenes/scene-05-keepers.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-06",
+        "variant": "darkness",
+        "overlay": "night",
+        "eyebrow": "Scene 06 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "orange",
+        "backgroundImage": "/scenes/scene-06-darkness.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-07",
+        "variant": "fifth",
+        "overlay": "none",
+        "eyebrow": "Scene 07 // TBD",
+        "heading": "TBD",
+        "lead": "TBD",
+        "accent": "white",
+        "backgroundImage": "/scenes/scene-07-fifth.webp",
+        "quote": "",
+        "ctaLabel": "",
+        "ctaHref": ""
       }
     }
   ],

@@ -30,7 +30,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
         { label: "Ночь (night)", value: "night" },
       ],
     },
-    eyebrow: { type: "text", label: "Надзаголовок" },
+    eyebrowPrefix: { type: "text", label: "Префикс надзаголовка" },
+    eyebrowSuffix: { type: "text", label: "Суффикс надзаголовка" },
     heading: { type: "text", label: "Заголовок" },
     lead: { type: "textarea", label: "Ведущий текст" },
     accent: {
@@ -51,7 +52,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
   defaultProps: {
     variant: "mystery",
     overlay: "none",
-    eyebrow: "",
+    eyebrowPrefix: "",
+    eyebrowSuffix: "",
     heading: "",
     lead: "",
     accent: "gold",
@@ -64,7 +66,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     <Scene
       variant={props.variant}
       overlay={props.overlay}
-      eyebrow={props.eyebrow}
+      eyebrowPrefix={props.eyebrowPrefix}
+      eyebrowSuffix={props.eyebrowSuffix}
       heading={props.heading}
       lead={props.lead}
       accent={props.accent}

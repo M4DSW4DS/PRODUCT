@@ -10,9 +10,11 @@ import { Darkness } from "./variants/Darkness";
 import { Fifth } from "./variants/Fifth";
 
 export interface SceneProps {
+  index?: number;
   variant?: "mystery" | "truth" | "key" | "elements" | "keepers" | "darkness" | "fifth";
   overlay?: "none" | "dusk" | "night";
-  eyebrow?: string;
+  eyebrowPrefix?: string;
+  eyebrowSuffix?: string;
   heading?: string;
   lead?: string;
   accent?: "gold" | "cyan" | "orange" | "white";
@@ -39,9 +41,11 @@ const OVERLAY_STYLES: Record<string, React.CSSProperties> = {
 };
 
 export function Scene({
+  index = 0,
   variant = "mystery",
   overlay = "none",
-  eyebrow,
+  eyebrowPrefix,
+  eyebrowSuffix,
   heading,
   lead,
   accent = "gold",
@@ -50,6 +54,8 @@ export function Scene({
   ctaLabel,
   ctaHref,
 }: SceneProps) {
+  const prefix = eyebrowPrefix || `SCENE ${String(index + 1).padStart(2, "0")}`;
+  const eyebrow = `${prefix} // ${eyebrowSuffix ?? ""}`.trim();
   const VariantComponent = VARIANT_COMPONENTS[variant] ?? Mystery;
 
   return (
@@ -123,9 +129,11 @@ export function Scene({
 
         {/* Вариант сцены (раскрывается в следующих тасках) */}
         <VariantComponent
+          index={index}
           variant={variant}
           overlay={overlay}
-          eyebrow={eyebrow}
+          eyebrowPrefix={eyebrowPrefix}
+          eyebrowSuffix={eyebrowSuffix}
           heading={heading}
           lead={lead}
           accent={accent}
