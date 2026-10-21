@@ -1,0 +1,129 @@
+{
+  "root": {
+    "props": {}
+  },
+  "content": [
+    {
+      "type": "Hero",
+      "props": {
+        "id": "Hero-1",
+        "eyebrow": "Миссия Луксор · 02.08.2027 · 6 минут 23 секунды",
+        "title": "4498 лет назад небо над Египтом умерло. Оно снова закроется.",
+        "subtitle": "Полное солнечное затмение в Луксоре. Второе по длительности в XXI веке. Следующее — не раньше 2114 года.",
+        "ctaText": "Войти в точку выравнивания",
+        "ctaHref": "#register",
+        "align": "center",
+        "imageMode": "none",
+        "imageUrl": "",
+        "imagePrompt": "Ancient Egyptian desert at golden dawn, Great Pyramids silhouettes on horizon, deep cosmic black sky with faint stars, warm gold light on sand dunes, cinematic, photorealistic, high detail, no people, no faces, safe for work",
+        "imageSeed": 7,
+        "timer": {
+          "enabled": true,
+          "target_utc": "2027-08-02T08:40:00Z",
+          "position": "below_lead",
+          "timezones": [
+            { "label": "Москва", "tz": "Europe/Moscow" },
+            { "label": "Луксор", "tz": "Africa/Cairo" },
+            { "label": "Лондон", "tz": "Europe/London" },
+            { "label": "Нью-Йорк", "tz": "America/New_York" },
+            { "label": "Дубай", "tz": "Asia/Dubai" }
+          ],
+          "hint_text": "Ты в UTC+3 — та же зона, что Луксор.",
+          "accent_color": "#00e5ff",
+          "post_countdown_text": "Затмение началось. Ты успел?"
+        }
+      }
+    },
+    {
+      "type": "Timer",
+      "props": {
+        "id": "Timer-1",
+        "title": "До закрытия набора —",
+        "targetDate": "2026-12-31T23:59",
+        "endMessage": "Набор закрыт — регистрация временно недоступна"
+      }
+    },
+    {
+      "type": "Features",
+      "props": {
+        "id": "Features-1",
+        "title": "Почему Design Lab",
+        "items": [
+          {
+            "icon": "⚡",
+            "title": "50 минут — готовая страница",
+            "description": "Собери страницу из семи готовых блоков, не трогая ни строчки кода."
+          },
+          {
+            "icon": "🎨",
+            "title": "AI-визуалы без ключей",
+            "description": "Pollinations генерирует картинки прямо в блоке: промпт, seed — и картинка готова."
+          },
+          {
+            "icon": "📈",
+            "title": "Регистрация без ПД на нашей стороне",
+            "description": "Встроенный iframe-виджет TimePad: билеты и данные участников — у оператора, сайт остаётся витриной."
+          },
+          {
+            "icon": "🚀",
+            "title": "Публикация в один клик",
+            "description": "Кнопка Publish сохраняет страницу, а хостинг разворачивает её за минуты."
+          }
+        ]
+      }
+    },
+    {
+      "type": "Heading",
+      "props": {
+        "id": "Heading-1",
+        "title": "Зарегистрируйся на событии",
+        "level": "h2",
+        "align": "center"
+      }
+    },
+    {
+      "type": "PartnerWidget",
+      "props": {
+        "id": "PartnerWidget-1",
+        "title": "Регистрация на событие",
+        "subtitle": "Виджет TimePad: билеты, оплата и согласие на обработку персональных данных — внутри виджета TimePad — оператор ПД на стороне сервиса.",
+        "src": "",
+        "height": "620",
+        "fallbackUrl": "https://timepad.ru/",
+        "fallbackText": "Открыть на TimePad"
+      }
+    },
+    {
+      "type": "Faq",
+      "props": {
+        "id": "Faq-1",
+        "title": "Частые вопросы",
+        "items": [
+          {
+            "question": "Нужен ли свой хостинг?",
+            "answer": "Нет, конструктор работает в браузере, а готовую страницу разворачивают на хостинге за минуты."
+          },
+          {
+            "question": "Собираете ли вы мои данные?",
+            "answer": "Нет. Мы — витрина: форма регистрации, оплата и обработка персональных данных работают внутри виджета TimePad — оператор ПД на стороне сервиса."
+          },
+          {
+            "question": "Картинки точно бесплатно?",
+            "answer": "Да, Pollinations.ai — открытый сервис: генерация по промпту с фиксированным seed, без ключей и оплаты."
+          }
+        ]
+      }
+    },
+    {
+      "type": "Cta",
+      "props": {
+        "id": "Cta-1",
+        "title": "Готов зарегистрироваться?",
+        "subtitle": "Виджет TimePad откроется прямо на странице — подтверждение придёт на твою почту.",
+        "buttonText": "Зарегистрироваться",
+        "buttonHref": "#register"
+      }
+    }
+  ],
+  "zones": {}
+}
