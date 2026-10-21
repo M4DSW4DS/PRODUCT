@@ -10,28 +10,14 @@
         "eyebrow": "Миссия Луксор · 02.08.2027 · 6 минут 23 секунды",
         "title": "4498 лет назад небо над Египтом умерло. Оно снова закроется.",
         "subtitle": "Полное солнечное затмение в Луксоре. Второе по длительности в XXI веке. Следующее — не раньше 2114 года.",
-        "ctaText": "Войти в точку выравнивания",
+        "quote": "Я выстроил это небо из света и камня. Теперь оно гаснет по моей команде — и ты увидишь.",
+        "quoteAttribution": "MISTER ZORG",
+        "ctaLabel": "Войти в точку выравнивания",
         "ctaHref": "#register",
-        "align": "center",
-        "imageMode": "none",
-        "imageUrl": "",
-        "imagePrompt": "Ancient Egyptian desert at golden dawn, Great Pyramids silhouettes on horizon, deep cosmic black sky with faint stars, warm gold light on sand dunes, cinematic, photorealistic, high detail, no people, no faces, safe for work",
-        "imageSeed": 7,
-        "timer": {
-          "enabled": true,
-          "target_utc": "2027-08-02T08:40:00Z",
-          "position": "below_lead",
-          "timezones": [
-            { "label": "Москва", "tz": "Europe/Moscow" },
-            { "label": "Луксор", "tz": "Africa/Cairo" },
-            { "label": "Лондон", "tz": "Europe/London" },
-            { "label": "Нью-Йорк", "tz": "America/New_York" },
-            { "label": "Дубай", "tz": "Asia/Dubai" }
-          ],
-          "hint_text": "Ты в UTC+3 — та же зона, что Луксор.",
-          "accent_color": "#00e5ff",
-          "post_countdown_text": "Затмение началось. Ты успел?"
-        }
+        "hudLabel": "System Ready // Countdown",
+        "hudFooter": "ORBIT · EARTH · EGYPT",
+        "showTimer": true,
+        "showCalendar": true
       }
     },
     {

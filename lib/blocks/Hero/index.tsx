@@ -1,180 +1,195 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { pollinationsImageUrl } from "../../core/pollinations";
-import { CountdownTimer } from "@/lib/components/CountdownTimer";
-import type { CountdownTimezone } from "@/lib/components/CountdownTimer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CircularWindow } from "./internal/CircularWindow";
+import { ZorgCabinet } from "./internal/ZorgCabinet";
+import { HeroHUD } from "./internal/HeroHUD";
+import { fadeUp } from "@/lib/anim/primitives";
 
-/** Встраиваемый таймер в Hero. */
-export type HeroTimerConfig = {
-  /** Вкл/выкл. "yes"/"no" — из Puck-радио; boolean — из контента. */
-  enabled: boolean | "yes" | "no";
-  /** Целевая точка UTC (ISO 8601). */
-  target_utc: string;
-  /** Позиция: "below_lead" — между лидом и CTA. */
-  position: string;
-  timezones: CountdownTimezone[];
-  hint_text: string;
-  accent_color: string;
-  post_countdown_text: string;
-};
+gsap.registerPlugin(ScrollTrigger);
 
+/** Пропсы блока Hero (кинематографичная версия). */
 export type HeroProps = {
+  /** Надзаголовок. */
   eyebrow: string;
+  /** Главный заголовок. */
   title: string;
+  /** Подзаголовок. */
   subtitle: string;
-  ctaText: string;
+  /** Цитата Зорга. */
+  quote: string;
+  /** Автор цитаты. */
+  quoteAttribution: string;
+  /** Текст CTA-кнопки. */
+  ctaLabel: string;
+  /** Ссылка CTA. */
   ctaHref: string;
-  align: "left" | "center";
-  /** Фон hero: "none" — градиент-плейсхолдер, "url" — своя ссылка, "ai" — Pollinations по промпту */
-  imageMode: "none" | "url" | "ai";
-  imageUrl: string;
-  imagePrompt: string;
-  imageSeed: number;
-  /** Таймер поверх движка CountdownTimer (undefined у старых данных — не показывается). */
-  timer: HeroTimerConfig;
+  /** Подпись HUD-строки состояния. */
+  hudLabel: string;
+  /** Подпись HUD-подвала. */
+  hudFooter: string;
+  /** Показывать обратный отсчёт. */
+  showTimer: boolean;
+  /** Показывать календарный блок. */
+  showCalendar: boolean;
 };
-
-/** Локальные стили Hero (пульсация CTA неоновым цианом). */
-const STYLES = `
-@keyframes hero-cta-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.45); } 50% { box-shadow: 0 0 22px 4px rgba(0, 229, 255, 0.30); } }
-.hero-cta-glow { animation: hero-cta-glow 2.4s ease-in-out infinite; }
-`;
 
 /**
- * БЛОК — Hero. Первый экран промо-страницы.
- * GSAP-анимации: параллакс фона 0.5x при скролле;
- * fade-in по этапам: eyebrow (0.2s) → H1 (0.4s) → lead (0.6s) → timer (0.8s) → CTA (1.0s).
+ * БЛОК — Hero (кинематографичная версия).
+ *
+ * Структура: круглое окно-прицел + фоновый шкаф Зорга + HUD-панель.
+ * Пиннится на 150% высоты вьюпорта; окно «отъезжает» с zoom 14 → 1.
  */
-export function HeroBlock({
-  eyebrow,
-  title,
-  subtitle,
-  ctaText,
-  ctaHref,
-  align,
-  imageMode,
-  imageUrl,
-  imagePrompt,
-  imageSeed,
-  timer,
+export function Hero({
+  eyebrow = "",
+  title = "",
+  subtitle = "",
+  quote = "",
+  quoteAttribution = "MISTER ZORG",
+  ctaLabel = "",
+  ctaHref = "",
+  hudLabel = "System Ready // Countdown",
+  hudFooter = "ORBIT · EARTH · EGYPT",
+  showTimer = true,
+  showCalendar = true,
 }: HeroProps) {
   const rootRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const eyebrowRef = useRef<HTMLSpanElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const leadRef = useRef<HTMLParagraphElement>(null);
+  const windowRef = useRef<HTMLDivElement>(null);
+  const cabinetRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(eyebrowRef.current, {
-        y: -16, opacity: 0, duration: 0.6, delay: 0.2, ease: "power2.out",
-      });
-      gsap.from(titleRef.current, {
-        y: 28, opacity: 0, duration: 0.8, delay: 0.4, ease: "power2.out",
-      });
-      gsap.from(leadRef.current, {
-        y: 20, opacity: 0, duration: 0.8, delay: 0.6, ease: "power2.out",
-      });
-      if (timerRef.current) {
-        gsap.from(timerRef.current, {
-          y: 16, opacity: 0, duration: 0.8, delay: 0.8, ease: "power2.out",
-        });
-      }
-      gsap.from(ctaRef.current, {
-        y: 16, opacity: 0, duration: 0.6, delay: 1.0, ease: "power2.out",
-      });
-    }, rootRef);
+    const root = rootRef.current;
+    if (!root) return;
 
-    // Параллакс фона 0.5x при скролле.
-    const toY = bgRef.current
-      ? gsap.quickTo(bgRef.current, "y", { duration: 0.35, ease: "power2.out" })
-      : null;
-    const onScroll = () => toY?.(window.scrollY * 0.5);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // gsap.context гарантирует cleanup всех твинов и ScrollTrigger при unmount.
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          reduce: "(prefers-reduced-motion: reduce)",
+          mobile: "(max-width: 767px)",
+        },
+        (context) => {
+          const { reduce, mobile } = context.conditions as {
+            reduce: boolean;
+            mobile: boolean;
+          };
+
+          // Уважаем системную настройку — никаких анимаций.
+          if (reduce) return;
+
+          fadeUp(".hero-title, .hero-subtitle, .hero-cta");
+
+          const windowEl = windowRef.current;
+          const cabinetEl = cabinetRef.current;
+          const timerEl = timerRef.current;
+
+          // Смещения таймера: фиксированные пиксели вместо vw/vh,
+          // чтобы не ломать мобильную вёрстку.
+          const timerX = mobile ? 0 : -72;
+          const timerY = mobile ? 56 : -140;
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: root,
+              start: "top top",
+              end: "+=150%",
+              pin: true,
+              scrub: 1,
+              anticipatePin: 1,
+            },
+          });
+
+          if (cabinetEl) {
+            tl.fromTo(
+              cabinetEl,
+              { opacity: 0, scale: 1.6 },
+              { opacity: 1, scale: 1, ease: "none", duration: 1 },
+              0
+            );
+          }
+
+          if (windowEl) {
+            tl.fromTo(
+              windowEl,
+              { scale: 14, transformOrigin: "center center" },
+              { scale: 1, transformOrigin: "center center", ease: "none", duration: 1 },
+              0
+            );
+          }
+
+          if (timerEl) {
+            tl.fromTo(
+              timerEl,
+              { scale: 1.25, x: timerX, y: timerY },
+              { scale: 1, x: 0, y: 0, ease: "none", duration: 0.6 },
+              0.25
+            );
+          }
+        }
+      );
+    }, root);
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
       ctx.revert();
     };
   }, []);
 
-  const alignCls =
-    align === "center" ? "text-center items-center" : "text-left items-start";
-  const bgSrc =
-    imageMode === "ai"
-      ? pollinationsImageUrl(imagePrompt, { width: 768, height: 432, seed: imageSeed })
-      : imageMode === "url"
-        ? imageUrl
-        : "";
-  const timerOn =
-    timer?.enabled === true ||
-    timer?.enabled === "yes";
-  const showTimer =
-    timerOn &&
-    timer?.position === "below_lead" &&
-    Boolean(timer?.target_utc);
-
   return (
-    <section ref={rootRef} className="relative overflow-hidden px-6 py-20 md:py-32">
-      <style>{STYLES}</style>
+    <section
+      ref={rootRef}
+      className="relative flex min-h-screen w-full flex-col items-center justify-center gap-8 overflow-hidden bg-cosmic-black px-6 py-24 md:flex-row md:gap-12 md:py-32"
+    >
+      {/* Фоновый слой — шкаф Зорга */}
+      <ZorgCabinet ref={cabinetRef} />
 
-      {/* Фон (параллакс 0.5x): картинка или градиент-плейсхолдер cosmic-black → egyptian-gold */}
-      <div ref={bgRef} className="absolute inset-0 h-[125%]" aria-hidden="true">
-        {bgSrc ? (
-          <>
-            <img
-              src={bgSrc}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-cosmic-black/80" />
-            <div className="absolute inset-0 bg-gradient-to-b from-cosmic-black/30 via-transparent to-cosmic-black" />
-          </>
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-cosmic-black via-cosmic-black to-egyptian-gold/15" />
-        )}
+      {/* Круглое окно-прицел */}
+      <div className="relative z-10 flex w-full justify-center md:absolute md:left-8 md:top-1/2 md:w-auto md:-translate-y-1/2 md:justify-start lg:left-16">
+        <CircularWindow ref={windowRef} imageSrc="/hero/zorg-window.webp" />
       </div>
 
-      <div className={`relative z-10 flex flex-col gap-6 ${alignCls}`}>
-        <span
-          ref={eyebrowRef}
-          className="text-neon-cyan uppercase tracking-[0.2em] text-sm font-semibold"
-        >
-          {eyebrow}
-        </span>
-        <h1 ref={titleRef} className="text-hero font-bold text-egyptian-gold max-w-4xl">
-          {title}
-        </h1>
-        <p ref={leadRef} className="text-lg text-neon-cyan max-w-2xl leading-relaxed">
-          {subtitle}
-        </p>
-        {showTimer ? (
-          <div ref={timerRef} className="w-full flex justify-center">
-            <CountdownTimer
-              target_utc={timer.target_utc}
-              timezones={timer.timezones}
-              hint_text={timer.hint_text}
-              accent_color={timer.accent_color}
-              post_countdown_text={timer.post_countdown_text}
-            />
-          </div>
+      {/* Левый столбец: заголовок, подзаголовок, CTA */}
+      <div className="relative z-20 flex w-full flex-col items-center gap-5 text-center md:absolute md:left-8 md:top-1/2 md:w-[24rem] md:-translate-y-1/2 md:items-start md:text-left lg:left-16 lg:w-[30rem]">
+        {title ? (
+          <h1 className="hero-title font-display text-hero font-bold text-egyptian-gold">
+            {title}
+          </h1>
         ) : null}
-        {ctaText ? (
+        {subtitle ? (
+          <p className="hero-subtitle max-w-xl text-[length:var(--font-size-body)] leading-relaxed text-zinc-300">
+            {subtitle}
+          </p>
+        ) : null}
+        {ctaLabel ? (
           <a
-            ref={ctaRef}
             href={ctaHref || "#"}
-            className="hero-cta-glow mt-2 inline-flex w-fit bg-egyptian-gold text-cosmic-black font-semibold px-6 py-3 rounded-lg transition-colors hover:bg-[#ff6b35]"
+            className="hero-cta inline-flex w-fit items-center border border-[var(--color-neon-cyan)]/60 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-neon-cyan)] transition-colors hover:bg-[var(--color-neon-cyan)]/10"
           >
-            {ctaText}
+            {ctaLabel}
           </a>
         ) : null}
+      </div>
+
+      {/* HUD-панель */}
+      <HeroHUD
+        timerRef={timerRef}
+        eyebrow={eyebrow}
+        quote={quote}
+        quoteAttribution={quoteAttribution}
+        hudLabel={hudLabel}
+        hudFooter={hudFooter}
+        showTimer={showTimer}
+        showCalendar={showCalendar}
+      />
+
+      {/* Декоративная подсказка прокрутки */}
+      <div className="pointer-events-none absolute bottom-6 left-1/2 z-20 -translate-x-1/2 text-[length:var(--font-size-hud)] uppercase tracking-[0.4em] text-zinc-600">
+        Scroll
       </div>
     </section>
   );
 }
-
