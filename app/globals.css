@@ -7,6 +7,17 @@
   --color-neon-cyan: #00e5ff;
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-eclipse-orange: #ff6b35;
+
+  --font-size-h1: clamp(2.5rem, 6vw, 5rem);
+  --font-size-h2: clamp(1.8rem, 4vw, 3.5rem);
+  --font-size-body: clamp(1rem, 1.5vw, 1.25rem);
+  --font-size-hud: clamp(0.65rem, 0.8vw, 0.75rem);
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
 /* ===== Глобальные правила против overflow ===== */
@@ -59,4 +70,55 @@ picture,
 video {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+/* grain overlay — hidden until asset arrives */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background-image: url("/textures/grain.png");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+.grain-pending::after {
+  display: none;
+}
+
+/* keyframes */
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  16.67% { transform: translate(20%, -20%); }
+  33.33% { transform: translate(-20%, 20%); }
+  50% { transform: translate(20%, 20%); }
+  66.67% { transform: translate(-20%, -20%); }
+  83.33% { transform: translate(20%, -20%); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes hud-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(0, 229, 255, 0.3); }
+  50% { box-shadow: 0 0 24px rgba(0, 229, 255, 0.6); }
+}
+.animate-hud {
+  animation: hud-pulse 4s ease-in-out infinite;
+}
+.eclipse-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--color-cosmic-black);
+}
+
+/* Global guards */
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+html,
+body {
+  background: var(--color-cosmic-black);
 }
