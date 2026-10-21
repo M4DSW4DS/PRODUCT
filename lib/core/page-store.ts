@@ -64,13 +64,15 @@ function encodeDatabasePassword(raw: string): string {
   return `${scheme}${user}:${encodeURIComponent(plain)}@${host}${tail}`;
 }
 
-/** Ленивый singleton-клиент (переживает HMR в dev). Бросает без DATABASE_URL. */
-function getSql(): SqlClient {
+/**
+ * Ленивый singleton-клиент (переживает HMR в dev).
+ * Возвращает null, если DATABASE_URL не задан — тогда хранилище работает
+ * в режиме «только чтение»: чтение из page.json, публикация недоступна.
+ */
+function getSql(): SqlClient | null {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    throw new Error(
-      "DATABASE_URL не задан: подключи PostgreSQL (ONREZA → Project → Environment Variables)"
-    );
+    return null;
   }
   if (!globalThis.__designLabPg) {
     globalThis.__designLabPg = postgres(encodeDatabasePassword(url), {
@@ -78,6 +80,15 @@ function getSql(): SqlClient {
     });
   }
   return globalThis.__designLabPg;
+}
+
+/**
+ * Читает дефолтный контент страницы из content/page.json.
+ * Используется как fallback, когда PostgreSQL недоступен (нет DATABASE_URL
+ * или БД не отвечает) — локальная разработка и превью без внешней БД.
+ */
+function readJsonPage(): Data {
+  return pageFallback as unknown as Data;
 }
 
 /** Создаёт таблицу один раз на процесс (CREATE TABLE IF_NOT EXISTS идемпотентен). */
@@ -143,8 +154,15 @@ async function seedDefaultIfNeeded(
  * Логирует исход каждый вызов (диагностика «что вернул /admin»).
  */
 export async function getPageData(): Promise<Data> {
+  const sql = getSql();
+  if (!sql) {
+    console.info(
+      "[page-store] DATABASE_URL не задан — читаем дефолт из page.json (read-only режим)"
+    );
+    return readJsonPage();
+  }
+
   try {
-    const sql = getSql();
     await ensureSchema(sql);
     const rows = await sql<{ data: Data | null }[]>`
       SELECT data FROM page_content WHERE id = ${PAGE_KEY}
@@ -166,7 +184,7 @@ export async function getPageData(): Promise<Data> {
       err
     );
   }
-  return pageFallback as unknown as Data;
+  return readJsonPage();
 }
 
 /**
@@ -175,6 +193,11 @@ export async function getPageData(): Promise<Data> {
  */
 export async function savePageData(data: Data): Promise<void> {
   const sql = getSql();
+  if (!sql) {
+    throw new Error(
+      "Cannot save: DATABASE_URL not configured (read-only mode)"
+    );
+  }
   await ensureSchema(sql);
   await sql`
     INSERT INTO page_content (id, data)
