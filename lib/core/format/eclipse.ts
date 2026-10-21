@@ -42,16 +42,10 @@ export function formatDuration(sec: number, mode: "hud" | "human" = "hud"): stri
 }
 
 /**
- * Format geographic coordinates to degrees/minutes with hemisphere.
+ * Format geographic coordinates to decimal degrees with hemisphere (4 decimals).
  */
 export function formatCoords(lat: number, lng: number): string {
-  const latAbs = Math.abs(lat);
-  const lngAbs = Math.abs(lng);
-  const latDeg = Math.floor(latAbs);
-  const latMin = Math.round((latAbs - latDeg) * 60);
-  const lngDeg = Math.floor(lngAbs);
-  const lngMin = Math.round((lngAbs - lngDeg) * 60);
   const latHem = lat >= 0 ? "N" : "S";
   const lngHem = lng >= 0 ? "E" : "W";
-  return `${latDeg}°${latMin}′ ${latHem}, ${lngDeg}°${lngMin}′ ${lngHem}`;
+  return `${Math.abs(lat).toFixed(4)}° ${latHem}, ${Math.abs(lng).toFixed(4)}° ${lngHem}`;
 }
