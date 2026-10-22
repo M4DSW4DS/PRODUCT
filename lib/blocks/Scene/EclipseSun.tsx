@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export function EclipseSun() {
   const maskRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const maskEl = maskRef.current;
@@ -34,21 +35,24 @@ export function EclipseSun() {
       });
 
       // Вспышка солнца на Сцене 7 (Fifth).
-      gsap.to(".sun-core", {
-        scrollTrigger: {
-          trigger: "#scene-fifth",
-          start: "top center",
-          onEnter: () => {
-            gsap.to(".sun-core", {
-              filter: "drop-shadow(0 0 40px rgba(0,229,255,1))",
-              duration: 0.3,
-              yoyo: true,
-              repeat: 1,
-            });
+      const flashTarget = rootRef.current?.querySelector(".sun-core");
+      if (flashTarget) {
+        gsap.to(flashTarget, {
+          scrollTrigger: {
+            trigger: document.querySelector("#scene-fifth"),
+            start: "top center",
+            onEnter: () => {
+              gsap.to(flashTarget, {
+                filter: "drop-shadow(0 0 40px rgba(0,229,255,1))",
+                duration: 0.3,
+                yoyo: true,
+                repeat: 1,
+              });
+            },
           },
-        },
-      });
-    }, maskEl ?? undefined);
+        });
+      }
+    }, rootRef);
 
     return () => {
       ctx.revert();
@@ -57,6 +61,7 @@ export function EclipseSun() {
 
   return (
     <div
+      ref={rootRef}
       className="eclipse-anchor fixed top-[8vh] right-[6vw] z-30 pointer-events-none opacity-0"
       aria-hidden="true"
     >

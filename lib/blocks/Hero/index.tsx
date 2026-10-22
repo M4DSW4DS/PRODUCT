@@ -114,7 +114,10 @@ export function Hero({
           }
 
           // Handoff: reveal global eclipse sun at end of pin
-          tl.to(".eclipse-anchor", { opacity: 1, duration: 0.1 }, "+=1.8");
+          const eclipseAnchor = document.querySelector(".eclipse-anchor");
+          if (eclipseAnchor) {
+            tl.to(eclipseAnchor, { opacity: 1, duration: 0.1 }, "+=1.8");
+          }
           tl.set(".hero-circular-window", { visibility: "hidden" }, "+=1.9");
 
           if (timerEl) {
