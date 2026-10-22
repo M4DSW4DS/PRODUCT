@@ -1,7 +1,6 @@
 import { PageRenderer } from "@/lib/core/renderer";
 import { blocksConfig } from "@/lib/blocks";
 import { getPageData } from "@/lib/core/page-store";
-import { EclipseSun } from "@/lib/blocks/Scene/EclipseSun";
 
 /**
  * Страница рендерится из опубликованного контента (PostgreSQL)
@@ -16,8 +15,6 @@ export default async function Home() {
   return (
     <>
       <PageRenderer config={blocksConfig} data={pageData} />
-
-      <EclipseSun />
 
       <footer className="px-6 py-10 border-t border-white/10 bg-white/5">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
