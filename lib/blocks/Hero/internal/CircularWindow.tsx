@@ -18,7 +18,7 @@ export function CircularWindow({ ref, imageSrc }: CircularWindowProps) {
   return (
     <div
       ref={ref}
-      className="relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden border border-neon-cyan/30 shadow-[0_0_120px_rgba(0,229,255,0.25)] shrink-0"
+      className="relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden border border-neon-cyan/30 shadow-[0_0_120px_rgba(0,229,255,0.25)] shrink-0 hero-circular-window"
       aria-hidden="true"
     >
       {imageSrc ? (

@@ -122,7 +122,11 @@ video {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: var(--color-cosmic-black);
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-cosmic-black) var(--eclipse, 0%),
+    transparent calc(var(--eclipse, 0%) + 2%)
+  );
 }
 
 /* Global guards */

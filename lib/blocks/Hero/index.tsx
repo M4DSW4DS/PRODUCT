@@ -105,22 +105,17 @@ export function Hero({
           });
 
           if (cabinetEl) {
-            tl.fromTo(
-              cabinetEl,
-              { opacity: 0, scale: 1.6 },
-              { opacity: 1, scale: 1, ease: "none", duration: 1 },
-              0
-            );
+            tl.to(cabinetEl, { opacity: 0, scale: 1.6, ease: "power1.inOut" }, 0);
           }
 
           if (windowEl) {
-            tl.fromTo(
-              windowEl,
-              { scale: 14, transformOrigin: "center center" },
-              { scale: 1, transformOrigin: "center center", ease: "none", duration: 1 },
-              0
-            );
+            tl.to(windowEl, { scale: 14, transformOrigin: "center center", ease: "power2.in" }, 0);
+            tl.to(".hero-circular-window img", { opacity: 0, ease: "power1.in" }, 0.35);
           }
+
+          // Handoff: reveal global eclipse sun at end of pin
+          tl.to(".eclipse-anchor", { opacity: 1, duration: 0.1 }, "+=1.8");
+          tl.set(".hero-circular-window", { visibility: "hidden" }, "+=1.9");
 
           if (timerEl) {
             tl.fromTo(

@@ -5,6 +5,7 @@ export function Fifth(props: SceneProps) {
     <div
       className="col-span-12"
       data-variant="fifth"
+      id="scene-fifth"
     >
       {/* Скелет варианта Fifth — наполняется в следующих тасках */}
     </div>
