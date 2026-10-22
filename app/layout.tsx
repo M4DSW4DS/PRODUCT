@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
+      suppressHydrationWarning
       className={`${playfair.variable} ${inter.variable} ${mono.variable} grain-pending`}
     >
       <head>

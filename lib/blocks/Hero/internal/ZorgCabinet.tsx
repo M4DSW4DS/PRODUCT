@@ -23,7 +23,7 @@ export function ZorgCabinet({ ref }: ZorgCabinetProps) {
         src="/hero/zorg-cabinet.webp"
         alt=""
         fill
-        sizes="100vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 50vw"
         className="object-cover"
         priority
       />

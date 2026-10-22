@@ -1,14 +1,12 @@
 "use client";
 
 import { CountdownTimer } from "@/lib/components/CountdownTimer";
-import type { CountdownTimezone } from "@/lib/components/CountdownTimer";
 
 export type TimerProps = {
   title: string;
   /** Целевая дата/время в формате ISO или "YYYY-MM-DDTHH:MM". */
   targetDate: string;
   endMessage: string;
-  timezones: CountdownTimezone[];
   hint_text: string;
   accent_color: string;
   post_countdown_text: string;
@@ -22,7 +20,6 @@ export function TimerBlock({
   title,
   targetDate,
   endMessage,
-  timezones,
   hint_text,
   accent_color,
   post_countdown_text,
@@ -35,7 +32,7 @@ export function TimerBlock({
         </h2>
         <CountdownTimer
           target_utc={targetDate}
-          timezones={timezones}
+          timezones={[{ label: "Луксор", tz: "Africa/Cairo" }]}
           hint_text={hint_text}
           accent_color={accent_color}
           post_countdown_text={post_countdown_text || endMessage}

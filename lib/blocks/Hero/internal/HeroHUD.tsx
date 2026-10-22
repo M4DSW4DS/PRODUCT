@@ -1,6 +1,6 @@
 "use client";
 
-import { CountdownTimer, DEFAULT_COUNTDOWN_TIMEZONES } from "@/lib/components/CountdownTimer";
+import { CountdownTimer } from "@/lib/components/CountdownTimer";
 import { ECLIPSE } from "@/lib/core/constants/eclipse";
 import { formatDate, formatDuration, formatTime } from "@/lib/core/format/eclipse";
 
@@ -71,7 +71,7 @@ export function HeroHUD({
           <div ref={timerRef} className="w-full">
             <CountdownTimer
               target_utc={ECLIPSE.targetDateISO}
-              timezones={DEFAULT_COUNTDOWN_TIMEZONES}
+              timezones={[{ label: "Луксор", tz: "Africa/Cairo" }]}
               hint_text=""
               accent_color="#00e5ff"
               post_countdown_text=""
