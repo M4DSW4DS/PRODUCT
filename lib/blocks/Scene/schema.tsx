@@ -32,7 +32,9 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     eyebrowPrefix: { type: "text", label: "Префикс надзаголовка" },
     eyebrowSuffix: { type: "text", label: "Суффикс надзаголовка" },
-    heading: { type: "text", label: "Заголовок" },
+    headingLine1: { type: "text", label: "Заголовок — строка 1" },
+    headingLead: { type: "text", label: "Заголовок — строка 2 (обычная часть)" },
+    headingAccent: { type: "text", label: "Заголовок — строка 2 (цветная часть)" },
     lead: { type: "textarea", label: "Ведущий текст" },
     accent: {
       type: "radio",
@@ -46,21 +48,87 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     backgroundImage: { type: "text", label: "Фоновая картинка (путь из public/)" },
     quote: { type: "textarea", label: "Цитата (опционально)" },
+    quoteAttribution: { type: "text", label: "Автор цитаты" },
     ctaLabel: { type: "text", label: "Текст кнопки CTA" },
     ctaHref: { type: "text", label: "Ссылка CTA" },
+    svg_caption: { type: "text", label: "Подпись к SVG (Scene 2)" },
+    microcopy: { type: "text", label: "Микрокопия (Scene 7)" },
+    anchor: {
+      type: "text",
+      label: "ID-якорь (напр. mystery, nasa); пусто = variant",
+    },
+    artifacts: {
+      type: "array",
+      label: "Карточки-числа (Scene 3)",
+      arrayFields: {
+        title: { type: "text", label: "Заголовок" },
+        sub: { type: "text", label: "Подпись" },
+      },
+      defaultItemProps: { title: "", sub: "" },
+      getItemSummary: (item) => item.title || "Карточка",
+    },
+    plates: {
+      type: "array",
+      label: "Плиты стихий (Scene 4)",
+      arrayFields: {
+        name: { type: "text", label: "Название" },
+        text: { type: "textarea", label: "Текст" },
+        color: {
+          type: "radio",
+          label: "Цвет",
+          options: [
+            { label: "Gold", value: "gold" },
+            { label: "Cyan", value: "cyan" },
+            { label: "Orange", value: "orange" },
+            { label: "White", value: "white" },
+          ],
+        },
+      },
+      defaultItemProps: { name: "", text: "", color: "gold" },
+      getItemSummary: (item) => item.name || "Плита",
+    },
+    voices: {
+      type: "array",
+      label: "Голоса (Scene 5)",
+      arrayFields: {
+        name: { type: "text", label: "Имя голоса" },
+      },
+      defaultItemProps: { name: "" },
+      getItemSummary: (item) => item.name || "Голос",
+    },
+    additional_ctas: {
+      type: "array",
+      label: "Доп. ссылки (Scene 7)",
+      arrayFields: {
+        label: { type: "text", label: "Текст ссылки" },
+        href: { type: "text", label: "URL / якорь" },
+      },
+      defaultItemProps: { label: "", href: "" },
+      getItemSummary: (item) => item.label || "Ссылка",
+    },
   },
   defaultProps: {
     variant: "mystery",
     overlay: "none",
     eyebrowPrefix: "",
     eyebrowSuffix: "",
-    heading: "",
+    headingLine1: "",
+    headingLead: "",
+    headingAccent: "",
     lead: "",
     accent: "gold",
     backgroundImage: "",
     quote: "",
+    quoteAttribution: "",
     ctaLabel: "",
     ctaHref: "",
+    svg_caption: "",
+    microcopy: "",
+    anchor: "",
+    artifacts: [],
+    plates: [],
+    voices: [],
+    additional_ctas: [],
   },
   render: (props) => (
     <Scene
@@ -68,13 +136,23 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
       overlay={props.overlay}
       eyebrowPrefix={props.eyebrowPrefix}
       eyebrowSuffix={props.eyebrowSuffix}
-      heading={props.heading}
+      headingLine1={props.headingLine1}
+      headingLead={props.headingLead}
+      headingAccent={props.headingAccent}
       lead={props.lead}
       accent={props.accent}
       backgroundImage={props.backgroundImage}
       quote={props.quote}
+      quoteAttribution={props.quoteAttribution}
       ctaLabel={props.ctaLabel}
       ctaHref={props.ctaHref}
+      svg_caption={props.svg_caption}
+      microcopy={props.microcopy}
+      anchor={props.anchor}
+      artifacts={props.artifacts}
+      plates={props.plates}
+      voices={props.voices}
+      additional_ctas={props.additional_ctas}
     />
   ),
 };
