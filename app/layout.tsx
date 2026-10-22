@@ -32,6 +32,19 @@ export default function RootLayout({
       lang="ru"
       className={`${playfair.variable} ${inter.variable} ${mono.variable} grain-pending`}
     >
+      <head>
+        {/*
+          Маркер «JS доступен»: скрытие анимируемого контента до старта GSAP
+          (globals.css, [data-anim]) применяется только при .js — иначе при
+          отключённом JS контент сцены остался бы невидимым.
+          Инлайн-скрипт выполняется до отрисовки body.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js');",
+          }}
+        />
+      </head>
       <body>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
         <LenisProvider>{children}</LenisProvider>

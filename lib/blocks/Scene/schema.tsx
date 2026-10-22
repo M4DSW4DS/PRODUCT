@@ -32,6 +32,10 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     eyebrowPrefix: { type: "text", label: "Префикс надзаголовка" },
     eyebrowSuffix: { type: "text", label: "Суффикс надзаголовка" },
+    heading: {
+      type: "text",
+      label: "Заголовок (устаревшее — используется, если строки ниже пусты)",
+    },
     headingLine1: { type: "text", label: "Заголовок — строка 1" },
     headingLead: { type: "text", label: "Заголовок — строка 2 (обычная часть)" },
     headingAccent: { type: "text", label: "Заголовок — строка 2 (цветная часть)" },
@@ -136,6 +140,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
       overlay={props.overlay}
       eyebrowPrefix={props.eyebrowPrefix}
       eyebrowSuffix={props.eyebrowSuffix}
+      heading={props.heading}
       headingLine1={props.headingLine1}
       headingLead={props.headingLead}
       headingAccent={props.headingAccent}

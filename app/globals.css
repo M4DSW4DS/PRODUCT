@@ -88,6 +88,19 @@ video {
   display: none;
 }
 
+/* ===== Скрытие анимируемого контента до старта GSAP =====
+ * SSR отдаёт готовую разметку с opacity 1 — до гидрации виден «вспышечный»
+ * кадр, затем контент мигает. Правило прячет элементы на уровне CSS ещё до
+ * гидрации; GSAP перебивает его inline-стилем (opacity: 0 → 1) при старте.
+ * При prefers-reduced-motion: reduce анимаций нет — контент виден сразу.
+ * Класс .js ставится инлайн-скриптом в layout: без JS контент виден всегда.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-anim="mystery"] {
+    opacity: 0;
+  }
+}
+
 /* keyframes */
 @keyframes grain {
   0% { transform: translate(0, 0); }
