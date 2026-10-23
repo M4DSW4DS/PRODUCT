@@ -1,12 +1,166 @@
+"use client";
+
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DUR, EASE, staggerWords, reveal } from "@/lib/anim/primitives";
 import type { SceneProps } from "../index";
 
+gsap.registerPlugin(ScrollTrigger);
+
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+const PLATE_COLOR_CLASS: Record<string, string> = {
+  orange: "bg-eclipse-orange/20 border-eclipse-orange/40 text-eclipse-orange",
+  cyan: "bg-neon-cyan/20 border-neon-cyan/40 text-neon-cyan",
+  gold: "bg-egyptian-gold/20 border-egyptian-gold/40 text-egyptian-gold",
+  white: "bg-white/20 border-white/40 text-white",
+};
+
 export function Elements(props: SceneProps) {
+  const {
+    index = 0,
+    eyebrowPrefix,
+    eyebrowSuffix,
+    headingLine1,
+    headingLead,
+    headingAccent,
+    lead,
+    accent = "gold",
+    plates = [],
+  } = props;
+
+  const prefix = eyebrowPrefix || `SCENE ${String(index + 1).padStart(2, "0")}`;
+  const eyebrow = `${prefix} // ${eyebrowSuffix ?? ""}`.trim();
+
+  const hasHeadingPart2 = Boolean(headingLead || headingAccent);
+
+  const rootRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const leadRef = useRef<HTMLParagraphElement>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const headingEl = headingRef.current;
+    const leadEl = leadRef.current;
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      // prefers-reduced-motion: reduce — content visible immediately, no tweens.
+      mm.add(
+        { reduce: "(prefers-reduced-motion: reduce)" },
+        () => {
+          const targets: HTMLElement[] = [];
+          if (headingEl) targets.push(headingEl);
+          if (leadEl) targets.push(leadEl);
+          gsap.set([...targets, ".elements-plate"], {
+            opacity: 1,
+            y: 0,
+            filter: "none",
+          });
+        }
+      );
+
+      mm.add(
+        { motion: "(prefers-reduced-motion: no-preference)" },
+        () => {
+          const targets: HTMLElement[] = [];
+          if (headingEl) targets.push(headingEl);
+          if (leadEl) targets.push(leadEl);
+
+          gsap.set([...targets, ".elements-plate"], { opacity: 0, y: 30 });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: root,
+              start: "top 80%",
+              pin: true,
+              pinSpacing: false,
+              end: "+=200%",
+              scrub: 1,
+            },
+          });
+
+          // 1. Heading staggerWords
+          if (headingEl) {
+            tl.add(() => staggerWords(headingEl), 0);
+          }
+
+          // 2. Lead reveal
+          if (leadEl) {
+            tl.add(() => reveal(leadEl), "+=0.2");
+          }
+
+          // 3. Plates slide up with stagger
+          tl.to(".elements-plate", {
+            y: 0,
+            opacity: 1,
+            stagger: { each: 0.15 },
+          });
+        }
+      );
+    }, root);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
     <div
-      className="col-span-12"
-      data-variant="elements"
+      ref={rootRef}
+      data-anim="elements"
+      className="relative min-h-screen w-full py-24 px-6 md:px-16"
     >
-      {/* Скелет варианта Elements — наполняется в следующих тасках */}
+      {/* Left column: eyebrow + heading + lead */}
+      <div className="flex flex-col justify-center items-start md:max-w-[45rem]">
+        {eyebrow ? (
+          <div className="font-mono text-xs uppercase tracking-[0.28em] text-egyptian-gold mb-4">
+            {eyebrow}
+          </div>
+        ) : null}
+        <h2
+          ref={headingRef}
+          data-anim="elements"
+          className="font-display font-bold text-white break-words leading-tight text-4xl md:text-5xl"
+        >
+          {headingLine1}
+          {hasHeadingPart2 ? <br /> : null}
+          {headingLead} {headingAccent ? (
+            <span className="text-eclipse-orange">{headingAccent}</span>
+          ) : null}
+        </h2>
+        {lead ? (
+          <p
+            ref={leadRef}
+            data-anim="elements"
+            className="mt-4 text-base leading-relaxed text-zinc-300 md:text-lg max-w-lg"
+          >
+            {lead}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Right column: 4 vertical plates */}
+      <div className="mt-12 md:mt-0 md:ml-12 flex flex-col gap-6 md:flex-row md:gap-12">
+        {plates.map((plate, i) => (
+          <div
+            key={i}
+            className={`elements-plate relative group cursor-default flex flex-col items-center justify-center px-6 py-8 rounded-xl border text-center min-h-[200px] ${PLATE_COLOR_CLASS[plate.color] || PLATE_COLOR_CLASS.white}`}
+          >
+            <div className="text-2xl md:text-3xl font-display font-bold mb-2">
+              {plate.name}
+            </div>
+            <p className="text-sm md:text-base leading-relaxed hidden md:block opacity-90 group-hover:opacity-100 transition-opacity">
+              {plate.text}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

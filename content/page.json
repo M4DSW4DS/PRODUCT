@@ -117,14 +117,15 @@
         "variant": "mystery",
         "overlay": "dusk",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
+        "eyebrowSuffix": "// ТАЙНА ПЕРВОГО ЗАТМЕНИЯ",
+        "headingLine1": "Династии рушились",
+        "headingLead": "",
+        "headingAccent": "в полной темноте",
+        "lead": "Первого апреля 2471 года до нашей эры солнце исчезло в полдень. Правитель империи испугался мрака. Он остановил постройку великих пирамид, замуровал себя в глухом бункере Саккары и навсегда убрал имя бога Ра из своих титулов.",
+        "quote": "«В официальных папирусах Древнего Царства нет ни одной строки об этой катастрофе. Страх заставил империю стереть историю».",
+        "quoteAttribution": "— Из секретных архивов",
         "accent": "gold",
-        "backgroundImage": "/scenes/scene-01-mystery.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "backgroundImage": "/scenes/scene-01-mystery.webp"
       }
     },
     {
@@ -134,14 +135,14 @@
         "variant": "truth",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
+        "eyebrowSuffix": "// ТОЧКА ЗЕНИТА",
+        "headingLine1": "Чем уникальны эти 6 минут?",
+        "headingLead": "Такого не будет",
+        "headingAccent": "до 2114 года",
+        "lead": "В Испании годом ранее тень пролетит всего за 76 секунд. Луксор 2 августа 2027 года даст абсолютный максимум века — 6 минут 23 секунды чистой тьмы. Черный диск встанет на высоте 82 градуса, ударив по Египту вертикально вниз.",
+        "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
         "accent": "cyan",
-        "backgroundImage": "/scenes/scene-02-truth.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "backgroundImage": "/scenes/scene-02-truth.webp"
       }
     },
     {
@@ -151,14 +152,19 @@
         "variant": "key",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
-        "accent": "orange",
-        "backgroundImage": "/scenes/scene-03-key.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "eyebrowSuffix": "// КАМЕННЫЙ ПРИБОР",
+        "headingLine1": "Зачем древним эта точность?",
+        "headingLead": "Карнак строился",
+        "headingAccent": "как капкан",
+        "lead": "Сто лет назад ученые доказали: главная ось храма Амона-Ра — астрономический прибор предельной точности. Жрецы целились в солнце. 2 августа эта каменная оптика сработает наоборот: мегалит поймает мертвый свет короны.",
+        "artifacts": [
+          { "title": "6 мин 23 сек", "sub": "Пик Saros 136" },
+          { "title": "82° в зените", "sub": "Прямо над головой" },
+          { "title": "Менее 5%", "sub": "Риск облаков в августе" },
+          { "title": "0 мест", "sub": "Группа укомплектована" }
+        ],
+        "accent": "gold",
+        "backgroundImage": "/scenes/scene-03-key.webp"
       }
     },
     {
@@ -168,14 +174,19 @@
         "variant": "elements",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
-        "accent": "gold",
-        "backgroundImage": "/scenes/scene-04-elements.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "eyebrowSuffix": "// ЗОВ СТИХИЙ",
+        "headingLine1": "Кинематографика космоса",
+        "headingLead": "Четыре элемента",
+        "headingAccent": "встали в ряд",
+        "lead": "Время не имеет значения. Важна только жизнь. Затмение в пустыне — не мистика, а неизбежная механика планет. Четыре камня открыты. Чтобы запустить Пятый элемент, физика космоса должна замкнуться.",
+        "plates": [
+          { "name": "Огонь", "text": "Взрыв протуберанцев проявится в небе при сорока трех градусах жары на земле.", "color": "orange" },
+          { "name": "Вода", "text": "Черный Нил остановит течение бликов, превращаясь в ртутное зеркало во тьме.", "color": "cyan" },
+          { "name": "Земля", "text": "Древний некрополь Фив мгновенно сбросит семь градусов тепла за три минуты пика.", "color": "gold" },
+          { "name": "Воздух", "text": "Лунная тень на скорости звука обрушит ледяной шквал ветра в атмосферу.", "color": "white" }
+        ],
+        "accent": "orange",
+        "backgroundImage": "/scenes/scene-04-elements.webp"
       }
     },
     {
@@ -185,14 +196,16 @@
         "variant": "keepers",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
+        "eyebrowSuffix": "// ХРАНИТЕЛИ ФИНАЛА",
+        "headingLine1": "Кто останется в точке?",
+        "headingLead": "Пять голосов",
+        "headingAccent": "одного финала",
+        "lead": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет. Группа Астролагеря уже полностью собрана. Где в эту секунду будешь ты?",
+        "voices": [
+          { "name": "Жрец" }, { "name": "Пилот" }, { "name": "Посланник" }, { "name": "Инженер" }, { "name": "Участник" }
+        ],
         "accent": "cyan",
-        "backgroundImage": "/scenes/scene-05-keepers.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "backgroundImage": "/scenes/scene-05-keepers.webp"
       }
     },
     {
@@ -202,14 +215,14 @@
         "variant": "darkness",
         "overlay": "night",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
+        "eyebrowSuffix": "// ПОЛНАЯ ФАЗА",
+        "headingLine1": "Секунда катарсиса",
+        "headingLead": "",
+        "headingAccent": "",
+        "quote": "«Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход».",
+        "quoteAttribution": "— Инженер",
         "accent": "orange",
-        "backgroundImage": "/scenes/scene-06-darkness.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "backgroundImage": "/scenes/scene-06-darkness.webp"
       }
     },
     {
@@ -219,14 +232,16 @@
         "variant": "fifth",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "TBD",
-        "heading": "TBD",
-        "lead": "TBD",
+        "eyebrowSuffix": "// ПЯТЫЙ ЭЛЕМЕНТ",
+        "headingLine1": "Стань пятым элементом",
+        "headingLead": "",
+        "headingAccent": "",
+        "lead": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. Твой единственный способ перехватить освободившийся билет — войти в резервный лист ожидания прямо сейчас.",
+        "ctaLabel": "Встать в лист ожидания",
+        "ctaHref": "https://astro-camp.com/eclipse2027egipt",
+        "microcopy": "БЕЗ РЕГИСТРАЦИИ НА САЙТЕ · ТОЛЬКО ВНЕШНИЙ РЕДИРЕКТ",
         "accent": "white",
-        "backgroundImage": "/scenes/scene-07-fifth.webp",
-        "quote": "",
-        "ctaLabel": "",
-        "ctaHref": ""
+        "backgroundImage": "/scenes/scene-07-fifth.webp"
       }
     }
   ],

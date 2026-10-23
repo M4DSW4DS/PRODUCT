@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import { LenisProvider } from "@/lib/core/providers/LenisProvider";
 
@@ -34,19 +35,11 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} ${mono.variable} grain-pending`}
     >
       <head>
-        {/*
-          Маркер «JS доступен»: скрытие анимируемого контента до старта GSAP
-          (globals.css, [data-anim]) применяется только при .js — иначе при
-          отключённом JS контент сцены остался бы невидимым.
-          Инлайн-скрипт выполняется до отрисовки body.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js');",
-          }}
-        />
       </head>
       <body>
+        <Script id="js-marker" strategy="beforeInteractive">
+          {`document.documentElement.classList.add('js');`}
+        </Script>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
         <LenisProvider>{children}</LenisProvider>
       </body>
