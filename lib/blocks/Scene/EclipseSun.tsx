@@ -18,20 +18,7 @@ export function EclipseSun() {
       const sun = sunRef.current;
       if (!anchor || !mask || !sun) return;
 
-      // 1. Fade in Sun when Scene 1 enters viewport
-      gsap.fromTo(
-        anchor,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.5,
-          scrollTrigger: {
-            trigger: "#scene-mystery",
-            start: "top bottom",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      // Sun visibility is controlled by Hero timeline (starts hidden, opacity 0).
 
       // 2. Progress mask from Scene 1 to Scene 7
       gsap.to(mask, {
