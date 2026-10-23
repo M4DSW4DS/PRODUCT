@@ -12,34 +12,35 @@ export function EclipseSun() {
   const sunRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const anchor = rootRef.current;
-    const mask = maskRef.current;
-    const sun = sunRef.current;
-
     const ctx = gsap.context(() => {
+      const anchor = rootRef.current;
+      const mask = maskRef.current;
+      const sun = sunRef.current;
       if (!anchor || !mask || !sun) return;
 
-      // 1. Fade in the sun when Hero pin ends
-      gsap.fromTo(anchor,
+      // 1. Fade in Sun when Scene 1 enters viewport
+      gsap.fromTo(
+        anchor,
         { opacity: 0 },
         {
           opacity: 1,
           duration: 0.5,
           scrollTrigger: {
-            trigger: "#scene-hero",
-            start: "bottom bottom", // Hero pin ends
+            trigger: "#scene-mystery",
+            start: "top bottom",
             toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 2. Master progress for eclipse mask
+      // 2. Progress mask from Scene 1 to Scene 7
       gsap.to(mask, {
         "--eclipse": "100%",
         ease: "none",
         scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
+          trigger: "#scene-mystery",
+          start: "top center",
+          endTrigger: "#scene-fifth",
           end: "bottom bottom",
           scrub: 1,
         },
@@ -54,8 +55,8 @@ export function EclipseSun() {
             start: "top center",
             onEnter: () => {
               gsap.to(sun, {
-                filter: "drop-shadow(0 0 40px rgba(0,229,255,1))",
-                duration: 0.3,
+                filter: "drop-shadow(0 0 60px #fff) brightness(2)",
+                duration: 0.6,
                 yoyo: true,
                 repeat: 1,
               });
