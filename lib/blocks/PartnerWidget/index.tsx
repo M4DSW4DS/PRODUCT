@@ -33,14 +33,12 @@ export function PartnerWidgetBlock({
   const safeFallback = (fallbackUrl ?? "").trim() || "https://timepad.ru/";
 
   return (
-    <section id="register" className="px-6 py-16 md:py-24">
-      <div className="max-w-3xl mx-auto flex flex-col gap-6">
-        <div className="text-center">
-          <h2 className="text-section-title font-bold text-egyptian-gold">{title}</h2>
-          <p className="text-zinc-400 mt-3">{subtitle}</p>
-        </div>
+    <section id="register" className="relative w-full py-24 px-6 md:py-32 bg-cosmic-black flex flex-col items-center">
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+        <h2 className="font-display text-3xl md:text-5xl text-white mb-12 text-center">Регистрация на событие</h2>
+        <p className="text-zinc-400 mt-3 text-center mb-8">{subtitle}</p>
 
-        <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto border border-neon-cyan/30 bg-cosmic-black/50 p-2 shadow-[0_0_40px_rgba(0,229,255,0.1)]">
           {safeSrc ? (
             <iframe
               src={safeSrc}
