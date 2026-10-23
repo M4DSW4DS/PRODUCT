@@ -96,7 +96,7 @@ video {
  * Класс .js ставится инлайн-скриптом в layout: без JS контент виден всегда.
  */
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-anim="mystery"] {
+  .js [data-anim] {
     opacity: 0;
   }
 }
