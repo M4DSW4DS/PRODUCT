@@ -88,12 +88,32 @@ export function Hero({
     // 2. Morph window to top-right
     const windowEl = windowRef.current;
     if (windowEl) {
-      const rect = windowEl.getBoundingClientRect();
-      const targetX = window.innerWidth - (window.innerWidth * 0.06) - 70 - (rect.left + rect.width / 2);
-      const targetY = (window.innerHeight * 0.08) + 70 - (rect.top + rect.height / 2);
-      const scale = 140 / rect.width;
+      // Reset any previous transforms to measure correctly
+      gsap.set(windowEl, { clearProps: "transform" });
       
-      tl.to(windowEl, { x: targetX, y: targetY, scale: scale, duration: 1.5, ease: "power2.inOut" }, 0.5);
+      const rect = windowEl.getBoundingClientRect();
+      
+      // Start X is based on its actual left position
+      const startCenterX = rect.left + rect.width / 2;
+      // Start Y is ALWAYS center of screen because the window is vertically centered in the pinned Hero (top-1/2 -translate-y-1/2)
+      const startCenterY = window.innerHeight / 2; 
+      
+      // Target is top-right corner (140px size, top 8vh, right 6vw)
+      const targetCenterX = window.innerWidth - (window.innerWidth * 0.06) - 70;
+      const targetCenterY = (window.innerHeight * 0.08) + 70;
+      
+      const targetX = targetCenterX - startCenterX;
+      const targetY = targetCenterY - startCenterY;
+      const scale = 140 / rect.width;
+
+      tl.to(windowEl, { 
+        x: targetX, 
+        y: targetY, 
+        scale: scale, 
+        transformOrigin: "center center",
+        duration: 1.5, 
+        ease: "power2.inOut" 
+      }, 0.5);
       
       tl.to(".hero-circular-window img", { opacity: 0, duration: 0.5 }, 1.5);
       tl.to(windowEl, { 
