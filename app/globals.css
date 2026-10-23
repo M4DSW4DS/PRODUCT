@@ -123,9 +123,10 @@ video {
   inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    circle at 50% 50%,
-    var(--color-cosmic-black) var(--eclipse, 0%),
-    transparent calc(var(--eclipse, 0%) + 2%)
+    circle at 65% 35%,
+    var(--color-cosmic-black) calc(var(--eclipse, 0%) - 10%),
+    rgba(10, 10, 15, 0.9) var(--eclipse, 0%),
+    transparent calc(var(--eclipse, 0%) + 15%)
   );
 }
 

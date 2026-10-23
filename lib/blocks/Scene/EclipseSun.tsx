@@ -43,6 +43,20 @@ export function EclipseSun() {
           endTrigger: "#scene-fifth",
           end: "bottom bottom",
           scrub: 1,
+          onUpdate: (self) => {
+            // 1. Fade in corona at the end (last 10% of the scroll)
+            const corona = rootRef.current?.querySelector(".corona");
+            if (corona) {
+              const opacity = self.progress > 0.9 ? (self.progress - 0.9) * 10 : 0;
+              gsap.set(corona, { opacity });
+            }
+
+            // 2. Update the percentage text
+            const readout = rootRef.current?.querySelector("#eclipse-readout");
+            if (readout) {
+              readout.textContent = `${Math.round(self.progress * 100)}%`;
+            }
+          },
         },
       });
 
@@ -78,9 +92,10 @@ export function EclipseSun() {
     >
       <div
         ref={sunRef}
-        className="sun-core relative w-[140px] h-[140px] rounded-full overflow-hidden bg-[radial-gradient(circle_at_30%_30%,#fff4c8,#c9a96e_60%,#7a5a2a)] shadow-[0_0_60px_rgba(201,169,110,0.6)]"
+        className="sun-core relative w-[140px] h-[140px] rounded-full overflow-hidden bg-[radial-gradient(circle_at_30%_30%,#fffdf0,#ffcc33_40%,#e87a00_80%,#7a2a00_100%)] shadow-[0_0_80px_rgba(255,180,50,0.8)] border border-yellow-300/30"
       >
         <div ref={maskRef} className="eclipse-mask absolute inset-0 rounded-full" />
+        <div className="corona absolute inset-0 rounded-full pointer-events-none opacity-0 shadow-[0_0_40px_10px_rgba(255,255,255,0.8),inset_0_0_20px_rgba(255,255,255,0.9)] transition-opacity duration-300" />
       </div>
       <div className="font-mono text-[9px] tracking-[0.3em] text-neon-cyan/60 mt-2 text-right">
         OBSCURATION <span className="text-neon-cyan" id="eclipse-readout">0%</span>
