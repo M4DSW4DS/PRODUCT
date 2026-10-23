@@ -103,7 +103,7 @@ export function Keepers(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="keepers"
-      className="relative min-h-[60vh] w-full flex flex-col items-center justify-end py-24 px-6 md:px-16 pb-32"
+      className="relative w-full flex flex-col items-center justify-center py-24 md:py-32 px-6 md:px-16 pb-32 overflow-x-hidden"
     >
       {/* Eyebrow */}
       {eyebrow ? (

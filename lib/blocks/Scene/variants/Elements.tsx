@@ -114,7 +114,7 @@ export function Elements(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="elements"
-      className="relative min-h-screen w-full py-24 px-6 md:px-16"
+      className="relative min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-16 md:py-32 overflow-x-hidden"
     >
       {/* Left column: eyebrow + heading + lead */}
       <div className="flex flex-col justify-center items-start md:max-w-[45rem]">

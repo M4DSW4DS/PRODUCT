@@ -102,7 +102,7 @@ export function Key(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="key"
-      className="relative min-h-screen w-full py-24 px-6 md:px-16 flex flex-col justify-center md:grid md:grid-cols-12 gap-8 items-center"
+      className="relative w-full py-24 md:py-32 px-6 md:px-16 flex flex-col justify-center md:grid md:grid-cols-12 gap-8 items-center overflow-x-hidden"
     >
       {/* Left: Text */}
       <div className="md:col-span-5 flex flex-col justify-center">

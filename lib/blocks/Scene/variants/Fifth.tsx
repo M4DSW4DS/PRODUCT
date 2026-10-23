@@ -99,7 +99,7 @@ export function Fifth(props: SceneProps) {
       id="scene-fifth"
       ref={rootRef}
       data-anim="fifth"
-      className="relative min-h-[70vh] w-full flex flex-col items-center justify-center py-24 px-6 md:px-16 text-center"
+      className="relative w-full flex flex-col items-center justify-center py-24 md:py-32 px-6 md:px-16 text-center overflow-x-hidden"
     >
       {/* Eyebrow */}
       {eyebrow ? (
