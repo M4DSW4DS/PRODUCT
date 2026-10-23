@@ -94,14 +94,21 @@ export function Hero({
       const scale = 140 / rect.width;
       
       tl.to(windowEl, { x: targetX, y: targetY, scale: scale, duration: 1.5, ease: "power2.inOut" }, 0.5);
+      
       tl.to(".hero-circular-window img", { opacity: 0, duration: 0.5 }, 1.5);
+      tl.to(windowEl, { 
+        backgroundColor: "#e87a00", 
+        borderColor: "rgba(253, 224, 71, 0.3)", 
+        boxShadow: "0 0 80px rgba(255,180,50,0.8)",
+        duration: 0.5 
+      }, 1.5);
     }
 
     // 3. Handoff
     const eclipseAnchor = document.querySelector(".eclipse-anchor");
-    if (eclipseAnchor) {
-      tl.set(".hero-circular-window", { visibility: "hidden" }, 2);
-      tl.set(eclipseAnchor, { opacity: 1 }, 2);
+    if (eclipseAnchor && windowEl) {
+      tl.set(windowEl, { visibility: "hidden" }, 2);
+      tl.set(eclipseAnchor, { visibility: "visible", opacity: 1 }, 2);
     }
   }, { scope: rootRef });
 
