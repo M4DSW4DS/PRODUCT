@@ -1,50 +1,92 @@
 "use client";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, Suspense } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-function Pyramids() {
-  const groupRef = useRef<THREE.Group>(null);
-  useFrame((state) => {
-    if (!groupRef.current) return;
-    const targetX = state.pointer.x * 1.5;
-    const targetY = state.pointer.y * 1.0;
-    const scrollY = window.scrollY * 0.002;
-    groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.05);
-    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY + scrollY, 0.05);
-  });
-
-  return (
-    <group ref={groupRef} position={[0, -2, 0]}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial color="#c2a77a" roughness={0.9} />
-      </mesh>
-      <mesh position={[0, 2, -2]} rotation={[0, Math.PI / 4, 0]} castShadow receiveShadow>
-        <coneGeometry args={[3, 5, 4]} />
-        <meshStandardMaterial color="#8b7355" flatShading />
-      </mesh>
-      <mesh position={[-6, 1, -8]} rotation={[0, Math.PI / 4, 0]} castShadow receiveShadow>
-        <coneGeometry args={[2.5, 4, 4]} />
-        <meshStandardMaterial color="#7a6245" flatShading />
-      </mesh>
-      <mesh position={[7, 0.5, -12]} rotation={[0, Math.PI / 4, 0]} castShadow receiveShadow>
-        <coneGeometry args={[2, 3.5, 4]} />
-        <meshStandardMaterial color="#6b5337" flatShading />
-      </mesh>
-    </group>
-  );
-}
-
 export function Key3D() {
-  return (
-    <div className="absolute inset-0 z-0 pointer-events-none w-full h-full">
-      <Canvas camera={{ position: [0, 3, 10], fov: 60 }} dpr={[1, 1.5]} shadows style={{ width: '100%', height: '100%', pointerEvents: 'none' }}>
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 10, 5]} intensity={2} color="#ffaa55" castShadow shadow-mapSize={[1024, 1024]} />
-        <fog attach="fog" args={["#0a0a0f", 15, 45]} />
-        <Suspense fallback={null}><Pyramids /></Suspense>
-      </Canvas>
-    </div>
-  );
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mountRef.current) return;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 4000);
+    camera.position.set(0, 8, 70);
+    camera.lookAt(0, 14, -80);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mountRef.current.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffb884, 0.35));
+    const sunLight = new THREE.DirectionalLight(0xffb070, 0.85);
+    sunLight.position.set(-30, 30, -40);
+    scene.add(sunLight);
+
+    const groundGeo = new THREE.PlaneGeometry(6000, 6000, 128, 128);
+    const gp = groundGeo.attributes.position;
+    for (let i = 0; i < gp.count; i++) {
+      const gx = gp.getX(i), gy = gp.getY(i);
+      const gd = Math.sqrt(gx * gx + gy * gy);
+      const gh = Math.sin(gx * 0.005) * Math.cos(gy * 0.005) * 4.0 + Math.sin(gx * 0.017 + gy * 0.009) * 1.6;
+      gp.setZ(i, gh * Math.max(0, 1 - gd / 2000));
+    }
+    groundGeo.computeVertexNormals();
+    const ground = new THREE.Mesh(groundGeo, new THREE.MeshStandardMaterial({ color: 0x6a4a2a, roughness: 1.0 }));
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -6;
+    scene.add(ground);
+
+    const buildPyramid = (x: number, z: number, size: number, height: number, edgeColor: number) => {
+      const bodyGeo = new THREE.CylinderGeometry(0, size, height, 4);
+      const body = new THREE.Mesh(bodyGeo, new THREE.MeshStandardMaterial({ color: 0x8a6a44, roughness: 0.92, flatShading: true }));
+      body.rotation.y = Math.PI / 4;
+      body.position.set(x, height / 2 - 6, z);
+      scene.add(body);
+
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(bodyGeo),
+        new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.55 })
+      );
+      edges.rotation.y = Math.PI / 4;
+      edges.position.copy(body.position);
+      scene.add(edges);
+    };
+
+    buildPyramid(-95, -175, 50, 45, 0x4f7bff);
+    buildPyramid(-10, -140, 42, 38, 0xa04fff);
+    buildPyramid(85, -155, 26, 22, 0x4ff0ff);
+
+    let mouseX = 0, mouseY = 0;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+    window.addEventListener("mousemove", onMouseMove);
+
+    let animationId: number;
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+      camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+      camera.position.y += (8 + (-mouseY * 2.5) - camera.position.y) * 0.05;
+      camera.lookAt(0, 16, -90);
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const onResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("resize", onResize);
+      mountRef.current?.removeChild(renderer.domElement);
+    };
+  }, []);
+
+  return <div ref={mountRef} className="absolute inset-0 z-0 pointer-events-none" />;
 }
