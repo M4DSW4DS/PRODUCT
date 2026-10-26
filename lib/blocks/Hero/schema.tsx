@@ -8,9 +8,9 @@ import type { HeroProps } from "./index";
 export const HeroSchema: ComponentConfig<HeroProps> = {
   fields: {
     eyebrow: { type: "text", label: "Надзаголовок (маленький текст сверху)" },
-    title: { type: "text", label: "Главный заголовок (H1)" },
-    subtitle: { type: "textarea", label: "Подзаголовок" },
-    quote: { type: "textarea", label: "Цитата Зорга" },
+    title: { type: "text", contentEditable: true, label: "Главный заголовок (H1)" },
+    subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок" },
+    quote: { type: "textarea", contentEditable: true, label: "Цитата Зорга" },
     quoteAttribution: { type: "text", label: "Автор цитаты" },
     ctaLabel: { type: "text", label: "Текст кнопки (если нужно)" },
     ctaHref: { type: "text", label: "Ссылка кнопки" },

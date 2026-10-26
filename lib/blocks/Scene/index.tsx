@@ -117,11 +117,24 @@ export function Scene({
   // Устаревшее поле `heading` используется как fallback для строки 1, если новые
   // поля пусты (контент, созданный до разделения заголовка на строки).
   const legacyHeading = (heading ?? "").trim();
-  const resolvedLine1 = (headingLine1 ?? "").trim() || legacyHeading;
-  const resolvedLead = (headingLead ?? "").trim();
-  const resolvedAccent = (headingAccent ?? "").trim();
-  const line2 = [resolvedLead, resolvedAccent].filter(Boolean).join(" ");
-  const headingPlain = [resolvedLine1, line2].filter(Boolean).join(" / ");
+  const resolvedLine1 =
+    (typeof headingLine1 === "string" ? headingLine1.trim() : headingLine1) ||
+    legacyHeading;
+  const resolvedLead =
+    typeof headingLead === "string" ? headingLead.trim() : headingLead;
+  const resolvedAccent =
+    typeof headingAccent === "string" ? headingAccent.trim() : headingAccent;
+  let headingPlain: any;
+  if (
+    typeof resolvedLine1 === "string" &&
+    typeof resolvedLead === "string" &&
+    typeof resolvedAccent === "string"
+  ) {
+    const line2 = [resolvedLead, resolvedAccent].filter(Boolean).join(" ");
+    headingPlain = [resolvedLine1, line2].filter(Boolean).join(" / ");
+  } else {
+    headingPlain = [resolvedLine1, resolvedLead, resolvedAccent].filter(Boolean);
+  }
 
   const anchorId = anchor || `scene-${variant}`;
   const overlayBackground = OVERLAY_BACKGROUNDS[overlay];

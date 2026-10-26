@@ -1,17 +1,17 @@
 {
   "root": {
     "props": {
-      "title": ""
+      "title": "ЭТО МОЕ"
     }
   },
   "content": [
     {
       "type": "Hero",
       "props": {
-        "eyebrow": "",
+        "eyebrow": "ЭТО МОЕ",
         "title": "",
         "subtitle": "",
-        "quote": "",
+        "quote": "Я ТУТ ",
         "quoteAttribution": "MISTER ZORG",
         "ctaLabel": "",
         "ctaHref": "",

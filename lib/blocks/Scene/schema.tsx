@@ -1,6 +1,7 @@
 import type { ComponentConfig } from "@puckeditor/core";
 import { Scene } from "./index";
 import type { SceneProps } from "./index";
+import { MediaPicker } from "@/lib/core/fields/MediaPicker";
 
 /**
  * Схема блока Scene для Puck.
@@ -32,10 +33,10 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     eyebrowPrefix: { type: "text", label: "Префикс сцены (напр. SCENE 01 //)" },
     eyebrowSuffix: { type: "text", label: "Текст после префикса" },
-    headingLine1: { type: "text", label: "Заголовок — Строка 1" },
-    headingLead: { type: "text", label: "Заголовок — Строка 2 (обычный текст)" },
-    headingAccent: { type: "text", label: "Заголовок — Строка 2 (цветной текст)" },
-    lead: { type: "textarea", label: "Основной текст (Лид)" },
+    headingLine1: { type: "text", contentEditable: true, label: "Заголовок — Строка 1" },
+    headingLead: { type: "text", contentEditable: true, label: "Заголовок — Строка 2 (обычный текст)" },
+    headingAccent: { type: "text", contentEditable: true, label: "Заголовок — Строка 2 (цветной текст)" },
+    lead: { type: "textarea", contentEditable: true, label: "Основной текст (Лид)" },
     accent: {
       type: "radio",
       label: "Акцентный цвет",
@@ -46,8 +47,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
         { label: "Белый (white)", value: "white" },
       ],
     },
-    backgroundImage: { type: "text", label: "Фоновое изображение (путь из public)" },
-    quote: { type: "textarea", label: "Цитата (если есть)" },
+    backgroundImage: { type: "custom", render: ({ value, onChange }) => <MediaPicker value={value} onChange={onChange} /> },
+    quote: { type: "textarea", contentEditable: true, label: "Цитата (если есть)" },
     quoteAttribution: { type: "text", label: "Автор цитаты" },
     ctaLabel: { type: "text", label: "Текст кнопки CTA" },
     ctaHref: { type: "text", label: "Ссылка CTA" },
