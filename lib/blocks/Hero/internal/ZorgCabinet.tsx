@@ -16,7 +16,7 @@ export function ZorgCabinet({ ref }: ZorgCabinetProps) {
   return (
     <div
       ref={ref}
-      className="zorg-cabinet pointer-events-none absolute inset-0 overflow-hidden mix-blend-lighten z-0"
+      className="zorg-cabinet pointer-events-none absolute inset-0 overflow-hidden z-0"
       aria-hidden="true"
     >
       <Image

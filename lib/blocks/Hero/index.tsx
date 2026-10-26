@@ -81,26 +81,25 @@ export function Hero({
       }
     });
 
-    // 1. Fade out text and desk UI
+    // 1. Fade out text and timer
     tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: 20, duration: 1 }, 0);
-    tl.to(".zorg-cabinet", { opacity: 0, duration: 1 }, 0.5);
+    
+    // 2. Zoom in on the Zorg cabinet and blur it
+    tl.to(".zorg-cabinet", { 
+      scale: 1.5, // Reduced scale (less stretching)
+      filter: "blur(15px)", // Blur effect
+      duration: 2,
+      ease: "power2.inOut"
+    }, 0.2);
 
-    // 2. Camera Zoom (scale up the centered window)
-    tl.to(".hero-circular-window", { 
-      scale: 12, 
-      transformOrigin: "center center", 
-      ease: "power2.in", 
-      duration: 2 
-    }, 0.5);
-
-    // 3. Fade out the blue neon border
-    tl.to(".window-border", { opacity: 0, duration: 0.5 }, 1.5);
+    // 3. Fade out the circular window border
+    tl.to(".hero-circular-window", { opacity: 0, duration: 1 }, 0.5);
   }, { scope: rootRef });
 
   return (
     <section
       ref={rootRef}
-      className="relative h-screen w-full overflow-hidden bg-cosmic-black"
+      className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black"
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />

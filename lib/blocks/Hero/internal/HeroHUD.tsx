@@ -59,7 +59,7 @@ export function HeroHUD({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-4 rounded-xl border border-white/10 bg-black/45 p-4 backdrop-blur-sm">
+      <div className="flex flex-col gap-4">
         {hudLabel ? (
           <div className="flex items-center gap-2 text-[length:var(--font-size-hud)] uppercase tracking-[0.22em] text-[var(--color-neon-cyan)]">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-neon-cyan)] animate-hud" />
@@ -68,7 +68,7 @@ export function HeroHUD({
         ) : null}
 
         {showTimer ? (
-          <div ref={timerRef} className="w-full">
+          <div ref={timerRef} className="w-full text-neon-cyan drop-shadow-[0_0_10px_rgba(0,229,255,0.9)]">
             <CountdownTimer
               target_utc={ECLIPSE.targetDateISO}
               timezones={[{ label: "Луксор", tz: "Africa/Cairo" }]}
