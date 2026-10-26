@@ -48,9 +48,8 @@ export type HeroProps = {
  * Структура: круглое окно-прицел + фоновый шкаф Зорга + HUD-панель.
  * Пиннится на 150% высоты вьюпорта; окно «отъезжает» с zoom 14 → 1.
  */
-export function Hero({
-  showTimer = true,
-}: HeroProps) {
+export function Hero(props: HeroProps) {
+  const showTimer = props.showTimer ?? true;
   const rootRef = useRef<HTMLElement>(null);
   const cabinetRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
@@ -86,6 +85,24 @@ export function Hero({
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
+
+      {/* Текстовый контент Hero (восстановлен для админки) */}
+      <div className="hero-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6 pointer-events-auto">
+        {props.eyebrow && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrow}</p>}
+        {props.title && <h1 className="font-display text-5xl md:text-7xl text-white mb-6 leading-tight">{props.title}</h1>}
+        {props.subtitle && <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">{props.subtitle}</p>}
+        {props.quote && (
+          <div className="mb-8">
+            <p className="font-display italic text-xl text-neon-cyan">«{props.quote}»</p>
+            {props.quoteAttribution && <p className="font-mono text-xs text-white/50 mt-2">— {props.quoteAttribution}</p>}
+          </div>
+        )}
+        {props.ctaLabel && (
+          <a href={props.ctaHref} className="inline-block border-2 border-egyptian-gold text-egyptian-gold px-8 py-3 font-mono uppercase tracking-widest hover:bg-egyptian-gold hover:text-black transition-colors pointer-events-auto">
+            {props.ctaLabel}
+          </a>
+        )}
+      </div>
 
       {/* CSS Eclipse Sphere */}
       <div className="space-viewport">

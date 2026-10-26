@@ -151,64 +151,19 @@ if (quoteEl) {
   const hasHeadingPart2 = Boolean(headingLead || headingAccent);
 
   return (
-    <div
-      ref={rootRef}
-      data-variant="mystery"
-      className="relative w-full min-h-screen flex flex-col justify-center items-center text-center py-24 px-6 overflow-hidden"
-    >
-      <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
-
-      {eyebrow ? (
-        <div
-          className={`font-mono text-xs uppercase tracking-[0.28em] ${accentClass(
-            props.accent
-          )}`}
-        >
-          {eyebrow}
-        </div>
-      ) : null}
-
-      <h2
-        ref={headingRef}
-        data-anim="mystery"
-        className="scene-text font-display text-[length:var(--font-size-h1)] font-bold leading-[1.1] text-white break-words"
-      >
-        {headingLine1}
-        {hasHeadingPart2 ? <br /> : null}
-        {headingLead}{" "}
-        {headingAccent ? (
-          <span className={accentClass(props.accent)}>{headingAccent}</span>
-        ) : null}
+    <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto scene-text px-6">
+      {props.eyebrowSuffix && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrowPrefix || "SCENE 01"} {props.eyebrowSuffix}</p>}
+      <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
+        {props.headingLine1} <br />
+        <span className="text-egyptian-gold">{props.headingLead} {props.headingAccent}</span>
       </h2>
-
-      {lead ? (
-        <p
-          ref={leadRef}
-          data-anim="mystery"
-          className="scene-text w-full max-w-2xl break-words text-base leading-relaxed text-zinc-300 md:text-lg"
-        >
-          {lead}
-        </p>
-      ) : null}
-
-      {quote ? (
-        <blockquote
-          ref={quoteRef}
-          data-anim="mystery"
-          className="w-full max-w-2xl break-words border-l-2 border-egyptian-gold pl-4 text-left italic text-zinc-300"
-        >
-          {quote}
-          {quoteAttribution ? (
-            <footer className="mt-3 font-mono text-xs not-italic uppercase tracking-[0.2em] text-egyptian-gold/70">
-              {quoteAttribution}
-            </footer>
-          ) : null}
-        </blockquote>
-      ) : null}
-
-      {/* Слот глобального таймера (задача T). Пока — визуальный плейсхолдер. */}
-      <div data-timer-slot="mystery" className="w-full" aria-hidden="true" />
-      </div>
+      {props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>}
+      {props.quote && (
+        <div className="border-l-2 border-egyptian-gold pl-4 text-left">
+          <p className="font-display italic text-xl text-neon-cyan">«{props.quote}»</p>
+          {props.quoteAttribution && <p className="font-mono text-xs text-white/50 mt-2">— {props.quoteAttribution}</p>}
+        </div>
+      )}
     </div>
   );
 }
