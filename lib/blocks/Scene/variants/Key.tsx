@@ -89,6 +89,14 @@ export function Key(props: SceneProps) {
             opacity: 1,
             stagger: { each: 0.1, from: [0, 1, 3, 2] as any },
           });
+
+           gsap.from(".scene-text", {
+             y: 30,
+             opacity: 0,
+             duration: 1,
+             stagger: 0.1,
+             scrollTrigger: { trigger: root, start: "top 80%" },
+           });
         }
       );
     }, root);
@@ -114,7 +122,7 @@ export function Key(props: SceneProps) {
         <h2
           ref={headingRef}
           data-anim="key"
-          className="font-display font-bold text-white break-words leading-tight"
+          className="scene-text font-display font-bold text-white break-words leading-tight"
         >
           {headingLine1}
           {hasHeadingPart2 ? <br /> : null}
@@ -127,7 +135,7 @@ export function Key(props: SceneProps) {
           <p
             ref={leadRef}
             data-anim="key"
-            className="mt-4 text-base leading-relaxed text-zinc-300 md:text-lg"
+            className="scene-text mt-4 text-base leading-relaxed text-zinc-300 md:text-lg"
           >
             {lead}
           </p>

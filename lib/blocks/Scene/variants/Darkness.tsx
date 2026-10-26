@@ -83,6 +83,14 @@ export function Darkness(props: SceneProps) {
           if (quoteEl) {
             tl.add(() => reveal(quoteEl), "+=0.3");
           }
+
+           gsap.from(".scene-text", {
+             y: 30,
+             opacity: 0,
+             duration: 1,
+             stagger: 0.1,
+             scrollTrigger: { trigger: root, start: "top 80%" },
+           });
         }
       );
     }, root);
@@ -111,7 +119,7 @@ export function Darkness(props: SceneProps) {
       <h2
         ref={headingRef}
         data-anim="darkness"
-        className="font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl text-center max-w-2xl"
+        className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl text-center max-w-2xl"
       >
         {headingLine1}
         {hasHeadingPart2 ? <br /> : null}

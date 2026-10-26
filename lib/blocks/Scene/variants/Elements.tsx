@@ -101,6 +101,14 @@ export function Elements(props: SceneProps) {
             opacity: 1,
             stagger: { each: 0.15 },
           });
+
+           gsap.from(".scene-text", {
+             y: 30,
+             opacity: 0,
+             duration: 1,
+             stagger: 0.1,
+             scrollTrigger: { trigger: root, start: "top 80%" },
+           });
         }
       );
     }, root);
@@ -126,7 +134,7 @@ export function Elements(props: SceneProps) {
         <h2
           ref={headingRef}
           data-anim="elements"
-          className="font-display font-bold text-white break-words leading-tight text-4xl md:text-5xl"
+          className="scene-text font-display font-bold text-white break-words leading-tight text-4xl md:text-5xl"
         >
           {headingLine1}
           {hasHeadingPart2 ? <br /> : null}
@@ -138,7 +146,7 @@ export function Elements(props: SceneProps) {
           <p
             ref={leadRef}
             data-anim="elements"
-            className="mt-4 text-base leading-relaxed text-zinc-300 md:text-lg max-w-lg"
+            className="scene-text mt-4 text-base leading-relaxed text-zinc-300 md:text-lg max-w-lg"
           >
             {lead}
           </p>

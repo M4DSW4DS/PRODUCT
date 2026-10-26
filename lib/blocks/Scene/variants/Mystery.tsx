@@ -2,8 +2,11 @@
 
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DUR, EASE } from "@/lib/anim/primitives";
 import type { SceneProps } from "../index";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * useLayoutEffect выполняется до отрисовки — это убирает «вспышку» готового
@@ -120,7 +123,7 @@ export function Mystery(props: SceneProps) {
               DUR.base + 0.15
             );
           }
-          if (quoteEl) {
+if (quoteEl) {
             tl.fromTo(
               quoteEl,
               { opacity: 0, y: 40 },
@@ -128,6 +131,14 @@ export function Mystery(props: SceneProps) {
               DUR.base + 0.15 + DUR.reveal
             );
           }
+
+          gsap.from(".scene-text", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.1,
+            scrollTrigger: { trigger: root, start: "top 80%" },
+          });
         }
       );
     }, root);
@@ -160,7 +171,7 @@ export function Mystery(props: SceneProps) {
       <h2
         ref={headingRef}
         data-anim="mystery"
-        className="font-display text-[length:var(--font-size-h1)] font-bold leading-[1.1] text-white break-words"
+        className="scene-text font-display text-[length:var(--font-size-h1)] font-bold leading-[1.1] text-white break-words"
       >
         {headingLine1}
         {hasHeadingPart2 ? <br /> : null}
@@ -174,7 +185,7 @@ export function Mystery(props: SceneProps) {
         <p
           ref={leadRef}
           data-anim="mystery"
-          className="w-full max-w-2xl break-words text-base leading-relaxed text-zinc-300 md:text-lg"
+          className="scene-text w-full max-w-2xl break-words text-base leading-relaxed text-zinc-300 md:text-lg"
         >
           {lead}
         </p>

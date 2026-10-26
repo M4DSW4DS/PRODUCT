@@ -35,7 +35,7 @@
         "quote": "«В официальных папирусах Древнего Царства нет ни одной строки об этой катастрофе. Страх заставил империю стереть историю».",
         "quoteAttribution": "— Из секретных архивов",
         "accent": "gold",
-        "backgroundImage": ""
+        "backgroundImage": "/EXPER/scene-01..png"
       }
     },
     {
@@ -52,7 +52,7 @@
         "lead": "В Испании годом ранее тень пролетит всего за 76 секунд. Луксор 2 августа 2027 года даст абсолютный максимум века — 6 минут 23 секунды чистой тьмы. Черный диск встанет на высоте 82 градуса, ударив по Египту вертикально вниз.",
         "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
         "accent": "cyan",
-        "backgroundImage": "/scenes/scene-02-truth.webp"
+        "backgroundImage": "/EXPER/scene-02..png"
       }
     },
     {
@@ -86,7 +86,7 @@
           }
         ],
         "accent": "gold",
-        "backgroundImage": "/scenes/scene-03-key.webp"
+        "backgroundImage": "/EXPER/scene-03..jpg"
       }
     },
     {
@@ -124,7 +124,7 @@
           }
         ],
         "accent": "orange",
-        "backgroundImage": "/scenes/scene-04-elements.webp"
+        "backgroundImage": "/EXPER/scene-04.jpg"
       }
     },
     {
@@ -157,7 +157,7 @@
           }
         ],
         "accent": "cyan",
-        "backgroundImage": "/scenes/scene-05-keepers.webp"
+        "backgroundImage": "/EXPER/scene-05..jpg"
       }
     },
     {
@@ -174,7 +174,7 @@
         "quote": "«Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход».",
         "quoteAttribution": "— Инженер",
         "accent": "orange",
-        "backgroundImage": "/scenes/scene-06-darkness.webp"
+        "backgroundImage": "/EXPER/scene-06.jpg"
       }
     },
     {
@@ -193,7 +193,7 @@
         "ctaHref": "https://astro-camp.com/eclipse2027egipt",
         "microcopy": "БЕЗ РЕГИСТРАЦИИ НА САЙТЕ · ТОЛЬКО ВНЕШНИЙ РЕДИРЕКТ",
         "accent": "white",
-        "backgroundImage": "/scenes/scene-07-fifth.webp"
+        "backgroundImage": "/EXPER/scene-07.jpg"
       }
     },
     {

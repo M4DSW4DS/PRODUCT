@@ -90,6 +90,14 @@ export function Keepers(props: SceneProps) {
             opacity: 1,
             stagger: { each: 0.1 },
           });
+
+           gsap.from(".scene-text", {
+             y: 30,
+             opacity: 0,
+             duration: 1,
+             stagger: 0.1,
+             scrollTrigger: { trigger: root, start: "top 80%" },
+           });
         }
       );
     }, root);
@@ -118,7 +126,7 @@ export function Keepers(props: SceneProps) {
       <h2
         ref={headingRef}
         data-anim="keepers"
-        className="font-display font-bold text-white break-words leading-tight text-3xl md:text-4xl text-center max-w-2xl"
+        className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-4xl text-center max-w-2xl"
       >
         {headingLine1}
         {hasHeadingPart2 ? <br /> : null}
@@ -132,7 +140,7 @@ export function Keepers(props: SceneProps) {
         <p
           ref={leadRef}
           data-anim="keepers"
-          className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg text-center max-w-xl"
+          className="scene-text mt-6 text-base leading-relaxed text-zinc-300 md:text-lg text-center max-w-xl"
         >
           {lead}
         </p>

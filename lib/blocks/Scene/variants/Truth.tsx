@@ -34,6 +34,14 @@ export function Truth(props: SceneProps) {
       if (props.svg_caption) {
         tl.fromTo(".truth-box", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.4");
       }
+
+      gsap.from(".scene-text", {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        scrollTrigger: { trigger: rootRef.current, start: "top 80%" },
+      });
     });
   }, { scope: rootRef });
 
@@ -48,7 +56,7 @@ export function Truth(props: SceneProps) {
             </div>
           )}
           
-          <h2 className="truth-heading font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+          <h2 className="truth-heading scene-text font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
             {props.headingLine1}
             {(props.headingLead || props.headingAccent) && <br />}
             {props.headingLead}{" "}
@@ -58,7 +66,7 @@ export function Truth(props: SceneProps) {
           </h2>
 
           {props.lead && (
-            <p className="truth-lead font-body text-lg md:text-xl text-white/70 max-w-md mt-4">
+            <p className="truth-lead scene-text font-body text-lg md:text-xl text-white/70 max-w-md mt-4">
               {props.lead}
             </p>
           )}

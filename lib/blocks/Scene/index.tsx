@@ -179,6 +179,12 @@ export function Scene({
         )
       ) : null}
 
+      {/* Extra dark layer at bottom for text readability */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-t from-cosmic-black/80 to-transparent"
+        aria-hidden="true"
+      />
+
       {/* Контент */}
       {isCustomVariant ? (
         <div className="relative z-10 flex w-full flex-col items-center">

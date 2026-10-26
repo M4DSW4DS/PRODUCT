@@ -85,6 +85,14 @@ export function Fifth(props: SceneProps) {
           if (leadEl) {
             tl.add(() => reveal(leadEl), "+=0.2");
           }
+
+           gsap.from(".scene-text", {
+             y: 30,
+             opacity: 0,
+             duration: 1,
+             stagger: 0.1,
+             scrollTrigger: { trigger: root, start: "top 80%" },
+           });
         }
       );
     }, root);
@@ -114,7 +122,7 @@ export function Fifth(props: SceneProps) {
       <h2
         ref={headingRef}
         data-anim="fifth"
-        className="font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl max-w-2xl"
+        className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl max-w-2xl"
       >
         {headingLine1}
         {hasHeadingPart2 ? <br /> : null}
@@ -128,7 +136,7 @@ export function Fifth(props: SceneProps) {
         <p
           ref={leadRef}
           data-anim="fifth"
-          className="mt-6 text-base leading-relaxed text-zinc-300 md:text-lg max-w-xl"
+          className="scene-text mt-6 text-base leading-relaxed text-zinc-300 md:text-lg max-w-xl"
         >
           {lead}
         </p>
