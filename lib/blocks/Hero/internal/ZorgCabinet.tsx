@@ -24,7 +24,7 @@ export function ZorgCabinet({ ref }: ZorgCabinetProps) {
         alt=""
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 50vw"
-        className="object-contain object-center"
+        className="object-contain object-center scale-[0.75] md:scale-[0.85]"
         priority
       />
 
