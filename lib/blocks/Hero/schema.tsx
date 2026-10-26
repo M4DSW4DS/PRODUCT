@@ -56,21 +56,13 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
   },
   render: (props) => (
     <Hero
-      eyebrow={props.eyebrow}
-      title={props.title}
-      subtitle={props.subtitle}
-      quote={props.quote}
-      quoteAttribution={props.quoteAttribution}
-      ctaLabel={props.ctaLabel}
-      ctaHref={props.ctaHref}
-      hudLabel={props.hudLabel}
-      hudFooter={props.hudFooter}
+      {...props}
       showTimer={props.showTimer}
       showCalendar={props.showCalendar}
-       sunTop={props.sunTop}
-       sunLeft={props.sunLeft}
-       sunSize={props.sunSize}
-       sunGlow={props.sunGlow}
+      sunTop={props.sunTop}
+      sunLeft={props.sunLeft}
+      sunSize={props.sunSize}
+      sunGlow={props.sunGlow}
     />
   ),
 };
