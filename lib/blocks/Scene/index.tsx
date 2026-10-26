@@ -255,7 +255,9 @@ export function Scene({
           )}
           {headingPlain && (
             <h1 className="col-span-12 text-4xl md:text-6xl font-display font-bold text-white">
-              {headingPlain}
+              {Array.isArray(headingPlain)
+                ? headingPlain.map((node, i) => <span key={i}>{node}</span>)
+                : headingPlain}
             </h1>
           )}
           {lead && (
