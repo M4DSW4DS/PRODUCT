@@ -36,6 +36,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     headingLines: {
       type: "array",
       label: "Заголовок (Строки)",
+      getItemSummary: (item) => item.text || "Новая строка",
       arrayFields: {
         text: { type: "text", contentEditable: true, label: "Текст строки" },
         color: {
@@ -54,6 +55,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     textBlocks: {
       type: "array",
       label: "Текстовые абзацы",
+      getItemSummary: (item) => item.text || "Новый абзац",
       arrayFields: {
         text: { type: "textarea", contentEditable: true, label: "Текст" },
       },

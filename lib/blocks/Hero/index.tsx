@@ -62,7 +62,7 @@ export function Hero(props: HeroProps) {
       scrollTrigger: {
         trigger: rootRef.current,
         start: "top top",
-        end: "+=100%",
+        end: "+=150%",
         pin: true,
         scrub: 1,
       }
@@ -74,8 +74,8 @@ export function Hero(props: HeroProps) {
     // Dark overlay 80% for transition
     tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
 
-    // Brighten the Sun (fade in to full opacity)
-    tl.to(".sun-body", { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
+    // Brighten the Sun (fade in to full brightness)
+    tl.to(".sun-body", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, 0.5);
   }, { scope: rootRef });
 
   return (
@@ -120,6 +120,8 @@ export function Hero(props: HeroProps) {
       </div>
 
       <div className="hero-dark-overlay absolute inset-0 z-20 bg-cosmic-black opacity-0 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent z-20 pointer-events-none" />
+
     </section>
   );
 }

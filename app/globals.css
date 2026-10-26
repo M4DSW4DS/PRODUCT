@@ -142,11 +142,11 @@ body {
 }
 .space-viewport {
   position: absolute;
-  top: 65%; /* Raised sun */
+  top: 50%; /* Raised sun */
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 260px; /* 15% smaller */
-  height: 260px;
+  width: 234px; /* 10% smaller */
+  height: 234px;
   pointer-events: none;
   mix-blend-mode: screen;
   z-index: 20;

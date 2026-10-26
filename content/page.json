@@ -33,7 +33,23 @@
         "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
         "accent": "gold",
         "backgroundImage": "/EXPER/scene-02..png",
-        "quoteAttribution": "ZORG"
+        "quoteAttribution": "ZORG",
+        "textBlocks": [
+          {
+            "text": ""
+          }
+        ],
+        "headingLines": [
+          {
+            "text": "Новая строка",
+            "color": "white"
+          },
+          {
+            "text": "Новая строка",
+            "color": "white"
+          }
+        ],
+        "quote": " И я знаю когда "
       }
     },
     {
@@ -248,33 +264,9 @@
         "backgroundImage": "/scenes/scene-07.jpg",
         "quote": "",
         "quoteAttribution": "",
-        "plates": [
-          {
-            "name": "",
-            "text": "",
-            "color": "gold"
-          },
-          {
-            "name": "",
-            "text": "",
-            "color": "gold"
-          }
-        ],
-        "headingLines": [
-          {
-            "text": "Стань пятым элементом",
-            "color": "white"
-          },
-          {
-            "text": "иии",
-            "color": "gold"
-          }
-        ],
-        "textBlocks": [
-          {
-            "text": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. \nТвой единственный способ перехватить освободившийся билет — войти в резиервный лист ожидания прямо сейчас."
-          }
-        ]
+        "plates": [],
+        "headingLines": [],
+        "textBlocks": []
       }
     },
     {
