@@ -73,23 +73,17 @@ export function Hero({
       scrollTrigger: {
         trigger: rootRef.current,
         start: "top top",
-        end: "+=150%",
+        end: "+=100%",
         pin: true,
         scrub: 1,
       }
     });
 
-    // 1. Fade out text and HUD
-    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
+    // Fade out text, HUD, and Zorg background
+    tl.to(".hero-text, .hero-desk-ui, .zorg-cabinet", { opacity: 0, duration: 1 }, 0);
 
-    // 2. Fade out Zorg
-    tl.to(".zorg-cabinet", { opacity: 0, duration: 1 }, 0.5);
-
-    // 3. Moon covers Sun
-    tl.to(".moon-body", { x: "0%", y: "0%", scale: 1.05, duration: 2, ease: "power2.inOut" }, 0.5);
-
-    // 4. Corona fades in
-    tl.to(".corona-flares", { opacity: 1, duration: 0.5 }, 2);
+    // Brighten the Sun (fade in to full opacity)
+    tl.to(".sun-body", { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
   }, { scope: rootRef });
 
   return (
@@ -118,14 +112,6 @@ export function Hero({
           <p className="hero-subtitle hero-text max-w-xl text-[length:var(--font-size-body)] leading-relaxed text-zinc-300">
             {subtitle}
           </p>
-        ) : null}
-        {ctaLabel ? (
-          <a
-            href={ctaHref || "#"}
-            className="hero-cta inline-flex w-fit items-center border border-[var(--color-neon-cyan)]/60 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-neon-cyan)] transition-colors hover:bg-[var(--color-neon-cyan)]/10"
-          >
-            {ctaLabel}
-          </a>
         ) : null}
       </div>
 
