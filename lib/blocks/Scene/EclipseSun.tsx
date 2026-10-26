@@ -73,7 +73,7 @@ export function EclipseSun() {
   return (
     <div
       ref={rootRef}
-      className="eclipse-anchor fixed top-[8vh] right-[6vw] z-30 pointer-events-none opacity-0 invisible"
+      className="eclipse-anchor fixed bottom-[10vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-0 invisible"
       style={{ opacity: 0, visibility: "hidden" }}
       aria-hidden="true"
     >
@@ -84,7 +84,7 @@ export function EclipseSun() {
         <div ref={maskRef} className="eclipse-mask absolute inset-0 rounded-full" />
         <div className="corona absolute inset-0 rounded-full pointer-events-none opacity-0 shadow-[0_0_40px_10px_rgba(255,255,255,0.8),inset_0_0_20px_rgba(255,255,255,0.9)] transition-opacity duration-300" />
       </div>
-      <div className="font-mono text-[9px] tracking-[0.3em] text-neon-cyan/60 mt-2 text-right">
+      <div className="font-mono text-[9px] tracking-[0.3em] text-neon-cyan/60 mt-2 text-center">
         OBSCURATION <span className="text-neon-cyan" id="eclipse-readout">0%</span>
       </div>
     </div>

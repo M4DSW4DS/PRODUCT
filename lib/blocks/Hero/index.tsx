@@ -75,7 +75,7 @@ export function Hero({
       scrollTrigger: {
         trigger: rootRef.current,
         start: "top top",
-        end: "+=200%",
+        end: "+=133%",
         pin: true,
         scrub: 1,
       }
@@ -98,9 +98,9 @@ export function Hero({
       // Start Y is ALWAYS center of screen because the window is vertically centered in the pinned Hero (top-1/2 -translate-y-1/2)
       const startCenterY = window.innerHeight / 2; 
       
-      // Target is top-right corner (140px size, top 8vh, right 6vw)
-      const targetCenterX = window.innerWidth - (window.innerWidth * 0.06) - 70;
-      const targetCenterY = (window.innerHeight * 0.08) + 70;
+      // Target: Bottom Center (window size 140px, 10vh from bottom)
+      const targetCenterX = window.innerWidth / 2;
+      const targetCenterY = window.innerHeight - (window.innerHeight * 0.10) - 70; 
       
       const targetX = targetCenterX - startCenterX;
       const targetY = targetCenterY - startCenterY;
