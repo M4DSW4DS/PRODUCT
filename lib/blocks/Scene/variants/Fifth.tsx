@@ -142,18 +142,6 @@ export function Fifth(props: SceneProps) {
         </p>
       ) : null}
 
-      {/* CTA Button */}
-      {ctaLabel && ctaHref ? (
-        <a
-          href={ctaHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white text-[#0a0a0f] font-mono font-semibold uppercase tracking-widest px-8 py-4 text-sm md:text-base hover:bg-white/90 transition-colors"
-        >
-          {ctaLabel}
-        </a>
-      ) : null}
-
       {/* Microcopy */}
       {microcopy ? (
         <p className="mt-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-zinc-500">

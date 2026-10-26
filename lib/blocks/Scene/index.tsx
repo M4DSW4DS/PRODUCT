@@ -133,7 +133,7 @@ export function Scene({
     <section
       id={anchorId}
       data-accent={accent}
-      className="relative min-h-screen w-full"
+      className="w-full relative flex flex-col justify-center overflow-hidden h-[100dvh] bg-cosmic-black"
     >
       {/* Фон */}
       {backgroundImage ? (

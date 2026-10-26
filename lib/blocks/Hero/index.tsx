@@ -72,6 +72,9 @@ export function Hero({
     // Fade out text, HUD, and Zorg background
     tl.to(".hero-text, .hero-desk-ui, .zorg-cabinet", { opacity: 0, duration: 1 }, 0);
 
+    // Полное затемнение фона (100% чёрный) для перехода в Scene 1
+    tl.to(".hero-blackout", { opacity: 1, duration: 1 }, 0);
+
     // Brighten the Sun (fade in to full opacity)
     tl.to(".sun-body", { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
   }, { scope: rootRef });
@@ -83,6 +86,9 @@ export function Hero({
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
+
+      {/* Полное затемнение фона для перехода в Scene 1 */}
+      <div className="absolute inset-0 z-20 bg-cosmic-black opacity-0 pointer-events-none hero-blackout" />
 
       {/* CSS Eclipse Sphere */}
       <div className="space-viewport">

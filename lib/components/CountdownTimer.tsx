@@ -142,7 +142,7 @@ export function CountdownTimer({
   post_countdown_text,
 }: CountdownTimerProps) {
   const zones =
-    timezones && timezones.length > 0 ? timezones : DEFAULT_COUNTDOWN_TIMEZONES;
+    timezones && timezones.length > 0 ? timezones : timezones === undefined ? DEFAULT_COUNTDOWN_TIMEZONES : [];
   const accent = accent_color || "#00e5ff";
   const targetMs = useMemo(() => new Date(target_utc).getTime(), [target_utc]);
 
