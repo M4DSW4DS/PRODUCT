@@ -98,9 +98,9 @@ export function Hero({
       // Start Y is ALWAYS center of screen because the window is vertically centered in the pinned Hero (top-1/2 -translate-y-1/2)
       const startCenterY = window.innerHeight / 2; 
       
-      // Target: Bottom Center (window size 140px, 10vh from bottom)
+      // Target: Top Center (window size 140px, 10vh from top)
       const targetCenterX = window.innerWidth / 2;
-      const targetCenterY = window.innerHeight - (window.innerHeight * 0.10) - 70; 
+      const targetCenterY = (window.innerHeight * 0.10) + 70; // 10vh from top + 70px (half of 140px) 
       
       const targetX = targetCenterX - startCenterX;
       const targetY = targetCenterY - startCenterY;
@@ -141,7 +141,7 @@ export function Hero({
       <ZorgCabinet ref={cabinetRef} />
 
       {/* Круглое окно-прицел */}
-      <div className="relative z-10 flex w-full justify-center md:absolute md:left-8 md:top-1/2 md:w-auto md:-translate-y-1/2 md:justify-start lg:left-16">
+      <div className="flex flex-col items-center justify-center w-full">
         <CircularWindow ref={windowRef} imageSrc="/hero/zorg-window.webp" />
       </div>
 

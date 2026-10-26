@@ -73,7 +73,7 @@ export function EclipseSun() {
   return (
     <div
       ref={rootRef}
-      className="eclipse-anchor fixed bottom-[10vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-0 invisible"
+      className="eclipse-anchor fixed top-[10vh] left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-0 invisible"
       style={{ opacity: 0, visibility: "hidden" }}
       aria-hidden="true"
     >
