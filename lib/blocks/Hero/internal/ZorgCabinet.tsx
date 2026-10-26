@@ -14,7 +14,7 @@ export function ZorgCabinet({ ref }: ZorgCabinetProps) {
         width={1920}
         height={1080}
         priority
-        className="w-full h-full object-contain object-center"
+        className="w-full h-full object-cover md:object-contain object-center"
       />
     </div>
   );
