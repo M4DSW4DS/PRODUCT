@@ -165,11 +165,18 @@ export function Scene({
       )}
       {/* Overlay — между фоном и контентом (bg < overlay < content) */}
       {hasOverlay ? (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: overlayBackground }}
-          aria-hidden="true"
-        />
+        overlay === "night" ? (
+          <div
+            className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(10,10,15,0.95)_100%)]"
+            aria-hidden="true"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: overlayBackground }}
+            aria-hidden="true"
+          />
+        )
       ) : null}
 
       {/* Контент */}

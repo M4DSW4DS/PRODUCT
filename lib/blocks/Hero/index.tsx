@@ -49,17 +49,7 @@ export type HeroProps = {
  * Пиннится на 150% высоты вьюпорта; окно «отъезжает» с zoom 14 → 1.
  */
 export function Hero({
-  eyebrow = "",
-  title = "",
-  subtitle = "",
-  quote = "",
-  quoteAttribution = "MISTER ZORG",
-  ctaLabel = "",
-  ctaHref = "",
-  hudLabel = "System Ready // Countdown",
-  hudFooter = "ORBIT · EARTH · EGYPT",
   showTimer = true,
-  showCalendar = true,
 }: HeroProps) {
   const rootRef = useRef<HTMLElement>(null);
   const cabinetRef = useRef<HTMLDivElement>(null);
@@ -89,7 +79,7 @@ export function Hero({
   return (
     <section
       ref={rootRef}
-      className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black"
+      className="h-[100dvh] w-full overflow-hidden relative bg-cosmic-black"
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
@@ -101,37 +91,12 @@ export function Hero({
         <div className="moon-body" />
       </div>
 
-      {/* Левый столбец: заголовок, подзаголовок, CTA */}
-      <div className="relative z-20 flex w-full flex-col items-center gap-5 text-center md:absolute md:left-8 md:top-1/2 md:w-[24rem] md:-translate-y-1/2 md:items-start md:text-left lg:left-16 lg:w-[30rem]">
-        {title ? (
-          <h1 className="hero-title hero-text font-display text-hero font-bold text-egyptian-gold">
-            {title}
-          </h1>
-        ) : null}
-        {subtitle ? (
-          <p className="hero-subtitle hero-text max-w-xl text-[length:var(--font-size-body)] leading-relaxed text-zinc-300">
-            {subtitle}
-          </p>
-        ) : null}
-      </div>
-
       {/* HUD-панель */}
       <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
         <HeroHUD
           timerRef={timerRef}
-          eyebrow={eyebrow}
-          quote={quote}
-          quoteAttribution={quoteAttribution}
-          hudLabel={hudLabel}
-          hudFooter={hudFooter}
           showTimer={showTimer}
-          showCalendar={showCalendar}
         />
-      </div>
-
-      {/* Декоративная подсказка прокрутки */}
-      <div className="pointer-events-none absolute bottom-6 left-1/2 z-20 -translate-x-1/2 text-[length:var(--font-size-hud)] uppercase tracking-[0.4em] text-zinc-600">
-        Scroll
       </div>
     </section>
   );

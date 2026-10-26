@@ -143,9 +143,9 @@ export function Mystery(props: SceneProps) {
     <div
       ref={rootRef}
       data-variant="mystery"
-      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
+      className="relative w-full min-h-screen flex flex-col justify-center items-center text-center py-24 px-6 overflow-hidden"
     >
-      <div className="relative z-10 max-w-7xl mx-auto w-full text-center">
+      <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
 
       {eyebrow ? (
         <div
