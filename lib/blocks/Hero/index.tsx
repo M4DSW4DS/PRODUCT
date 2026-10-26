@@ -79,7 +79,7 @@ export function Hero({
   return (
     <section
       ref={rootRef}
-      className="h-[100dvh] w-full overflow-hidden relative bg-cosmic-black"
+      className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black"
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
