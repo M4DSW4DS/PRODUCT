@@ -15,7 +15,7 @@ export type FeaturesProps = {
  */
 export function FeaturesBlock({ title, items }: FeaturesProps) {
   return (
-    <section className="px-6 py-16 md:py-24">
+    <section className="bg-cosmic-black text-white px-6 py-16 md:py-24">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-section-title font-bold text-egyptian-gold mb-10 text-center">
           {title}
@@ -24,9 +24,9 @@ export function FeaturesBlock({ title, items }: FeaturesProps) {
           {(items ?? []).map((item, i) => (
             <div
               key={i}
-              className="flex flex-col gap-3 bg-white/5 border border-egyptian-gold/20 rounded-xl p-6"
+              className="flex flex-col gap-3 bg-white/5 border border-white/10 rounded-xl p-6"
             >
-              <span className="text-3xl">{item.icon}</span>
+              <span className="text-3xl text-egyptian-gold">{item.icon}</span>
               <h3 className="font-semibold text-lg text-neon-cyan">
                 {item.title}
               </h3>

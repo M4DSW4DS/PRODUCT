@@ -10,7 +10,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
   fields: {
     variant: {
       type: "radio",
-      label: "Вариант сцены",
+      label: "Тип сцены (Вариант)",
       options: [
         { label: "Mystery (тайна)", value: "mystery" },
         { label: "Truth (истина)", value: "truth" },
@@ -23,23 +23,19 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     overlay: {
       type: "radio",
-      label: "Наложение фона",
+      label: "Затемнение фона (Vignette)",
       options: [
         { label: "Без наложения", value: "none" },
         { label: "Сумерки (dusk)", value: "dusk" },
         { label: "Ночь (night)", value: "night" },
       ],
     },
-    eyebrowPrefix: { type: "text", label: "Префикс надзаголовка" },
-    eyebrowSuffix: { type: "text", label: "Суффикс надзаголовка" },
-    heading: {
-      type: "text",
-      label: "Заголовок (устаревшее — используется, если строки ниже пусты)",
-    },
-    headingLine1: { type: "text", label: "Заголовок — строка 1" },
-    headingLead: { type: "text", label: "Заголовок — строка 2 (обычная часть)" },
-    headingAccent: { type: "text", label: "Заголовок — строка 2 (цветная часть)" },
-    lead: { type: "textarea", label: "Ведущий текст" },
+    eyebrowPrefix: { type: "text", label: "Префикс сцены (напр. SCENE 01 //)" },
+    eyebrowSuffix: { type: "text", label: "Текст после префикса" },
+    headingLine1: { type: "text", label: "Заголовок — Строка 1" },
+    headingLead: { type: "text", label: "Заголовок — Строка 2 (обычный текст)" },
+    headingAccent: { type: "text", label: "Заголовок — Строка 2 (цветной текст)" },
+    lead: { type: "textarea", label: "Основной текст (Лид)" },
     accent: {
       type: "radio",
       label: "Акцентный цвет",
@@ -50,8 +46,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
         { label: "Белый (white)", value: "white" },
       ],
     },
-    backgroundImage: { type: "text", label: "Фоновая картинка (путь из public/)" },
-    quote: { type: "textarea", label: "Цитата (опционально)" },
+    backgroundImage: { type: "text", label: "Фоновое изображение (путь из public)" },
+    quote: { type: "textarea", label: "Цитата (если есть)" },
     quoteAttribution: { type: "text", label: "Автор цитаты" },
     ctaLabel: { type: "text", label: "Текст кнопки CTA" },
     ctaHref: { type: "text", label: "Ссылка CTA" },
@@ -59,7 +55,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     microcopy: { type: "text", label: "Микрокопия (Scene 7)" },
     anchor: {
       type: "text",
-      label: "ID-якорь (напр. mystery, nasa); пусто = variant",
+      label: "ID-якорь для ссылок (напр. register)",
     },
     artifacts: {
       type: "array",

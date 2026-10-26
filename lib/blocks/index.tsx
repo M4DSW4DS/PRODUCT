@@ -8,6 +8,7 @@ import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
 import { CtaSchema } from "./CTA/schema";
 import { SceneSchema } from "./Scene/schema";
+import { ConversionSchema } from "./Conversion/schema";
 
 /**
  * РЕЕСТР БЛОКОВ.
@@ -25,13 +26,14 @@ export const blocksConfig: Config = {
     Faq: FaqSchema,
     Cta: CtaSchema,
     Scene: SceneSchema,
+    Conversion: ConversionSchema,
   },
   categories: {
     "Основные": {
       components: ["Heading", "Hero", "Cta"],
     },
     "Контент": {
-      components: ["Features", "Faq"],
+      components: ["Features", "Faq", "Conversion"],
     },
     "Интерактив": {
       components: ["Timer", "PartnerWidget"],

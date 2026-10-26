@@ -7,13 +7,13 @@ import type { HeroProps } from "./index";
  */
 export const HeroSchema: ComponentConfig<HeroProps> = {
   fields: {
-    eyebrow: { type: "text", label: "Надзаголовок" },
-    title: { type: "text", label: "Заголовок" },
+    eyebrow: { type: "text", label: "Надзаголовок (маленький текст сверху)" },
+    title: { type: "text", label: "Главный заголовок (H1)" },
     subtitle: { type: "textarea", label: "Подзаголовок" },
-    quote: { type: "textarea", label: "Цитата (подпись Зорга)" },
+    quote: { type: "textarea", label: "Цитата Зорга" },
     quoteAttribution: { type: "text", label: "Автор цитаты" },
-    ctaLabel: { type: "text", label: "Текст кнопки CTA" },
-    ctaHref: { type: "text", label: "Ссылка CTA" },
+    ctaLabel: { type: "text", label: "Текст кнопки (если нужно)" },
+    ctaHref: { type: "text", label: "Ссылка кнопки" },
     hudLabel: { type: "text", label: "Подпись HUD (строка состояния)" },
     hudFooter: { type: "text", label: "Подпись HUD (подвал)" },
     showTimer: {
