@@ -6,7 +6,6 @@ const unbounded = Unbounded({ subsets: ["latin"], weight: ["400", "700", "900"],
 const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700", "900"], variable: "--font-orbitron" });
 import { LenisProvider } from "@/lib/core/providers/LenisProvider";
-import { CustomCursor } from "@/lib/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Luxor 2027 — Солнце над Египтом угаснет",
@@ -31,11 +30,7 @@ export default function RootLayout({
           {`document.documentElement.classList.add('js');`}
         </Script>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
-        <LenisProvider>
-          <div className="grain-overlay" />
-          {children}
-        </LenisProvider>
-        <CustomCursor />
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );

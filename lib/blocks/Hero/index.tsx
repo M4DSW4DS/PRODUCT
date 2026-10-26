@@ -40,6 +40,10 @@ export type HeroProps = {
   showTimer: boolean;
   /** Показывать календарный блок. */
   showCalendar: boolean;
+  sunTop?: string;
+  sunLeft?: string;
+  sunSize?: string;
+  sunGlow?: string;
 };
 
 /**
@@ -75,7 +79,7 @@ export function Hero(props: HeroProps) {
     tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
 
     // Brighten the Sun (fade in to full brightness)
-    tl.to(".sun-body", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, 0.5);
+    tl.to(".sun-body", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, 1);
   }, { scope: rootRef });
 
   return (
@@ -105,9 +109,18 @@ export function Hero(props: HeroProps) {
       </div>
 
       {/* CSS Eclipse Sphere */}
-      <div className="space-viewport">
+      <div
+        className="space-viewport absolute z-20 pointer-events-none mix-blend-mode-screen"
+        style={{
+          top: props.sunTop ?? "40%",
+          left: props.sunLeft ?? "50%",
+          width: props.sunSize ?? "400px",
+          height: props.sunSize ?? "400px",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
         <div className="corona-flares" />
-        <div className="sun-body" />
+        <div className="sun-body absolute inset-0 rounded-full" style={{ boxShadow: props.sunGlow ?? "0 0 100px rgba(255,180,50,0.9)" }} />
         <div className="moon-body" />
       </div>
 

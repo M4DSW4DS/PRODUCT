@@ -32,6 +32,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
         { label: "Нет", value: false },
       ],
     },
+    sunTop: { type: "text", label: "Положение Солнца по вертикали (напр. 40%, 75%)" },
+    sunLeft: { type: "text", label: "Положение Солнца по горизонтали (напр. 50%)" },
+    sunSize: { type: "text", label: "Размер Солнца (напр. 400px, 300px)" },
+    sunGlow: { type: "text", label: "Свечение Солнца (напр. rgba(255,120,20,0.8))" },
   },
   defaultProps: {
     eyebrow: "",
@@ -45,6 +49,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     hudFooter: "ORBIT · EARTH · EGYPT",
     showTimer: true,
     showCalendar: true,
+    sunTop: "40%",
+    sunLeft: "50%",
+    sunSize: "400px",
+    sunGlow: "0 0 100px rgba(255,180,50,0.9)",
   },
   render: (props) => (
     <Hero
@@ -59,6 +67,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
       hudFooter={props.hudFooter}
       showTimer={props.showTimer}
       showCalendar={props.showCalendar}
+       sunTop={props.sunTop}
+       sunLeft={props.sunLeft}
+       sunSize={props.sunSize}
+       sunGlow={props.sunGlow}
     />
   ),
 };
