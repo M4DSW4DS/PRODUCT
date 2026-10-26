@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { Data } from "@puckeditor/core";
 import { getPageData, savePageData } from "@/lib/core/page-store";
+import { revalidatePath } from "next/cache";
 
 /** GET /api/page — текущие опубликованные данные страницы (PostgreSQL, иначе page.json). */
 export async function GET() {
@@ -68,6 +69,7 @@ export async function PUT(request: Request) {
 
   try {
     await savePageData(page as Data);
+    revalidatePath("/");
     console.info(`[page] published (${page.content.length} blocks)`);
     return NextResponse.json({ ok: true });
   } catch (err) {

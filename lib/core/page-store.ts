@@ -1,6 +1,8 @@
 import type { Data } from "@puckeditor/core";
 import pageFallback from "@/content/page.json";
 import postgres from "postgres";
+import fs from "fs/promises";
+import path from "path";
 
 /** Ключ (id строки) опубликованной страницы в PostgreSQL. */
 const PAGE_KEY = "main";
@@ -194,9 +196,10 @@ export async function getPageData(): Promise<Data> {
 export async function savePageData(data: Data): Promise<void> {
   const sql = getSql();
   if (!sql) {
-    throw new Error(
-      "Cannot save: DATABASE_URL not configured (read-only mode)"
-    );
+    const filePath = path.join(process.cwd(), "content", "page.json");
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+    console.log("[page-store] Saved to local content/page.json");
+    return;
   }
   await ensureSchema(sql);
   await sql`
