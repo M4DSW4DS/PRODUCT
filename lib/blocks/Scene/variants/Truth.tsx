@@ -38,9 +38,9 @@ export function Truth(props: SceneProps) {
   }, { scope: rootRef });
 
   return (
-    <div ref={rootRef} data-anim="truth" className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 md:py-32 overflow-x-hidden">
+    <div ref={rootRef} data-anim="truth" className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black">
       <Key3D />
-      <div className="relative z-10 md:grid md:grid-cols-12 gap-8 items-center w-full max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto w-full md:grid md:grid-cols-12 gap-8 items-center">
         <div className="md:col-span-6 flex flex-col gap-6">
           {props.eyebrowSuffix && (
             <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-neon-cyan/70">

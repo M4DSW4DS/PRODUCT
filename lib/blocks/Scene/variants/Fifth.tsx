@@ -99,8 +99,10 @@ export function Fifth(props: SceneProps) {
       id="scene-fifth"
       ref={rootRef}
       data-anim="fifth"
-      className="relative w-full flex flex-col items-center justify-center py-24 md:py-32 px-6 md:px-16 text-center overflow-x-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
     >
+      <div className="relative z-10 max-w-7xl mx-auto w-full text-center">
+
       {/* Eyebrow */}
       {eyebrow ? (
         <div className="font-mono text-xs uppercase tracking-[0.28em] text-white mb-8">
@@ -150,6 +152,7 @@ export function Fifth(props: SceneProps) {
           {microcopy}
         </p>
       ) : null}
+      </div>
     </div>
   );
 }

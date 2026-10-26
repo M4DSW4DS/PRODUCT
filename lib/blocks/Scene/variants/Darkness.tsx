@@ -96,8 +96,10 @@ export function Darkness(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="darkness"
-      className="relative w-full flex flex-col items-center justify-center py-24 md:py-32 px-6 md:px-16 overflow-x-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
     >
+      <div className="relative z-10 max-w-7xl mx-auto w-full text-center">
+
       {/* Eyebrow */}
       {eyebrow ? (
         <div className="font-mono text-xs uppercase tracking-[0.28em] text-eclipse-orange mb-8">
@@ -133,6 +135,7 @@ export function Darkness(props: SceneProps) {
           ) : null}
         </blockquote>
       ) : null}
+      </div>
     </div>
   );
 }

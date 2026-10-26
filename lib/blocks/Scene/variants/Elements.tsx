@@ -114,10 +114,10 @@ export function Elements(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="elements"
-      className="relative min-h-screen w-full flex flex-col justify-center py-24 px-6 md:px-16 md:py-32 overflow-x-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
     >
       {/* Left column: eyebrow + heading + lead */}
-      <div className="flex flex-col justify-center items-start md:max-w-[45rem]">
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center items-start md:max-w-[45rem]">
         {eyebrow ? (
           <div className="font-mono text-xs uppercase tracking-[0.28em] text-egyptian-gold mb-4">
             {eyebrow}

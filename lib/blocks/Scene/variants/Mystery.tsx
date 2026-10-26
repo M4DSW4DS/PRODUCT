@@ -143,8 +143,10 @@ export function Mystery(props: SceneProps) {
     <div
       ref={rootRef}
       data-variant="mystery"
-      className="relative w-full flex flex-col items-center justify-center gap-6 px-6 py-24 text-center md:mx-auto md:max-w-3xl md:py-32 overflow-x-hidden bg-cosmic-black"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
     >
+      <div className="relative z-10 max-w-7xl mx-auto w-full text-center">
+
       {eyebrow ? (
         <div
           className={`font-mono text-xs uppercase tracking-[0.28em] ${accentClass(
@@ -195,6 +197,7 @@ export function Mystery(props: SceneProps) {
 
       {/* Слот глобального таймера (задача T). Пока — визуальный плейсхолдер. */}
       <div data-timer-slot="mystery" className="w-full" aria-hidden="true" />
+      </div>
     </div>
   );
 }

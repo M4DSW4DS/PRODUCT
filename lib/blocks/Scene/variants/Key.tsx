@@ -102,10 +102,10 @@ export function Key(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="key"
-      className="relative w-full py-24 md:py-32 px-6 md:px-16 flex flex-col justify-center md:grid md:grid-cols-12 gap-8 items-center overflow-x-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
     >
       {/* Left: Text */}
-      <div className="md:col-span-5 flex flex-col justify-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full md:col-span-5 flex flex-col justify-center">
         {eyebrow ? (
           <div className="font-mono text-xs uppercase tracking-[0.28em] text-egyptian-gold mb-4">
             {eyebrow}
