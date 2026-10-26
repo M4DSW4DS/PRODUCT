@@ -7,15 +7,15 @@ import type { HeroProps } from "./index";
  */
 export const HeroSchema: ComponentConfig<HeroProps> = {
   fields: {
-    eyebrow: { type: "text", label: "Надзаголовок (маленький текст сверху)" },
+    eyebrow: { type: "text", contentEditable: true, label: "Надзаголовок (маленький текст сверху)" },
     title: { type: "text", contentEditable: true, label: "Главный заголовок (H1)" },
     subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок" },
     quote: { type: "textarea", contentEditable: true, label: "Цитата Зорга" },
-    quoteAttribution: { type: "text", label: "Автор цитаты" },
-    ctaLabel: { type: "text", label: "Текст кнопки (если нужно)" },
-    ctaHref: { type: "text", label: "Ссылка кнопки" },
-    hudLabel: { type: "text", label: "Подпись HUD (строка состояния)" },
-    hudFooter: { type: "text", label: "Подпись HUD (подвал)" },
+    quoteAttribution: { type: "text", contentEditable: true, label: "Автор цитаты" },
+    ctaLabel: { type: "text", contentEditable: true, label: "Текст кнопки (если нужно)" },
+    ctaHref: { type: "text", contentEditable: true, label: "Ссылка кнопки" },
+    hudLabel: { type: "text", contentEditable: true, label: "Подпись HUD (строка состояния)" },
+    hudFooter: { type: "text", contentEditable: true, label: "Подпись HUD (подвал)" },
     showTimer: {
       type: "radio",
       label: "Показывать таймер",
@@ -32,10 +32,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
         { label: "Нет", value: false },
       ],
     },
-    sunTop: { type: "text", label: "Положение Солнца по вертикали (напр. 40%, 75%)" },
-    sunLeft: { type: "text", label: "Положение Солнца по горизонтали (напр. 50%)" },
-    sunSize: { type: "text", label: "Размер Солнца (напр. 400px, 300px)" },
-    sunGlow: { type: "text", label: "Свечение Солнца (напр. rgba(255,120,20,0.8))" },
+    sunTop: { type: "text", contentEditable: true, label: "Положение Солнца по вертикали (напр. 40%, 75%)" },
+    sunLeft: { type: "text", contentEditable: true, label: "Положение Солнца по горизонтали (напр. 50%)" },
+    sunSize: { type: "text", contentEditable: true, label: "Размер Солнца (напр. 400px, 300px)" },
+    sunGlow: { type: "text", contentEditable: true, label: "Свечение Солнца (напр. rgba(255,120,20,0.8))" },
   },
   defaultProps: {
     eyebrow: "",
