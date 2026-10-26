@@ -21,17 +21,13 @@ export function CircularWindow({ ref, imageSrc }: CircularWindowProps) {
       className="relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden transition-none border border-neon-cyan/30 shadow-[0_0_120px_rgba(0,229,255,0.25)] shrink-0 hero-circular-window"
       aria-hidden="true"
     >
-      {imageSrc ? (
-        <Image
-          src={imageSrc}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 78vw, 38rem"
-          className="rounded-full object-cover"
-        />
-      ) : (
-        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.18),transparent_70%)]" />
-      )}
+      <Image
+        src={imageSrc || "/hero/egypt-orbit.jpg"}
+        alt=""
+        fill
+        sizes="(max-width: 768px) 78vw, 38rem"
+        className="object-cover"
+      />
 
       {/* HUD-прицел: пунктирная окружность + перекрестия */}
       <svg
@@ -48,6 +44,9 @@ export function CircularWindow({ ref, imageSrc }: CircularWindowProps) {
         <line x1="88" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="0.3" opacity="0.8" />
         <rect x="38" y="38" width="24" height="24" stroke="currentColor" strokeWidth="0.25" opacity="0.45" />
       </svg>
+
+      {/* Неоновая рамка */}
+      <div className="absolute inset-0 rounded-full border-[3px] border-[#0055ff] shadow-[0_0_30px_#0055ff] pointer-events-none z-20 window-border" />
     </div>
   );
 }

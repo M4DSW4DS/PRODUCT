@@ -16,11 +16,11 @@ export function ZorgCabinet({ ref }: ZorgCabinetProps) {
   return (
     <div
       ref={ref}
-      className="zorg-cabinet pointer-events-none absolute inset-0 overflow-hidden mix-blend-lighten"
+      className="zorg-cabinet pointer-events-none absolute inset-0 overflow-hidden mix-blend-lighten z-0"
       aria-hidden="true"
     >
       <Image
-        src="/hero/zorg-cabinet.webp"
+        src="/hero/zorg-cabinet.png"
         alt=""
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 50vw"

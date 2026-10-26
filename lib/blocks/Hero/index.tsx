@@ -75,74 +75,39 @@ export function Hero({
       scrollTrigger: {
         trigger: rootRef.current,
         start: "top top",
-        end: "+=133%",
+        end: "+=150%",
         pin: true,
         scrub: 1,
       }
     });
 
-    // 1. Fade out text and cabinet
-    tl.to(".hero-text", { opacity: 0, y: -50, duration: 1 }, 0);
-    tl.to(".zorg-cabinet", { opacity: 0, scale: 1.1, duration: 1 }, 0);
+    // 1. Fade out text and desk UI
+    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: 20, duration: 1 }, 0);
+    tl.to(".zorg-cabinet", { opacity: 0, duration: 1 }, 0.5);
 
-    // 2. Morph window to top-right
-    const windowEl = windowRef.current;
-    if (windowEl) {
-      // Reset any previous transforms to measure correctly
-      gsap.set(windowEl, { clearProps: "transform" });
-      
-      const rect = windowEl.getBoundingClientRect();
-      
-      // Start X is based on its actual left position
-      const startCenterX = rect.left + rect.width / 2;
-      // Start Y is ALWAYS center of screen because the window is vertically centered in the pinned Hero (top-1/2 -translate-y-1/2)
-      const startCenterY = window.innerHeight / 2; 
-      
-      // Target: Top Center (window size 140px, 10vh from top)
-      const targetCenterX = window.innerWidth / 2;
-      const targetCenterY = (window.innerHeight * 0.10) + 70; // 10vh from top + 70px (half of 140px) 
-      
-      const targetX = targetCenterX - startCenterX;
-      const targetY = targetCenterY - startCenterY;
-      const scale = 140 / rect.width;
+    // 2. Camera Zoom (scale up the centered window)
+    tl.to(".hero-circular-window", { 
+      scale: 12, 
+      transformOrigin: "center center", 
+      ease: "power2.in", 
+      duration: 2 
+    }, 0.5);
 
-      tl.to(windowEl, { 
-        x: targetX, 
-        y: targetY, 
-        scale: scale, 
-        transformOrigin: "center center",
-        duration: 1.5, 
-        ease: "power2.inOut" 
-      }, 0.5);
-      
-      tl.to(".hero-circular-window img", { opacity: 0, duration: 0.5 }, 1.5);
-      tl.to(windowEl, { 
-        backgroundColor: "#e87a00", 
-        borderColor: "rgba(253, 224, 71, 0.3)", 
-        boxShadow: "0 0 80px rgba(255,180,50,0.8)",
-        duration: 0.5 
-      }, 1.5);
-    }
-
-    // 3. Handoff
-    const eclipseAnchor = document.querySelector(".eclipse-anchor");
-    if (eclipseAnchor && windowEl) {
-      tl.set(windowEl, { visibility: "hidden" }, 2);
-      tl.set(eclipseAnchor, { visibility: "visible", opacity: 1 }, 2);
-    }
+    // 3. Fade out the blue neon border
+    tl.to(".window-border", { opacity: 0, duration: 0.5 }, 1.5);
   }, { scope: rootRef });
 
   return (
     <section
       ref={rootRef}
-      className="relative flex min-h-screen w-full flex-col items-center justify-center gap-8 overflow-hidden bg-cosmic-black px-6 py-24 md:flex-row md:gap-12 md:py-32"
+      className="relative h-screen w-full overflow-hidden bg-cosmic-black"
     >
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
 
       {/* Круглое окно-прицел */}
-      <div className="flex flex-col items-center justify-center w-full">
-        <CircularWindow ref={windowRef} imageSrc="/hero/zorg-window.webp" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        <CircularWindow ref={windowRef} imageSrc="/hero/egypt-orbit.jpg" />
       </div>
 
       {/* Левый столбец: заголовок, подзаголовок, CTA */}
@@ -168,7 +133,7 @@ export function Hero({
       </div>
 
       {/* HUD-панель */}
-      <div className="hero-text">
+      <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
         <HeroHUD
           timerRef={timerRef}
           eyebrow={eyebrow}
