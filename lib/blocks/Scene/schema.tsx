@@ -134,30 +134,16 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     voices: [],
     additional_ctas: [],
   },
-  render: (props) => (
-    <Scene
-      variant={props.variant}
-      overlay={props.overlay}
-      eyebrowPrefix={props.eyebrowPrefix}
-      eyebrowSuffix={props.eyebrowSuffix}
-      heading={props.heading}
-      headingLine1={props.headingLine1}
-      headingLead={props.headingLead}
-      headingAccent={props.headingAccent}
-      lead={props.lead}
-      accent={props.accent}
-      backgroundImage={props.backgroundImage}
-      quote={props.quote}
-      quoteAttribution={props.quoteAttribution}
-      ctaLabel={props.ctaLabel}
-      ctaHref={props.ctaHref}
-      svg_caption={props.svg_caption}
-      microcopy={props.microcopy}
-      anchor={props.anchor}
-      artifacts={props.artifacts}
-      plates={props.plates}
-      voices={props.voices}
-      additional_ctas={props.additional_ctas}
-    />
-  ),
+  render: (props) => {
+    const { puck, id, ...rest } = props;
+    const fromId =
+      typeof id === "string" ? parseInt(id.replace(/\D/g, ""), 10) - 1 : 0;
+    const index =
+      typeof (puck as any)?.index === "number"
+        ? (puck as any).index
+        : Number.isFinite(fromId) && fromId >= 0
+          ? fromId
+          : 0;
+    return <Scene {...rest} index={index} />;
+  },
 };

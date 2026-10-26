@@ -38,8 +38,8 @@ function Pyramids() {
 
 export function Key3D() {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 3, 10], fov: 60 }} dpr={[1, 1.5]} shadows style={{ pointerEvents: 'none' }}>
+    <div className="absolute inset-0 z-0 pointer-events-none w-full h-full">
+      <Canvas camera={{ position: [0, 3, 10], fov: 60 }} dpr={[1, 1.5]} shadows style={{ width: '100%', height: '100%', pointerEvents: 'none' }}>
         <ambientLight intensity={0.3} />
         <directionalLight position={[5, 10, 5]} intensity={2} color="#ffaa55" castShadow shadow-mapSize={[1024, 1024]} />
         <fog attach="fog" args={["#0a0a0f", 15, 45]} />
