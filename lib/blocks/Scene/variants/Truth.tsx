@@ -19,6 +19,13 @@ function useGSAP(callback: () => void, config?: { scope?: any }) {
 }
 
 export function Truth(props: SceneProps) {
+  const colorMap: Record<string, string> = {
+    gold: "text-egyptian-gold",
+    cyan: "text-neon-cyan",
+    orange: "text-eclipse-orange",
+    white: "text-white",
+  };
+
   const rootRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -57,9 +64,9 @@ export function Truth(props: SceneProps) {
           )}
           
           {props.headingLines?.length ? (
-            <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+            <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center truth-heading scene-text">
               {props.headingLines.map((line, i) => (
-                <span key={i} className={`text-${line.color}`}>{line.text}</span>
+                <span key={i} className={colorMap[line.color] || "text-white"}>{line.text}</span>
               ))}
             </h2>
           ) : (
@@ -76,7 +83,7 @@ export function Truth(props: SceneProps) {
           {props.textBlocks?.length ? (
             <div className="flex flex-col gap-4 mb-8">
               {props.textBlocks.map((block, i) => (
-                <p key={i} className="text-lg text-white/80">{block.text}</p>
+                <p key={i} className="text-lg text-white/80 truth-lead scene-text">{block.text}</p>
               ))}
             </div>
           ) : (

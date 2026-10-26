@@ -40,6 +40,12 @@ function accentClass(accent?: SceneProps["accent"]): string {
  * Таймер (задача T) будет перенесён в слот позже — здесь только разметка.
  */
 export function Mystery(props: SceneProps) {
+  const colorMap: Record<string, string> = {
+    gold: "text-egyptian-gold",
+    cyan: "text-neon-cyan",
+    orange: "text-eclipse-orange",
+    white: "text-white",
+  };
   const rootRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const leadRef = useRef<HTMLParagraphElement>(null);
@@ -151,12 +157,12 @@ if (quoteEl) {
   const hasHeadingPart2 = Boolean(headingLead || headingAccent);
 
   return (
-    <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto scene-text px-6">
+    <div ref={rootRef} className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto scene-text px-6">
       {props.eyebrowSuffix && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrowPrefix || "SCENE 01"} {props.eyebrowSuffix}</p>}
       {props.headingLines?.length ? (
-        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center scene-text">
           {props.headingLines.map((line, i) => (
-            <span key={i} className={`text-${line.color}`}>{line.text}</span>
+            <span key={i} className={colorMap[line.color] || "text-white"}>{line.text}</span>
           ))}
         </h2>
       ) : (
@@ -168,7 +174,7 @@ if (quoteEl) {
       {props.textBlocks?.length ? (
         <div className="flex flex-col gap-4 mb-8">
           {props.textBlocks.map((block, i) => (
-            <p key={i} className="text-lg text-white/80">{block.text}</p>
+            <p key={i} className="text-lg text-white/80 scene-text">{block.text}</p>
           ))}
         </div>
       ) : (

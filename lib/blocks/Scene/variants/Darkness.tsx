@@ -12,6 +12,13 @@ const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export function Darkness(props: SceneProps) {
+  const colorMap: Record<string, string> = {
+    gold: "text-egyptian-gold",
+    cyan: "text-neon-cyan",
+    orange: "text-eclipse-orange",
+    white: "text-white",
+  };
+
   const {
     index = 0,
     eyebrowPrefix,
@@ -117,9 +124,9 @@ export function Darkness(props: SceneProps) {
 
       {/* Heading */}
       {props.headingLines?.length ? (
-        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center scene-text">
           {props.headingLines.map((line, i) => (
-            <span key={i} className={`text-${line.color}`}>{line.text}</span>
+            <span key={i} className={colorMap[line.color] || "text-white"}>{line.text}</span>
           ))}
         </h2>
       ) : (
