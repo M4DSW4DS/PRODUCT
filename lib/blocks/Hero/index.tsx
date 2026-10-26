@@ -92,7 +92,7 @@ export function Hero({
       </div>
 
       {/* HUD-панель */}
-      <div className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
+      <div className="absolute bottom-[4vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
         <HeroHUD
           timerRef={timerRef}
           showTimer={showTimer}

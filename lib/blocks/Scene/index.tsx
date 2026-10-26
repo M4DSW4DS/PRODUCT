@@ -151,7 +151,7 @@ export function Scene({
             alt=""
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-cover z-0"
             priority={false}
           />
         </>
@@ -167,7 +167,7 @@ export function Scene({
       {hasOverlay ? (
         overlay === "night" ? (
           <div
-            className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(10,10,15,0.95)_100%)]"
+            className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_center,transparent_20%,rgba(10,10,15,0.95)_100%)]"
             aria-hidden="true"
           />
         ) : (
