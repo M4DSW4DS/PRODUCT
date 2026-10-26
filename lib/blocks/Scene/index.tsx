@@ -42,6 +42,8 @@ export interface SceneProps {
   headingLead?: string;
   headingAccent?: string;
   lead?: string;
+  headingLines?: { text: string; color: "white" | "gold" | "cyan" | "orange" }[];
+  textBlocks?: { text: string }[];
   accent?: "gold" | "cyan" | "orange" | "white";
   backgroundImage?: string;
   quote?: string;
@@ -95,6 +97,8 @@ export function Scene({
   headingLead,
   headingAccent,
   lead,
+  headingLines,
+  textBlocks,
   accent = "gold",
   backgroundImage,
   quote,
@@ -294,6 +298,8 @@ export function Scene({
             headingLead={headingLead}
             headingAccent={headingAccent}
             lead={lead}
+            headingLines={headingLines}
+            textBlocks={textBlocks}
             accent={accent}
             backgroundImage={backgroundImage}
             quote={quote}

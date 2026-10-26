@@ -33,10 +33,32 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     eyebrowPrefix: { type: "text", label: "Префикс сцены (напр. SCENE 01 //)" },
     eyebrowSuffix: { type: "text", label: "Текст после префикса" },
-    headingLine1: { type: "text", contentEditable: true, label: "Заголовок — Строка 1" },
-    headingLead: { type: "text", contentEditable: true, label: "Заголовок — Строка 2 (обычный текст)" },
-    headingAccent: { type: "text", contentEditable: true, label: "Заголовок — Строка 2 (цветной текст)" },
-    lead: { type: "textarea", contentEditable: true, label: "Основной текст (Лид)" },
+    headingLines: {
+      type: "array",
+      label: "Заголовок (Строки)",
+      arrayFields: {
+        text: { type: "text", contentEditable: true, label: "Текст строки" },
+        color: {
+          type: "radio",
+          label: "Цвет",
+          options: [
+            { label: "Белый", value: "white" },
+            { label: "Золотой", value: "gold" },
+            { label: "Циан", value: "cyan" },
+            { label: "Оранжевый", value: "orange" },
+          ],
+        },
+      },
+      defaultItemProps: { text: "Новая строка", color: "white" },
+    },
+    textBlocks: {
+      type: "array",
+      label: "Текстовые абзацы",
+      arrayFields: {
+        text: { type: "textarea", contentEditable: true, label: "Текст" },
+      },
+      defaultItemProps: { text: "Новый абзац" },
+    },
     accent: {
       type: "radio",
       label: "Акцентный цвет",
@@ -117,6 +139,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     headingLead: "",
     headingAccent: "",
     lead: "",
+    headingLines: [],
+    textBlocks: [],
     accent: "gold",
     backgroundImage: "",
     quote: "",

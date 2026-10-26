@@ -7,13 +7,13 @@ import type { FaqProps } from "./index";
  */
 export const FaqSchema: ComponentConfig<FaqProps> = {
   fields: {
-    title: { type: "text", label: "Заголовок секции" },
+    title: { type: "text", contentEditable: true, label: "Заголовок секции" },
     items: {
       type: "array",
       label: "Вопросы",
       arrayFields: {
-        question: { type: "text", label: "Вопрос" },
-        answer: { type: "textarea", label: "Ответ" },
+        question: { type: "text", contentEditable: true, label: "Вопрос" },
+        answer: { type: "textarea", contentEditable: true, label: "Ответ" },
       },
       getItemSummary: (item, index) => item.question || `Вопрос ${(index ?? 0) + 1}`,
       defaultItemProps: () => ({ question: "Новый вопрос", answer: "Ответ на вопрос." }),

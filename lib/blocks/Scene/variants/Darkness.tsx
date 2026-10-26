@@ -116,17 +116,25 @@ export function Darkness(props: SceneProps) {
       ) : null}
 
       {/* Heading */}
-      <h2
-        ref={headingRef}
-        data-anim="darkness"
-        className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl text-center max-w-2xl"
-      >
-        {headingLine1}
-        {hasHeadingPart2 ? <br /> : null}
-        {headingLead} {headingAccent ? (
-          <span className="text-eclipse-orange">{headingAccent}</span>
-        ) : null}
-      </h2>
+      {props.headingLines?.length ? (
+        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+          {props.headingLines.map((line, i) => (
+            <span key={i} className={`text-${line.color}`}>{line.text}</span>
+          ))}
+        </h2>
+      ) : (
+        <h2
+          ref={headingRef}
+          data-anim="darkness"
+          className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-5xl text-center max-w-2xl"
+        >
+          {headingLine1}
+          {hasHeadingPart2 ? <br /> : null}
+          {headingLead} {headingAccent ? (
+            <span className="text-eclipse-orange">{headingAccent}</span>
+          ) : null}
+        </h2>
+      )}
 
       {/* Quote */}
       {quote ? (

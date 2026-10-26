@@ -56,19 +56,35 @@ export function Truth(props: SceneProps) {
             </div>
           )}
           
-          <h2 className="truth-heading scene-text font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-            {props.headingLine1}
-            {(props.headingLead || props.headingAccent) && <br />}
-            {props.headingLead}{" "}
-            {props.headingAccent && (
-              <span className="text-neon-cyan">{props.headingAccent}</span>
-            )}
-          </h2>
+          {props.headingLines?.length ? (
+            <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+              {props.headingLines.map((line, i) => (
+                <span key={i} className={`text-${line.color}`}>{line.text}</span>
+              ))}
+            </h2>
+          ) : (
+            <h2 className="truth-heading scene-text font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+              {props.headingLine1}
+              {(props.headingLead || props.headingAccent) && <br />}
+              {props.headingLead}{" "}
+              {props.headingAccent && (
+                <span className="text-neon-cyan">{props.headingAccent}</span>
+              )}
+            </h2>
+          )}
 
-          {props.lead && (
-            <p className="truth-lead scene-text font-body text-lg md:text-xl text-white/70 max-w-md mt-4">
-              {props.lead}
-            </p>
+          {props.textBlocks?.length ? (
+            <div className="flex flex-col gap-4 mb-8">
+              {props.textBlocks.map((block, i) => (
+                <p key={i} className="text-lg text-white/80">{block.text}</p>
+              ))}
+            </div>
+          ) : (
+            props.lead && (
+              <p className="truth-lead scene-text font-body text-lg md:text-xl text-white/70 max-w-md mt-4">
+                {props.lead}
+              </p>
+            )
           )}
         </div>
 

@@ -133,26 +133,42 @@ export function Elements(props: SceneProps) {
             {eyebrow}
           </div>
         ) : null}
-        <h2
-          ref={headingRef}
-          data-anim="elements"
-          className="scene-text font-display font-bold text-white break-words leading-tight text-4xl md:text-5xl"
-        >
-          {headingLine1}
-          {hasHeadingPart2 ? <br /> : null}
-          {headingLead} {headingAccent ? (
-            <span className="text-eclipse-orange">{headingAccent}</span>
-          ) : null}
-        </h2>
-        {lead ? (
-          <p
-            ref={leadRef}
+        {props.headingLines?.length ? (
+          <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+            {props.headingLines.map((line, i) => (
+              <span key={i} className={`text-${line.color}`}>{line.text}</span>
+            ))}
+          </h2>
+        ) : (
+          <h2
+            ref={headingRef}
             data-anim="elements"
-            className="scene-text mt-4 text-base leading-relaxed text-zinc-300 md:text-lg max-w-lg"
+            className="scene-text font-display font-bold text-white break-words leading-tight text-4xl md:text-5xl"
           >
-            {lead}
-          </p>
-        ) : null}
+            {headingLine1}
+            {hasHeadingPart2 ? <br /> : null}
+            {headingLead} {headingAccent ? (
+              <span className="text-eclipse-orange">{headingAccent}</span>
+            ) : null}
+          </h2>
+        )}
+        {props.textBlocks?.length ? (
+          <div className="flex flex-col gap-4 mb-8">
+            {props.textBlocks.map((block, i) => (
+              <p key={i} className="text-lg text-white/80">{block.text}</p>
+            ))}
+          </div>
+        ) : (
+          lead ? (
+            <p
+              ref={leadRef}
+              data-anim="elements"
+              className="scene-text mt-4 text-base leading-relaxed text-zinc-300 md:text-lg max-w-lg"
+            >
+              {lead}
+            </p>
+          ) : null
+        )}
       </div>
 
       {/* 3D Pillars */}

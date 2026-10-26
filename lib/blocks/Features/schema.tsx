@@ -7,14 +7,14 @@ import type { FeaturesProps } from "./index";
  */
 export const FeaturesSchema: ComponentConfig<FeaturesProps> = {
   fields: {
-    title: { type: "text", label: "Заголовок секции" },
+    title: { type: "text", contentEditable: true, label: "Заголовок секции" },
     items: {
       type: "array",
       label: "Преимущества",
       arrayFields: {
-        icon: { type: "text", label: "Иконка (эмодзи)" },
-        title: { type: "text", label: "Заголовок" },
-        description: { type: "textarea", label: "Описание" },
+        icon: { type: "text", contentEditable: true, label: "Иконка (эмодзи)" },
+        title: { type: "text", contentEditable: true, label: "Заголовок" },
+        description: { type: "textarea", contentEditable: true, label: "Описание" },
       },
       getItemSummary: (item, index) => item.title || `Преимущество ${(index ?? 0) + 1}`,
       defaultItemProps: () => ({

@@ -8,7 +8,7 @@
     {
       "type": "Hero",
       "props": {
-        "eyebrow": "4к90гыуаьуызкмукэьзмгаоэзаовыАОвАОуз9ькгоа9узМАушАМушгамуаоужэашгуЭАзгуау(акгм3каг3ЗОга",
+        "eyebrow": "",
         "title": "",
         "subtitle": " ",
         "quote": " Солнце над Египтом , угаснет ",
@@ -30,15 +30,9 @@
         "overlay": "night",
         "eyebrowPrefix": "",
         "eyebrowSuffix": "",
-        "headingLine1": "",
-        "headingLead": "",
-        "headingAccent": "",
-        "lead": "",
         "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
         "accent": "gold",
         "backgroundImage": "/EXPER/scene-02..png",
-        "heading": "drgdgdfsgsgesgseg",
-        "quote": " И я знаю когда ",
         "quoteAttribution": "ZORG"
       }
     },
@@ -77,11 +71,13 @@
         "headingLine1": "",
         "headingLead": "",
         "headingAccent": "",
-        "quote": "Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход",
+        "quote": "Места полностью забронированы. \nНо время не имеет значения, когда на кону твоя жизнь.\n Делай свой ход",
         "quoteAttribution": "",
         "accent": "orange",
         "backgroundImage": "/EXPER/scene-06.jpg",
-        "anchor": ""
+        "anchor": "",
+        "headingLines": [],
+        "textBlocks": []
       }
     },
     {
@@ -119,7 +115,13 @@
           }
         ],
         "accent": "cyan",
-        "backgroundImage": "/EXPER/scene-04.jpg"
+        "backgroundImage": "/EXPER/scene-04.jpg",
+        "headingLines": [],
+        "textBlocks": [
+          {
+            "text": "Земля. Вода. Огонь. Воздух. Каждая — точка на карте. Вместе — укажут путь к затмению."
+          }
+        ]
       }
     },
     {
@@ -157,7 +159,22 @@
           }
         ],
         "accent": "gold",
-        "backgroundImage": "/EXPER/scene-03..jpg"
+        "backgroundImage": "/EXPER/scene-03..jpg",
+        "headingLines": [
+          {
+            "text": "Шесть минут ночи",
+            "color": "white"
+          },
+          {
+            "text": "в Храме Солнца.",
+            "color": "gold"
+          }
+        ],
+        "textBlocks": [
+          {
+            "text": "Карнак. Храм, построенный как научный инструмент. 2000 лет строительства. Главная ось ориентирована на восход Солнца."
+          }
+        ]
       }
     },
     {
@@ -190,7 +207,26 @@
           }
         ],
         "accent": "cyan",
-        "backgroundImage": "/EXPER/scene-05..jpg"
+        "backgroundImage": "/EXPER/scene-05..jpg",
+        "headingLines": [
+          {
+            "text": "Кто останется в точке?",
+            "color": "white"
+          },
+          {
+            "text": "Пять голосов",
+            "color": "white"
+          },
+          {
+            "text": "одного финала",
+            "color": "gold"
+          }
+        ],
+        "textBlocks": [
+          {
+            "text": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет.  Где в эту секунду будешь ты?"
+          }
+        ]
       }
     },
     {
@@ -222,6 +258,21 @@
             "name": "",
             "text": "",
             "color": "gold"
+          }
+        ],
+        "headingLines": [
+          {
+            "text": "Стань пятым элементом",
+            "color": "white"
+          },
+          {
+            "text": "иии",
+            "color": "gold"
+          }
+        ],
+        "textBlocks": [
+          {
+            "text": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. \nТвой единственный способ перехватить освободившийся билет — войти в резиервный лист ожидания прямо сейчас."
           }
         ]
       }

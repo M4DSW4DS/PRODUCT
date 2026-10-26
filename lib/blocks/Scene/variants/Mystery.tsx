@@ -153,11 +153,27 @@ if (quoteEl) {
   return (
     <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto scene-text px-6">
       {props.eyebrowSuffix && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrowPrefix || "SCENE 01"} {props.eyebrowSuffix}</p>}
-      <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
-        {props.headingLine1} <br />
-        <span className="text-egyptian-gold">{props.headingLead} {props.headingAccent}</span>
-      </h2>
-      {props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>}
+      {props.headingLines?.length ? (
+        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+          {props.headingLines.map((line, i) => (
+            <span key={i} className={`text-${line.color}`}>{line.text}</span>
+          ))}
+        </h2>
+      ) : (
+        <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
+          {props.headingLine1} <br />
+          <span className="text-egyptian-gold">{props.headingLead} {props.headingAccent}</span>
+        </h2>
+      )}
+      {props.textBlocks?.length ? (
+        <div className="flex flex-col gap-4 mb-8">
+          {props.textBlocks.map((block, i) => (
+            <p key={i} className="text-lg text-white/80">{block.text}</p>
+          ))}
+        </div>
+      ) : (
+        props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>
+      )}
       {props.quote && (
         <div className="border-l-2 border-egyptian-gold pl-4 text-left">
           <p className="font-display italic text-xl text-neon-cyan">«{props.quote}»</p>

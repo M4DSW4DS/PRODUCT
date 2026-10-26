@@ -123,28 +123,44 @@ export function Keepers(props: SceneProps) {
       ) : null}
 
       {/* Heading */}
-      <h2
-        ref={headingRef}
-        data-anim="keepers"
-        className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-4xl text-center max-w-2xl"
-      >
-        {headingLine1}
-        {hasHeadingPart2 ? <br /> : null}
-        {headingLead} {headingAccent ? (
-          <span className="text-neon-cyan">{headingAccent}</span>
-        ) : null}
-      </h2>
+      {props.headingLines?.length ? (
+        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center">
+          {props.headingLines.map((line, i) => (
+            <span key={i} className={`text-${line.color}`}>{line.text}</span>
+          ))}
+        </h2>
+      ) : (
+        <h2
+          ref={headingRef}
+          data-anim="keepers"
+          className="scene-text font-display font-bold text-white break-words leading-tight text-3xl md:text-4xl text-center max-w-2xl"
+        >
+          {headingLine1}
+          {hasHeadingPart2 ? <br /> : null}
+          {headingLead} {headingAccent ? (
+            <span className="text-neon-cyan">{headingAccent}</span>
+          ) : null}
+        </h2>
+      )}
 
       {/* Lead */}
-      {lead ? (
-        <p
-          ref={leadRef}
-          data-anim="keepers"
-          className="scene-text mt-6 text-base leading-relaxed text-zinc-300 md:text-lg text-center max-w-xl"
-        >
-          {lead}
-        </p>
-      ) : null}
+      {props.textBlocks?.length ? (
+        <div className="flex flex-col gap-4 mb-8">
+          {props.textBlocks.map((block, i) => (
+            <p key={i} className="text-lg text-white/80">{block.text}</p>
+          ))}
+        </div>
+      ) : (
+        lead ? (
+          <p
+            ref={leadRef}
+            data-anim="keepers"
+            className="scene-text mt-6 text-base leading-relaxed text-zinc-300 md:text-lg text-center max-w-xl"
+          >
+            {lead}
+          </p>
+        ) : null
+      )}
 
       {/* Voices: bottom third, centered */}
       <div className="mt-12 flex flex-wrap justify-center gap-4 md:gap-6">
