@@ -3,7 +3,6 @@
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CircularWindow } from "./internal/CircularWindow";
 import { ZorgCabinet } from "./internal/ZorgCabinet";
 import { HeroHUD } from "./internal/HeroHUD";
 
@@ -63,7 +62,6 @@ export function Hero({
   showCalendar = true,
 }: HeroProps) {
   const rootRef = useRef<HTMLElement>(null);
-  const windowRef = useRef<HTMLDivElement>(null);
   const cabinetRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
 
@@ -81,25 +79,17 @@ export function Hero({
       }
     });
 
-    // 1. Fade out text and timer
-    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: -20, duration: 1 }, 0);
-    
-    // 2. Expand the clip-path circle to fill the screen
-    tl.to(".hero-circular-window", {
-      clipPath: "circle(150% at 50% 50%)",
-      duration: 2,
-      ease: "power2.inOut"
-    }, 0);
+    // 1. Fade out text and HUD
+    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
 
-    // 3. Scale up the blue border ring to match the expanding hole
-    tl.to(".window-border", {
-      scale: 12, // Adjust this if the border desyncs from the hole
-      duration: 2,
-      ease: "power2.inOut"
-    }, 0);
+    // 2. Fade out Zorg
+    tl.to(".zorg-cabinet", { opacity: 0, duration: 1 }, 0.5);
 
-    // 4. Fade out the blue border at the end
-    tl.to(".window-border", { opacity: 0, duration: 0.5 }, 1.5);
+    // 3. Moon covers Sun
+    tl.to(".moon-body", { x: "0%", y: "0%", scale: 1.05, duration: 2, ease: "power2.inOut" }, 0.5);
+
+    // 4. Corona fades in
+    tl.to(".corona-flares", { opacity: 1, duration: 0.5 }, 2);
   }, { scope: rootRef });
 
   return (
@@ -110,8 +100,12 @@ export function Hero({
       {/* Фоновый слой — шкаф Зорга */}
       <ZorgCabinet ref={cabinetRef} />
 
-      {/* Круглое окно-прицел */}
-      <CircularWindow ref={windowRef} />
+      {/* CSS Eclipse Sphere */}
+      <div className="space-viewport">
+        <div className="corona-flares" />
+        <div className="sun-body" />
+        <div className="moon-body" />
+      </div>
 
       {/* Левый столбец: заголовок, подзаголовок, CTA */}
       <div className="relative z-20 flex w-full flex-col items-center gap-5 text-center md:absolute md:left-8 md:top-1/2 md:w-[24rem] md:-translate-y-1/2 md:items-start md:text-left lg:left-16 lg:w-[30rem]">
