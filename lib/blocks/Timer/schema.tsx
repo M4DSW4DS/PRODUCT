@@ -9,7 +9,7 @@ export const TimerSchema: ComponentConfig<TimerProps> = {
   fields: {
     title: { type: "text", label: "Заголовок" },
     targetDate: { type: "text", label: "Целевая дата (ISO)" },
-    endMessage: { type: "text", label: "Сошение по истечении" },
+    endMessage: { type: "text", label: "Сообщение после завершения (что показать, когда таймер дойдёт до нуля)" },
     hint_text: { type: "text", label: "Подсказка для UTC+3" },
     accent_color: { type: "text", label: "Акцентный цвет (#00e5ff)" },
     post_countdown_text: { type: "text", label: "Текст после отсчёта" },
