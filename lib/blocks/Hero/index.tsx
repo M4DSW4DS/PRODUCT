@@ -84,14 +84,21 @@ export function Hero({
     // 1. Fade out text and timer
     tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: -20, duration: 1 }, 0);
     
-    // 2. Expand the sphere (window) to cover the screen
+    // 2. Expand the clip-path circle to fill the screen
     tl.to(".hero-circular-window", {
-      scale: 25, // Massive scale to fill the screen
+      clipPath: "circle(150% at 50% 50%)",
       duration: 2,
-      ease: "power2.in"
+      ease: "power2.inOut"
     }, 0);
 
-    // 3. Fade out the neon border as it fills the screen
+    // 3. Scale up the blue border ring to match the expanding hole
+    tl.to(".window-border", {
+      scale: 12, // Adjust this if the border desyncs from the hole
+      duration: 2,
+      ease: "power2.inOut"
+    }, 0);
+
+    // 4. Fade out the blue border at the end
     tl.to(".window-border", { opacity: 0, duration: 0.5 }, 1.5);
   }, { scope: rootRef });
 
@@ -104,9 +111,7 @@ export function Hero({
       <ZorgCabinet ref={cabinetRef} />
 
       {/* Круглое окно-прицел */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-        <CircularWindow ref={windowRef} imageSrc="/hero/egypt-orbit.jpg" />
-      </div>
+      <CircularWindow ref={windowRef} />
 
       {/* Левый столбец: заголовок, подзаголовок, CTA */}
       <div className="relative z-20 flex w-full flex-col items-center gap-5 text-center md:absolute md:left-8 md:top-1/2 md:w-[24rem] md:-translate-y-1/2 md:items-start md:text-left lg:left-16 lg:w-[30rem]">

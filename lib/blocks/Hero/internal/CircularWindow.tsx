@@ -1,26 +1,30 @@
 "use client";
+import Image from "next/image";
 
-/** Props круглого окна (HUD-прицел). */
 export type CircularWindowProps = {
-  /** Ref на корневой узел — родитель анимирует масштаб. */
   ref?: React.Ref<HTMLDivElement>;
-  /** Источник изображения (путь из public/). */
-  imageSrc?: string;
 };
 
-/**
- * Круглое окно с HUD-прицелом: пунктирная окружность, перекрестия,
- * голубая рамка со свечением. Декоративно — без текста.
- */
-export function CircularWindow({ ref, imageSrc }: CircularWindowProps) {
+export function CircularWindow({ ref }: CircularWindowProps) {
   return (
     <div
       ref={ref}
-      className="hero-circular-window relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden shrink-0 bg-transparent"
-      aria-hidden="true"
+      className="hero-circular-window absolute inset-0 z-10 pointer-events-none overflow-hidden"
+      style={{
+        clipPath: "circle(15% at 50% 50%)",
+      }}
     >
-      {/* Неоновая рамка */}
-      <div className="absolute inset-0 rounded-full border-[3px] border-[#0055ff] shadow-[0_0_30px_#0055ff] pointer-events-none z-20 window-border" />
+      <div className="relative w-full h-full">
+        {/* EXACT same image as background */}
+        <Image
+          src="/hero/zorg-cabinet.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+        />
+        {/* Neon border ring that matches the clip-path hole */}
+        <div className="window-border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] rounded-full border-[3px] border-[#0055ff] shadow-[0_0_30px_#0055ff]" />
+      </div>
     </div>
   );
 }
