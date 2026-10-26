@@ -197,6 +197,14 @@
       }
     },
     {
+      "type": "PartnerWidget",
+      "props": {
+        "id": "PartnerWidget-1",
+        "src": "https://timepad.ru/event/embed/123456/",
+        "height": "600"
+      }
+    },
+    {
       "type": "Faq",
       "props": {
         "id": "Faq-1",
