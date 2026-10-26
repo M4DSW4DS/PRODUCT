@@ -69,9 +69,11 @@ export function Hero({
       }
     });
 
-    // Fade out text and HUD; keep Zorg background slightly visible
+    // Fade out text and HUD; keep Zorg background fully visible
     tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
-    tl.to(".zorg-cabinet", { opacity: 0.2, duration: 1 }, 0);
+
+    // Dark overlay 80% for transition
+    tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
 
     // Brighten the Sun (fade in to full opacity)
     tl.to(".sun-body", { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
@@ -100,6 +102,7 @@ export function Hero({
         />
       </div>
 
+      <div className="hero-dark-overlay absolute inset-0 z-20 bg-cosmic-black opacity-0 pointer-events-none" />
     </section>
   );
 }
