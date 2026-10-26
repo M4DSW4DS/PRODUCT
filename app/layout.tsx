@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Script from "next/script";
+
 import { Unbounded, Space_Grotesk, Orbitron } from "next/font/google";
 const unbounded = Unbounded({ subsets: ["latin"], weight: ["400", "700", "900"], variable: "--font-unbounded" });
 const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700", "900"], variable: "--font-orbitron" });
 import { LenisProvider } from "@/lib/core/providers/LenisProvider";
+import { InlineScript } from "@/components/InlineScript";
 
 export const metadata: Metadata = {
   title: "Luxor 2027 — Солнце над Египтом угаснет",
@@ -26,9 +27,7 @@ export default function RootLayout({
       <head>
       </head>
       <body>
-        <Script id="js-marker" strategy="beforeInteractive">
-          {`document.documentElement.classList.add('js');`}
-        </Script>
+        <InlineScript id="js-marker">{`document.documentElement.classList.add('js');`}</InlineScript>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
         <LenisProvider>{children}</LenisProvider>
       </body>
