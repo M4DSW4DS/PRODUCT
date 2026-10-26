@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
-import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { Unbounded, Space_Grotesk, Orbitron } from "next/font/google";
+const unbounded = Unbounded({ subsets: ["latin"], weight: ["400", "700", "900"], variable: "--font-unbounded" });
+const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
+const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700", "900"], variable: "--font-orbitron" });
 import { LenisProvider } from "@/lib/core/providers/LenisProvider";
-
-const playfair = Playfair_Display({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "700"],
-  variable: "--font-playfair",
-});
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
-});
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+import { CustomCursor } from "@/lib/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Luxor 2027 — Солнце над Египтом угаснет",
@@ -32,7 +22,7 @@ export default function RootLayout({
     <html
       lang="ru"
       suppressHydrationWarning
-      className={`${playfair.variable} ${inter.variable} ${mono.variable} grain-pending`}
+      className={`${unbounded.variable} ${grotesk.variable} ${orbitron.variable} grain-pending`}
     >
       <head>
       </head>
@@ -41,7 +31,11 @@ export default function RootLayout({
           {`document.documentElement.classList.add('js');`}
         </Script>
         {/* TODO: switch "grain-pending" to "grain" when public/textures/grain.png arrives */}
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <div className="grain-overlay" />
+          {children}
+        </LenisProvider>
+        <CustomCursor />
       </body>
     </html>
   );
