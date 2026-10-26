@@ -1,41 +1,25 @@
 {
   "root": {
-    "props": {}
+    "props": {
+      "title": ""
+    }
   },
   "content": [
     {
       "type": "Hero",
       "props": {
-        "id": "Hero-1",
-        "eyebrow": "Миссия Луксор · 02.08.2027 · 6 минут 23 секунды",
-        "title": "4498 лет назад небо над Египтом умерло. Оно снова закроется.",
-        "subtitle": "Полное солнечное затмение в Луксоре. Второе по длительности в XXI веке. Следующее — не раньше 2114 года.",
-        "quote": "Я выстроил это небо из света и камня. Теперь оно гаснет по моей команде — и ты увидишь.",
+        "eyebrow": "",
+        "title": "",
+        "subtitle": "",
+        "quote": "",
         "quoteAttribution": "MISTER ZORG",
-        "ctaLabel": "Войти в точку выравнивания",
-        "ctaHref": "#register",
+        "ctaLabel": "",
+        "ctaHref": "",
         "hudLabel": "System Ready // Countdown",
         "hudFooter": "ORBIT · EARTH · EGYPT",
         "showTimer": true,
-        "showCalendar": true
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-01",
-        "variant": "mystery",
-        "overlay": "night",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "",
-        "headingLine1": "",
-        "headingLead": "",
-        "headingAccent": "",
-        "lead": "",
-        "quote": "",
-        "quoteAttribution": "",
-        "accent": "gold",
-        "backgroundImage": "/EXPER/scene-01..png"
+        "showCalendar": false,
+        "id": "Hero-97f575b7-4c0f-441e-af33-145e6bfe96f2"
       }
     },
     {
@@ -52,7 +36,50 @@
         "lead": "2 августа 2027. Луксор. 13:02. Солнце в зените — 82° над горизонтом. Тень падает прямо. Корона — максимально яркая.",
         "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
         "accent": "cyan",
-        "backgroundImage": "/EXPER/scene-02..png"
+        "backgroundImage": "/EXPER/scene-02..png",
+        "heading": "drgdgdfsgsgesgseg",
+        "quote": "esfsefsefesfesf"
+      }
+    },
+    {
+      "type": "Features",
+      "props": {
+        "title": "Почему выбирают нас",
+        "items": [
+          {
+            "icon": "⚡",
+            "title": "Быстрый старт",
+            "description": "Собери страницу из готовых блоков за считанные минуты."
+          },
+          {
+            "icon": "🎨",
+            "title": "Гибкий дизайн",
+            "description": "Настраивай цвета, тексты и картинки прямо в редакторе."
+          },
+          {
+            "icon": "🚀",
+            "title": "Мгновенный деплой",
+            "description": "Публикуй результат одним кликом "
+          }
+        ],
+        "id": "Features-c3a84f3a-32f8-4aaf-bfc6-f94c677b4dd4"
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-06",
+        "variant": "darkness",
+        "overlay": "night",
+        "eyebrowPrefix": "",
+        "eyebrowSuffix": "// ПОЛНАЯ ФАЗА",
+        "headingLine1": "Секунда катарсиса",
+        "headingLead": "",
+        "headingAccent": "",
+        "quote": "«Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход».",
+        "quoteAttribution": "— Инженер",
+        "accent": "orange",
+        "backgroundImage": "/EXPER/scene-06.jpg"
       }
     },
     {
@@ -158,23 +185,6 @@
         ],
         "accent": "cyan",
         "backgroundImage": "/EXPER/scene-05..jpg"
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-06",
-        "variant": "darkness",
-        "overlay": "night",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "// ПОЛНАЯ ФАЗА",
-        "headingLine1": "Секунда катарсиса",
-        "headingLead": "",
-        "headingAccent": "",
-        "quote": "«Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход».",
-        "quoteAttribution": "— Инженер",
-        "accent": "orange",
-        "backgroundImage": "/EXPER/scene-06.jpg"
       }
     },
     {
