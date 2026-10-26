@@ -14,8 +14,6 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     quoteAttribution: { type: "text", contentEditable: true, label: "Автор цитаты" },
     ctaLabel: { type: "text", contentEditable: true, label: "Текст кнопки (если нужно)" },
     ctaHref: { type: "text", contentEditable: true, label: "Ссылка кнопки" },
-    hudLabel: { type: "text", contentEditable: true, label: "Подпись HUD (строка состояния)" },
-    hudFooter: { type: "text", contentEditable: true, label: "Подпись HUD (подвал)" },
     showTimer: {
       type: "radio",
       label: "Показывать таймер",
@@ -45,8 +43,6 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     quoteAttribution: "MISTER ZORG",
     ctaLabel: "",
     ctaHref: "",
-    hudLabel: "System Ready // Countdown",
-    hudFooter: "ORBIT · EARTH · EGYPT",
     showTimer: true,
     showCalendar: true,
     sunTop: "40%",

@@ -32,10 +32,6 @@ export type HeroProps = {
   ctaLabel: string;
   /** Ссылка CTA. */
   ctaHref: string;
-  /** Подпись HUD-строки состояния. */
-  hudLabel: string;
-  /** Подпись HUD-подвала. */
-  hudFooter: string;
   /** Показывать обратный отсчёт. */
   showTimer: boolean;
   /** Показывать календарный блок. */
