@@ -8,11 +8,11 @@
     {
       "type": "Hero",
       "props": {
-        "eyebrow": "привет",
+        "eyebrow": "4к90гыуаьуызкмукэьзмгаоэзаовыАОвАОуз9ькгоа9узМАушАМушгамуаоужэашгуЭАзгуау(акгм3каг3ЗОга",
         "title": "",
-        "subtitle": "",
-        "quote": "",
-        "quoteAttribution": "MISTER ZORG",
+        "subtitle": " ",
+        "quote": " Солнце над Египтом , угаснет ",
+        "quoteAttribution": "Luxor 2 августа 2027 года",
         "ctaLabel": "",
         "ctaHref": "",
         "hudLabel": "System Ready // Countdown",
@@ -26,19 +26,20 @@
       "type": "Scene",
       "props": {
         "id": "Scene-02",
-        "variant": "truth",
-        "overlay": "none",
+        "variant": "mystery",
+        "overlay": "night",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "// ТОЧКА ЗЕНИТА",
-        "headingLine1": "82% ясного неба. 4 из 5 шансов.",
+        "eyebrowSuffix": "",
+        "headingLine1": "",
         "headingLead": "",
-        "headingAccent": "Это не удача — это география.",
-        "lead": "2 августа 2027. Луксор. 13:02. Солнце в зените — 82° над горизонтом. Тень падает прямо. Корона — максимально яркая.",
+        "headingAccent": "",
+        "lead": "",
         "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
-        "accent": "cyan",
+        "accent": "gold",
         "backgroundImage": "/EXPER/scene-02..png",
         "heading": "drgdgdfsgsgesgseg",
-        "quote": "esfsefsefesfesf"
+        "quote": " И я знаю когда ",
+        "quoteAttribution": "ZORG"
       }
     },
     {
@@ -69,65 +70,32 @@
       "type": "Scene",
       "props": {
         "id": "Scene-06",
-        "variant": "darkness",
-        "overlay": "night",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "// ПОЛНАЯ ФАЗА",
-        "headingLine1": "Секунда катарсиса",
-        "headingLead": "",
-        "headingAccent": "",
-        "quote": "«Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход».",
-        "quoteAttribution": "— Инженер",
-        "accent": "orange",
-        "backgroundImage": "/EXPER/scene-06.jpg"
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-03",
-        "variant": "key",
+        "variant": "mystery",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "// КАМЕННЫЙ ПРИБОР",
-        "headingLine1": "Шесть минут ночи",
+        "eyebrowSuffix": "",
+        "headingLine1": "",
         "headingLead": "",
-        "headingAccent": "в Храме Солнца.",
-        "lead": "Карнак. Храм, построенный как научный инструмент. 2000 лет строительства. Главная ось ориентирована на восход Солнца.",
-        "artifacts": [
-          {
-            "title": "6 мин 23 сек",
-            "sub": "Пик Saros 136"
-          },
-          {
-            "title": "82° в зените",
-            "sub": "Прямо над головой"
-          },
-          {
-            "title": "Менее 5%",
-            "sub": "Риск облаков в августе"
-          },
-          {
-            "title": "0 мест",
-            "sub": "Группа укомплектована"
-          }
-        ],
-        "accent": "gold",
-        "backgroundImage": "/EXPER/scene-03..jpg"
+        "headingAccent": "",
+        "quote": "Места полностью забронированы. Но время не имеет значения, когда на кону твоя жизнь. Делай свой ход",
+        "quoteAttribution": "",
+        "accent": "orange",
+        "backgroundImage": "/EXPER/scene-06.jpg",
+        "anchor": ""
       }
     },
     {
       "type": "Scene",
       "props": {
         "id": "Scene-04",
-        "variant": "elements",
+        "variant": "mystery",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "// ЗОВ СТИХИЙ",
-        "headingLine1": "Четыре стихии.",
+        "eyebrowSuffix": "",
+        "headingLine1": "                                                                              ",
         "headingLead": "",
-        "headingAccent": "Одна точка выравнивания.",
-        "lead": "Земля. Вода. Огонь. Воздух. Каждая — точка на карте. Вместе — путь к затмению.",
+        "headingAccent": "",
+        "lead": "Земля. Вода. Огонь. Воздух. Каждая — точка на карте. Вместе — укажут путь к затмению.",
         "plates": [
           {
             "name": "Огонь",
@@ -150,22 +118,60 @@
             "color": "white"
           }
         ],
-        "accent": "orange",
+        "accent": "cyan",
         "backgroundImage": "/EXPER/scene-04.jpg"
       }
     },
     {
       "type": "Scene",
       "props": {
-        "id": "Scene-05",
-        "variant": "keepers",
+        "id": "Scene-03",
+        "variant": "mystery",
         "overlay": "none",
         "eyebrowPrefix": "",
-        "eyebrowSuffix": "// ХРАНИТЕЛИ ФИНАЛА",
+        "eyebrowSuffix": "Каменный прибор",
+        "headingLine1": "Шесть минут ночи",
+        "headingLead": "",
+        "headingAccent": "в Храме Солнца.",
+        "lead": "Карнак. Храм, построенный как научный инструмент. 2000 лет строительства. Главная ось ориентирована на восход Солнца.",
+        "artifacts": [
+          {
+            "title": "82° в зените",
+            "sub": "Прямо над головой"
+          },
+          {
+            "title": "Менее 5%",
+            "sub": "Риск облаков в августе"
+          },
+          {
+            "title": "6 мин 23 сек",
+            "sub": "Пик Saros 136"
+          },
+          {
+            "title": "0 мест",
+            "sub": "Группа укомплектована"
+          },
+          {
+            "title": "",
+            "sub": ""
+          }
+        ],
+        "accent": "gold",
+        "backgroundImage": "/EXPER/scene-03..jpg"
+      }
+    },
+    {
+      "type": "Scene",
+      "props": {
+        "id": "Scene-05",
+        "variant": "mystery",
+        "overlay": "none",
+        "eyebrowPrefix": "",
+        "eyebrowSuffix": "",
         "headingLine1": "Кто останется в точке?",
         "headingLead": "Пять голосов",
         "headingAccent": "одного финала",
-        "lead": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет. Группа Астролагеря уже полностью собрана. Где в эту секунду будешь ты?",
+        "lead": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет.  Где в эту секунду будешь ты?",
         "voices": [
           {
             "name": "Жрец"
@@ -191,19 +197,33 @@
       "type": "Scene",
       "props": {
         "id": "Scene-07",
-        "variant": "fifth",
+        "variant": "mystery",
         "overlay": "none",
-        "eyebrowPrefix": "",
+        "eyebrowPrefix": "669",
         "eyebrowSuffix": "// ПЯТЫЙ ЭЛЕМЕНТ",
         "headingLine1": "Стань пятым элементом",
         "headingLead": "",
-        "headingAccent": "",
-        "lead": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. Твой единственный способ перехватить освободившийся билет — войти в резервный лист ожидания прямо сейчас.",
+        "headingAccent": "иии",
+        "lead": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. \nТвой единственный способ перехватить освободившийся билет — войти в резиервный лист ожидания прямо сейчас.",
         "ctaLabel": "",
         "ctaHref": "",
         "microcopy": "БЕЗ РЕГИСТРАЦИИ НА САЙТЕ · ТОЛЬКО ВНЕШНИЙ РЕДИРЕКТ",
-        "accent": "white",
-        "backgroundImage": "/EXPER/scene-07.jpg"
+        "accent": "cyan",
+        "backgroundImage": "/scenes/scene-07.jpg",
+        "quote": "",
+        "quoteAttribution": "",
+        "plates": [
+          {
+            "name": "",
+            "text": "",
+            "color": "gold"
+          },
+          {
+            "name": "",
+            "text": "",
+            "color": "gold"
+          }
+        ]
       }
     },
     {
