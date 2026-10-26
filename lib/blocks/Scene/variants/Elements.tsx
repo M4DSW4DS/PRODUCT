@@ -57,7 +57,7 @@ export function Elements(props: SceneProps) {
           const targets: HTMLElement[] = [];
           if (headingEl) targets.push(headingEl);
           if (leadEl) targets.push(leadEl);
-          gsap.set([...targets, ".elements-plate"], {
+          gsap.set([...targets, ".pillar"], {
             opacity: 1,
             y: 0,
             filter: "none",
@@ -72,7 +72,7 @@ export function Elements(props: SceneProps) {
           if (headingEl) targets.push(headingEl);
           if (leadEl) targets.push(leadEl);
 
-          gsap.set([...targets, ".elements-plate"], { opacity: 0, y: 30 });
+          gsap.set([...targets, ".pillar"], { opacity: 0, y: 30 });
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -95,11 +95,13 @@ export function Elements(props: SceneProps) {
             tl.add(() => reveal(leadEl), "+=0.2");
           }
 
-          // 3. Plates slide up with stagger
-          tl.to(".elements-plate", {
-            y: 0,
-            opacity: 1,
-            stagger: { each: 0.15 },
+          // 3. Pillars rise
+          gsap.from(".pillar", {
+            y: 80,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            scrollTrigger: { trigger: rootRef.current, start: "top 80%" },
           });
 
            gsap.from(".scene-text", {
@@ -122,7 +124,7 @@ export function Elements(props: SceneProps) {
     <div
       ref={rootRef}
       data-anim="elements"
-      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-hidden bg-cosmic-black"
+      className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 overflow-visible bg-cosmic-black"
     >
       {/* Left column: eyebrow + heading + lead */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col justify-center items-start md:max-w-[45rem]">
@@ -154,7 +156,7 @@ export function Elements(props: SceneProps) {
       </div>
 
       {/* 3D Pillars */}
-      <div className="pillars-container mt-12">
+      <div className="pillars-container mt-12 relative z-20">
         {plates.map((plate, i) => (
           <div key={i} className="pillar">
             <div className="pillar-3d">
