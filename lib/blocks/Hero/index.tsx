@@ -72,6 +72,9 @@ export function Hero({
     // Fade out text, HUD, and Zorg background
     tl.to(".hero-text, .hero-desk-ui, .zorg-cabinet", { opacity: 0, duration: 1 }, 0);
 
+    // Partial blackout for transition
+    tl.to(".hero-blackout", { opacity: 0.85, duration: 1 }, 0);
+
     // Brighten the Sun (fade in to full opacity)
     tl.to(".sun-body", { opacity: 1, duration: 2, ease: "power2.inOut" }, 0);
   }, { scope: rootRef });
@@ -98,6 +101,8 @@ export function Hero({
           showTimer={showTimer}
         />
       </div>
+
+      <div className="hero-blackout absolute inset-0 z-30 bg-cosmic-black opacity-0 pointer-events-none" />
     </section>
   );
 }
