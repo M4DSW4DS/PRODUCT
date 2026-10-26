@@ -16,7 +16,7 @@ export function CircularWindow({ ref, imageSrc }: CircularWindowProps) {
   return (
     <div
       ref={ref}
-      className="hero-circular-window relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden backdrop-blur-sm border border-[#0055ff]/60 shadow-[0_0_30px_#0055ff] shrink-0"
+      className="hero-circular-window relative w-[80vw] h-[80vw] md:w-[80vh] md:h-[80vh] max-w-[80vh] max-h-[80vh] rounded-full overflow-hidden shrink-0 bg-transparent"
       aria-hidden="true"
     >
       {/* Неоновая рамка */}

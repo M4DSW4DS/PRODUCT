@@ -82,18 +82,17 @@ export function Hero({
     });
 
     // 1. Fade out text and timer
-    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: 20, duration: 1 }, 0);
+    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, y: -20, duration: 1 }, 0);
     
-    // 2. Zoom in on the Zorg cabinet and blur it
-    tl.to(".zorg-cabinet", { 
-      scale: 1.5, // Reduced scale (less stretching)
-      filter: "blur(15px)", // Blur effect
+    // 2. Expand the sphere (window) to cover the screen
+    tl.to(".hero-circular-window", {
+      scale: 25, // Massive scale to fill the screen
       duration: 2,
-      ease: "power2.inOut"
-    }, 0.2);
+      ease: "power2.in"
+    }, 0);
 
-    // 3. Fade out the circular window border
-    tl.to(".hero-circular-window", { opacity: 0, duration: 1 }, 0.5);
+    // 3. Fade out the neon border as it fills the screen
+    tl.to(".window-border", { opacity: 0, duration: 0.5 }, 1.5);
   }, { scope: rootRef });
 
   return (
