@@ -153,19 +153,28 @@ export function Elements(props: SceneProps) {
         ) : null}
       </div>
 
-      {/* Right column: 4 vertical plates */}
-      <div className="mt-12 md:mt-0 md:ml-12 flex flex-col gap-6 md:flex-row md:gap-12">
+      {/* 3D Pillars */}
+      <div className="pillars-container mt-12">
         {plates.map((plate, i) => (
-          <div
-            key={i}
-            className={`elements-plate relative group cursor-default flex flex-col items-center justify-center px-6 py-8 rounded-xl border text-center min-h-[200px] ${PLATE_COLOR_CLASS[plate.color] || PLATE_COLOR_CLASS.white}`}
-          >
-            <div className="text-2xl md:text-3xl font-display font-bold mb-2">
-              {plate.name}
+          <div key={i} className="pillar">
+            <div className="pillar-3d">
+              <div className="face face-front">
+                <span className="hieroglyph">𓂀</span>
+                <span className="hieroglyph small">𓆣</span>
+                <span className="hieroglyph">𓊪</span>
+              </div>
+              <div className="face face-left">
+                <span className="hieroglyph small">𓊹</span>
+                <span className="hieroglyph small">𓉐</span>
+              </div>
+              <div className="face face-right">
+                <span className="hieroglyph small">𓋹</span>
+                <span className="hieroglyph small">𓌀</span>
+              </div>
             </div>
-            <p className="text-sm md:text-base leading-relaxed hidden md:block opacity-90 group-hover:opacity-100 transition-opacity">
-              {plate.text}
-            </p>
+            <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 font-mono text-sm tracking-widest text-egyptian-gold uppercase">
+              {plate.name}
+            </span>
           </div>
         ))}
       </div>
