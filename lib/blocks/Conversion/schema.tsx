@@ -5,14 +5,14 @@ import type { ConversionProps } from "./index";
 export const ConversionSchema: ComponentConfig<ConversionProps> = {
   label: "Блок конверсии (Цены и Программа)",
   fields: {
-    title: { type: "text", label: "Заголовок блока" },
+    title: { type: "text", contentEditable: true, label: "Заголовок блока" },
     tabs: {
       type: "array",
       label: "Вкладки",
       arrayFields: {
-        label: { type: "text", label: "Название вкладки" },
-        title: { type: "text", label: "Заголовок" },
-        body: { type: "textarea", label: "Текст" },
+        label: { type: "text", contentEditable: true, label: "Название вкладки" },
+        title: { type: "text", contentEditable: true, label: "Заголовок" },
+        body: { type: "textarea", contentEditable: true, label: "Текст" },
       },
       defaultItemProps: {
         label: "Новая вкладка",

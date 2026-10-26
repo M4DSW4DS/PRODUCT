@@ -1,15 +1,16 @@
 'use client';
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 export type ConversionTab = {
-  label: string;
-  title: string;
-  body: string;
+  label: ReactNode;
+  title: ReactNode;
+  body: ReactNode;
 };
 
 export type ConversionProps = {
-  title: string;
+  title: ReactNode;
   tabs: ConversionTab[];
 };
 

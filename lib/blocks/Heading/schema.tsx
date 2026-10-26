@@ -8,7 +8,7 @@ import type { HeadingProps } from "./index";
  */
 export const HeadingSchema: ComponentConfig<HeadingProps> = {
   fields: {
-    title: { type: "text" },
+    title: { type: "text", contentEditable: true },
     level: {
       type: "radio",
       options: [

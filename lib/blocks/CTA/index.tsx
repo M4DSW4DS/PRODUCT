@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
+
 export type CtaProps = {
-  title: string;
-  subtitle: string;
-  buttonText: string;
+  title: ReactNode;
+  subtitle: ReactNode;
+  buttonText: ReactNode;
   buttonHref: string;
 };
 

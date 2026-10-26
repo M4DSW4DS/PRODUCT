@@ -1,9 +1,9 @@
 "use client";
 
-import type { JSX } from "react";
+import type { JSX, ReactNode } from "react";
 
 export type HeadingProps = {
-  title: string;
+  title: ReactNode;
   level: "h1" | "h2" | "h3";
   align: "left" | "center" | "right";
 };

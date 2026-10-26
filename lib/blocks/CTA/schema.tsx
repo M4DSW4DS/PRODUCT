@@ -7,9 +7,9 @@ import type { CtaProps } from "./index";
  */
 export const CtaSchema: ComponentConfig<CtaProps> = {
   fields: {
-    title: { type: "text", label: "Заголовок" },
-    subtitle: { type: "textarea", label: "Подзаголовок" },
-    buttonText: { type: "text", label: "Текст кнопки" },
+    title: { type: "text", contentEditable: true, label: "Заголовок" },
+    subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок" },
+    buttonText: { type: "text", contentEditable: true, label: "Текст кнопки" },
     buttonHref: { type: "text", label: "Ссылка кнопки" },
   },
   defaultProps: {
