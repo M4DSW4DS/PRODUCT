@@ -1,5 +1,4 @@
-import { PageRenderer } from "@/lib/core/renderer";
-import { blocksConfig } from "@/lib/blocks";
+import { PageRendererClient } from "@/components/PageRendererClient";
 import { getPageData } from "@/lib/core/page-store";
 import { EclipseSun } from "@/lib/blocks/Scene/EclipseSun";
 
@@ -15,7 +14,7 @@ export default async function Home() {
   const pageData = await getPageData();
   return (
     <>
-      <PageRenderer config={blocksConfig} data={pageData} />
+      <PageRendererClient data={pageData} />
       <EclipseSun />
 
       <footer className="px-6 py-10 border-t border-white/10 bg-white/5">
