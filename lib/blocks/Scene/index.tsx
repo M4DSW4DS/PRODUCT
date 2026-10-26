@@ -149,9 +149,9 @@ export function Scene({
           <Image
             src={backgroundImage}
             alt=""
-            fill
-            sizes="100vw"
-            className="object-cover z-0"
+            width={1920}
+            height={1080}
+            className="absolute inset-0 w-full h-full object-contain object-center z-0"
             priority={false}
           />
         </>
