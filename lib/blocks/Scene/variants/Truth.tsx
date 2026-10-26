@@ -3,7 +3,10 @@
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import dynamic from "next/dynamic";
 import type { SceneProps } from "../index";
+
+const Key3D = dynamic(() => import("./Key3D").then((mod) => mod.Key3D), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,7 +39,8 @@ export function Truth(props: SceneProps) {
 
   return (
     <div ref={rootRef} data-anim="truth" className="relative w-full min-h-screen flex flex-col justify-center py-24 px-6 md:py-32 overflow-x-hidden">
-      <div className="md:grid md:grid-cols-12 gap-8 items-center w-full max-w-7xl mx-auto">
+      <Key3D />
+      <div className="relative z-10 md:grid md:grid-cols-12 gap-8 items-center w-full max-w-7xl mx-auto">
         <div className="md:col-span-6 flex flex-col gap-6">
           {props.eyebrowSuffix && (
             <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-neon-cyan/70">
