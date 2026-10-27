@@ -21,7 +21,7 @@ const useIsomorphicLayoutEffect =
  * gold → --color-egyptian-gold, cyan → --color-neon-cyan,
  * orange → --color-eclipse-orange, white → базовый text-white.
  */
-const ACCENT_CLASS_MAP: Record<string, string> = {
+const ACCENT_MAP: Record<string, string> = {
   "egyptian-gold": "text-[#c9a96e]",
   "neon-cyan": "text-[#00e5ff]",
   "eclipse-orange": "text-[#ff6b35]",
@@ -29,7 +29,7 @@ const ACCENT_CLASS_MAP: Record<string, string> = {
 };
 
 function accentClass(accent?: string): string {
-  return ACCENT_CLASS_MAP[accent ?? "egyptian-gold"] || ""
+  return ACCENT_MAP[accent ?? "egyptian-gold"] || ""
 }
 
 /**
@@ -149,13 +149,14 @@ if (quoteEl) {
       {props.headingLine1 && (
         <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
           {props.headingLine1} <br />
-          <span className={accentClass(props.headingAccent ?? "")}>{props.headingAccent ?? ""}</span>
+          <span className={ACCENT_MAP[props.accent ?? "egyptian-gold"] ?? ""}>{props.headingAccent}</span>
         </h2>
       )}
       {props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>}
       {quoteText && (
         <div className="border-l-2 border-egyptian-gold pl-4 text-left">
           <p className="font-display italic text-xl text-neon-cyan">{quoteText}</p>
+          {quoteAuthor && <span className="text-sm text-white/60 mt-1">{quoteAuthor}</span>}
         </div>
       )}
     </div>

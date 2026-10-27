@@ -35,6 +35,7 @@ export interface SceneProps {
   quote: { text: React.ReactNode; author: React.ReactNode };
   ctaLabel?: string;
   ctaHref?: string;
+  cta?: { label: string; href: string } | null;
   svg_caption?: string;
   microcopy?: string;
   anchor?: string;
@@ -65,10 +66,15 @@ export function Scene({
   quote,
   ctaLabel,
   ctaHref,
+  cta,
 }: SceneProps) {
   const anchorId = `scene-${index}`;
   const overlayBackground = OVERLAY_BACKGROUNDS[overlay];
   const hasOverlay = overlay !== "none" && Boolean(overlayBackground);
+  const resolvedCtaLabel =
+    typeof cta === "object" && cta !== null ? cta.label : ctaLabel;
+  const resolvedCtaHref =
+    typeof cta === "object" && cta !== null ? cta.href : ctaHref;
 
   return (
     <section
@@ -138,9 +144,9 @@ export function Scene({
           quote={quote}
         />
 
-        {ctaLabel && ctaHref ? (
+        {resolvedCtaLabel && resolvedCtaHref ? (
           <a
-            href={ctaHref}
+            href={resolvedCtaHref || "#"}
             className="mt-8 inline-block rounded-full px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest"
             style={{
               backgroundColor:
@@ -154,7 +160,7 @@ export function Scene({
               color: "#0a0a0f",
             }}
           >
-            {ctaLabel}
+            {resolvedCtaLabel}
           </a>
         ) : null}
       </div>
