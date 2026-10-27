@@ -9,6 +9,7 @@ import { FaqSchema } from "./Faq/schema";
 import { CtaSchema } from "./CTA/schema";
 import { SceneSchema } from "./Scene/schema";
 import { ConversionSchema } from "./Conversion/schema";
+import { eclipseSceneConfig } from "./EclipseScene/schema";
 
 /**
  * РЕЕСТР БЛОКОВ.
@@ -27,6 +28,7 @@ export const blocksConfig: Config = {
     Cta: CtaSchema,
     Scene: SceneSchema,
     Conversion: ConversionSchema,
+    EclipseScene: eclipseSceneConfig,
   },
   categories: {
     "Основные": {
