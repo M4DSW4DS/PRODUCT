@@ -2,40 +2,52 @@ import type { ComponentConfig } from "@puckeditor/core";
 import { Hero } from "./index";
 import type { HeroProps } from "./index";
 
-/**
- * Схема блока Hero для Puck (кинематографичная версия).
- */
 export const HeroSchema: ComponentConfig<HeroProps> = {
   fields: {
-    eyebrow: { type: "text", contentEditable: true, label: "Надзаголовок (маленький текст сверху)" },
-    title: { type: "text", contentEditable: true, label: "Главный заголовок (H1)" },
-    subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок" },
-    quote: { type: "textarea", contentEditable: true, label: "Цитата Зорга" },
-    quoteAttribution: { type: "text", contentEditable: true, label: "Автор цитаты" },
-    ctaLabel: { type: "text", contentEditable: true, label: "Текст кнопки (если нужно)" },
-    ctaHref: { type: "text", contentEditable: true, label: "Ссылка кнопки" },
+    eyebrow: { type: "text", contentEditable: true, label: "Надпись над заголовком (eyebrow)" },
+    title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
+    subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок (subtitle)" },
+    quote: {
+      type: "object",
+      label: "Цитата (quote)",
+      objectFields: {
+        text: { type: "textarea", contentEditable: true, label: "Текст цитаты (text)" },
+        author: { type: "text", contentEditable: true, label: "Автор цитаты (author)" },
+      },
+    },
+    cta: {
+      type: "object",
+      label: "Кнопка (cta)",
+      objectFields: {
+        label: { type: "text", contentEditable: true, label: "Текст кнопки (label)" },
+        href: { type: "text", label: "Ссылка кнопки (href)" },
+      },
+    },
+    accentWord: { type: "text", contentEditable: true, label: "Акцентное слово (accentWord)" },
+    accentColor: {
+      type: "radio",
+      label: "Акцентный цвет (accentColor)",
+      options: [
+        { label: "Золотой", value: "egyptian-gold" },
+        { label: "Голубой", value: "neon-cyan" },
+        { label: "Оранжевый", value: "eclipse-orange" },
+        { label: "Белый", value: "white" },
+      ],
+    },
     showTimer: {
       type: "radio",
-      label: "Показывать таймер",
+      label: "Таймер (showTimer)",
       options: [
         { label: "Да", value: true },
         { label: "Нет", value: false },
       ],
     },
-    showCalendar: {
-      type: "radio",
-      label: "Показывать календарь",
-      options: [
-        { label: "Да", value: true },
-        { label: "Нет", value: false },
-      ],
-    },
-    sunTop: { type: "text", contentEditable: true, label: "Положение Солнца по вертикали (напр. 40%, 75%)" },
-    sunLeft: { type: "text", contentEditable: true, label: "Положение Солнца по горизонтали (напр. 50%)" },
-    sunSize: { type: "text", contentEditable: true, label: "Размер Солнца (напр. 400px, 300px)" },
+    sunTop: { type: "text", contentEditable: true, label: "Позиция солнца сверху (sunTop)" },
+    sunLeft: { type: "text", contentEditable: true, label: "Позиция солнца слева (sunLeft)" },
+    sunSize: { type: "text", contentEditable: true, label: "Размер солнца (sunSize)" },
     sunGlowColor: {
       type: "radio",
-      label: "Цвет свечения Солнца",
+      label: "Цвет свечения (sunGlowColor)",
       options: [
         { label: "Голубой", value: "neon-cyan" },
         { label: "Золотой", value: "egyptian-gold" },
@@ -43,15 +55,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
         { label: "Белый", value: "white" },
       ],
     },
-    sunGlowSize: {
-      type: "number",
-      label: "Размер свечения (px, размытие)",
-      min: 0,
-      max: 300,
-    },
+    sunGlowSize: { type: "number", label: "Размер свечения (sunGlowSize)", min: 0, max: 300 },
     sunGlowOpacity: {
       type: "radio",
-      label: "Яркость свечения",
+      label: "Яркость свечения (sunGlowOpacity)",
       options: [
         { label: "Слабая (25%)", value: "0.25" },
         { label: "Средняя (50%)", value: "0.5" },
@@ -59,15 +66,10 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
         { label: "Максимум (100%)", value: "1" },
       ],
     },
-    eclipsePercent: {
-      type: "number",
-      label: "Затмение (%) — затемнение солнца",
-      min: 0,
-      max: 100,
-    },
+    eclipsePercent: { type: "number", label: "Затмение % (eclipsePercent)", min: 0, max: 100 },
     eclipseColor: {
       type: "radio",
-      label: "Цвет затмения",
+      label: "Цвет затмения (eclipseColor)",
       options: [
         { label: "Чёрный", value: "cosmic-black" },
         { label: "Тёмно-золотой", value: "egyptian-gold" },
@@ -79,12 +81,11 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     eyebrow: "",
     title: "",
     subtitle: "",
-    quote: "",
-    quoteAttribution: "MISTER ZORG",
-    ctaLabel: "",
-    ctaHref: "",
+    quote: { text: "", author: "" },
+    cta: { label: "", href: "" },
+    accentWord: "",
+    accentColor: "egyptian-gold",
     showTimer: true,
-    showCalendar: true,
     sunTop: "40%",
     sunLeft: "50%",
     sunSize: "400px",
@@ -94,20 +95,5 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     eclipsePercent: 0,
     eclipseColor: "cosmic-black",
   },
-  render: (props) => (
-    <Hero
-      {...props}
-      showTimer={props.showTimer}
-      showCalendar={props.showCalendar}
-      sunTop={props.sunTop}
-      sunLeft={props.sunLeft}
-      sunSize={props.sunSize}
-      sunGlowColor={props.sunGlowColor}
-      sunGlowSize={props.sunGlowSize}
-      sunGlowOpacity={props.sunGlowOpacity}
-      eclipsePercent={props.eclipsePercent}
-      eclipseColor={props.eclipseColor}
-    />
-  ),
+  render: (props) => <Hero {...props} />,
 };
-
