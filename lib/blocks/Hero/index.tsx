@@ -24,27 +24,6 @@ export type HeroProps = {
   accentWord?: ReactNode;
   accentColor?: string;
   showTimer?: boolean;
-  sunTop?: string;
-  sunLeft?: string;
-  sunSize?: string;
-  sunGlowColor?: string;
-  sunGlowSize?: number;
-  sunGlowOpacity?: string;
-  eclipsePercent?: number;
-  eclipseColor?: string;
-};
-
-const glowColorMap: Record<string, string> = {
-  "neon-cyan": "0, 229, 255",
-  "egyptian-gold": "201, 169, 110",
-  "eclipse-orange": "255, 107, 53",
-  white: "255, 255, 255",
-};
-
-const eclipseColorMap: Record<string, string> = {
-  "cosmic-black": "10, 10, 15",
-  "egyptian-gold": "201, 169, 110",
-  "eclipse-orange": "255, 107, 53",
 };
 
 const ACCENT_MAP: Record<string, string> = {
@@ -72,20 +51,39 @@ export function Hero(props: HeroProps) {
       scrollTrigger: {
         trigger: rootRef.current,
         start: "top top",
-        end: "+=150%",
-        pin: true,
+        end: "+=100%",
         scrub: 1,
       },
     });
 
+    // Фон темнеет до 0.8 (20% яркости) и солнце выходит на 1.0 — параллельно, без задержки
     tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
     tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
-    tl.to(".sun-body", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, 1);
+    tl.to(".sun-body", { opacity: 1, duration: 1, ease: "power2.inOut" }, 0);
   }, { scope: rootRef });
 
   return (
     <section ref={rootRef} className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black">
       <ZorgCabinet ref={cabinetRef} />
+
+      {/* Сфера солнца — фиксированные дефолты, без админки */}
+      <div
+        className="space-viewport absolute z-20 pointer-events-none mix-blend-mode-screen"
+        style={{
+          top: "40%",
+          left: "50%",
+          width: "400px",
+          height: "400px",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className="corona-flares" />
+        <div
+          className="sun-body relative absolute inset-0 rounded-full"
+          style={{ boxShadow: "0 0 100px rgba(0, 229, 255, 0.75)" }}
+        />
+        <div className="moon-body" />
+      </div>
 
       <div className="hero-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6 pointer-events-auto">
         {props.eyebrow && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrow}</p>}
@@ -109,30 +107,6 @@ export function Hero(props: HeroProps) {
             {ctaLabel}
           </a>
         )}
-      </div>
-
-      <div
-        className="space-viewport absolute z-20 pointer-events-none mix-blend-mode-screen"
-        style={{
-          top: props.sunTop ?? "40%",
-          left: props.sunLeft ?? "50%",
-          width: props.sunSize ?? "400px",
-          height: props.sunSize ?? "400px",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <div className="corona-flares" />
-        <div className="sun-body relative absolute inset-0 rounded-full" style={{ boxShadow: `0 0 ${props.sunGlowSize ?? 100}px rgba(${glowColorMap[props.sunGlowColor ?? "neon-cyan"] ?? "0, 229, 255"}, ${props.sunGlowOpacity ?? "0.75"})` }} />
-        {props.eclipsePercent && props.eclipsePercent > 0 && (
-          <div
-            className="absolute inset-0 rounded-full pointer-events-none"
-            style={{
-              backgroundColor: `rgba(${eclipseColorMap[props.eclipseColor ?? "cosmic-black"] ?? "10, 10, 15"}, ${props.eclipsePercent / 100})`,
-            }}
-            aria-hidden="true"
-          />
-        )}
-        <div className="moon-body" />
       </div>
 
       <div className="absolute bottom-[4vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
