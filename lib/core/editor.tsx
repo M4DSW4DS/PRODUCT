@@ -49,6 +49,32 @@ export function DesignLabEditor({
       viewports={editorViewports}
       iframe={{ enabled: false }}
       headerTitle={headerTitle}
+      overrides={{
+        headerActions: ({ children }) => (
+          <>
+            {children}
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                marginLeft: 8,
+                padding: "6px 12px",
+                borderRadius: 6,
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "inherit",
+                textDecoration: "none",
+                fontSize: 14,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              На сайт →
+            </a>
+          </>
+        ),
+      }}
     />
   );
 }
