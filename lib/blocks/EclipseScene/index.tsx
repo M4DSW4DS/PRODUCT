@@ -38,6 +38,7 @@ function lerp(a: number, b: number, t: number) {
 
 export type EclipseSceneProps = {
   size: number;
+  height: number;
   top: number;
   left: number;
   progress: number;
@@ -49,6 +50,7 @@ export type EclipseSceneProps = {
 
 export function EclipseScene({
   size,
+  height,
   top,
   left,
   progress,
@@ -113,10 +115,12 @@ export function EclipseScene({
       )}
       <div
         style={{
-          position: "absolute",
-          inset: 0,
+          position: "relative",
+          width: "100%",
+          height: `${height}px`,
+          overflow: "hidden",
           pointerEvents: "none",
-          zIndex: 5,
+          zIndex: 0,
         }}
       >
         <div

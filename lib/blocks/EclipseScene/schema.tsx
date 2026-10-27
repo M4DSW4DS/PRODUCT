@@ -4,6 +4,12 @@ import type { EclipseSceneProps } from "./index";
 
 export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
   fields: {
+    height: {
+      type: "number",
+      label: "Высота блока (px, занимаемое место на странице)",
+      min: 200,
+      max: 2000,
+    },
     size: {
       type: "number",
       label: "Размер солнца (px)",
@@ -60,6 +66,7 @@ export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
     },
   },
   defaultProps: {
+    height: 600,
     size: 440,
     top: 50,
     left: 50,
@@ -71,6 +78,7 @@ export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
   },
   render: (props) => (
     <EclipseScene
+      height={props.height}
       size={props.size}
       top={props.top}
       left={props.left}
