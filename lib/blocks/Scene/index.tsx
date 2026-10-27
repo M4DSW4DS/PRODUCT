@@ -2,12 +2,6 @@
 
 import Image from "next/image";
 import { Mystery } from "./variants/Mystery";
-import { Truth } from "./variants/Truth";
-import { Key } from "./variants/Key";
-import { Elements } from "./variants/Elements";
-import { Keepers } from "./variants/Keepers";
-import { Darkness } from "./variants/Darkness";
-import { Fifth } from "./variants/Fifth";
 
 export interface SceneArtifact {
   title: string;
@@ -31,13 +25,11 @@ export interface SceneCta {
 
 export interface SceneProps {
   index?: number;
-  variant?: "mystery" | "truth" | "key" | "elements" | "keepers" | "darkness" | "fifth";
   overlay?: "none" | "dusk" | "night";
   eyebrowPrefix?: string;
   eyebrowSuffix?: string;
   /** Устаревшее поле (до разделения заголовка на строки). Поддерживается для
    *  совместимости со старым контентом: используется, если новые поля пусты. */
-  heading?: string;
   headingLine1?: string;
   headingLead?: string;
   headingAccent?: string;
@@ -59,23 +51,6 @@ export interface SceneProps {
   additional_ctas?: SceneCta[];
 }
 
-const VARIANT_COMPONENTS: Record<string, React.ComponentType<SceneProps>> = {
-  mystery: Mystery,
-  truth: Truth,
-  key: Key,
-  elements: Elements,
-  keepers: Keepers,
-  darkness: Darkness,
-  fifth: Fifth,
-};
-
-/**
- * Варианты с собственной вёрсткой: контент (eyebrow/заголовок/лид/цитата)
- * рендерит сам компонент варианта, а не оболочка. Остальные варианты
- * пока используют общий каркас и будут переведены на свою вёрстку в D.2–D.7.
- */
-const CUSTOM_VARIANTS = new Set<string>(["mystery"]);
-
 /**
  * Фоновые слои-оверлеи. Значение — CSS background, применяемое к слою
  * между фоновым изображением и контентом (z-order: bg < overlay < content).
@@ -88,11 +63,9 @@ const OVERLAY_BACKGROUNDS: Record<string, string | undefined> = {
 
 export function Scene({
   index = 0,
-  variant = "mystery",
   overlay = "none",
   eyebrowPrefix,
   eyebrowSuffix,
-  heading,
   headingLine1,
   headingLead,
   headingAccent,
@@ -105,46 +78,10 @@ export function Scene({
   quoteAttribution,
   ctaLabel,
   ctaHref,
-  svg_caption,
-  microcopy,
-  anchor,
-  artifacts,
-  plates,
-  voices,
-  additional_ctas,
 }: SceneProps) {
-  const prefix = eyebrowPrefix || `SCENE ${String(index + 1).padStart(2, "0")}`;
-  const eyebrow = `${prefix} // ${eyebrowSuffix ?? ""}`.trim();
-  const VariantComponent = VARIANT_COMPONENTS[variant] ?? Mystery;
-
-  // Заголовок собирается из трёх частей: строка 1 + строка 2 (обычная + цветная).
-  // Устаревшее поле `heading` используется как fallback для строки 1, если новые
-  // поля пусты (контент, созданный до разделения заголовка на строки).
-  const legacyHeading = (heading ?? "").trim();
-  const resolvedLine1 =
-    (typeof headingLine1 === "string" ? headingLine1.trim() : headingLine1) ||
-    legacyHeading;
-  const resolvedLead =
-    typeof headingLead === "string" ? headingLead.trim() : headingLead;
-  const resolvedAccent =
-    typeof headingAccent === "string" ? headingAccent.trim() : headingAccent;
-  let headingPlain: any;
-  if (
-    typeof resolvedLine1 === "string" &&
-    typeof resolvedLead === "string" &&
-    typeof resolvedAccent === "string"
-  ) {
-    const line2 = [resolvedLead, resolvedAccent].filter(Boolean).join(" ");
-    headingPlain = [resolvedLine1, line2].filter(Boolean).join(" / ");
-  } else {
-    headingPlain = [resolvedLine1, resolvedLead, resolvedAccent].filter(Boolean);
-  }
-
-  const anchorId = anchor || `scene-${variant}`;
+  const anchorId = `scene-${index}`;
   const overlayBackground = OVERLAY_BACKGROUNDS[overlay];
   const hasOverlay = overlay !== "none" && Boolean(overlayBackground);
-  // Вариант с собственной вёрсткой рендерит контент сам — общий каркас не нужен.
-  const isCustomVariant = CUSTOM_VARIANTS.has(variant);
 
   return (
     <section
@@ -203,119 +140,41 @@ export function Scene({
       />
 
       {/* Контент */}
-      {isCustomVariant ? (
-        <div className="relative z-10 flex w-full flex-col items-center">
-          <VariantComponent
-            index={index}
-            variant={variant}
-            overlay={overlay}
-            eyebrowPrefix={eyebrowPrefix}
-            eyebrowSuffix={eyebrowSuffix}
-            headingLine1={resolvedLine1}
-            headingLead={resolvedLead}
-            headingAccent={resolvedAccent}
-            lead={lead}
-            accent={accent}
-            backgroundImage={backgroundImage}
-            quote={quote}
-            quoteAttribution={quoteAttribution}
-            ctaLabel={ctaLabel}
-            ctaHref={ctaHref}
-            svg_caption={svg_caption}
-            microcopy={microcopy}
-            anchor={anchor}
-            artifacts={artifacts}
-            plates={plates}
-            voices={voices}
-            additional_ctas={additional_ctas}
-          />
+      <div className="relative z-10 flex w-full flex-col items-center">
+        <Mystery
+          index={index}
+          eyebrowPrefix={eyebrowPrefix}
+          eyebrowSuffix={eyebrowSuffix}
+          headingLine1={headingLine1}
+          headingLead={headingLead}
+          headingAccent={headingAccent}
+          lead={lead}
+          accent={accent}
+          backgroundImage={backgroundImage}
+          quote={quote}
+          quoteAttribution={quoteAttribution}
+        />
 
-          {ctaLabel && ctaHref ? (
-            <a
-              href={ctaHref}
-              className="mt-8 inline-block rounded-full px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest"
-              style={{
-                backgroundColor:
-                  accent === "gold"
-                    ? "var(--color-egyptian-gold)"
-                    : accent === "cyan"
-                      ? "var(--color-neon-cyan)"
-                      : accent === "orange"
-                        ? "var(--color-eclipse-orange)"
-                        : "#ffffff",
-                color: "#0a0a0f",
-              }}
-            >
-              {ctaLabel}
-            </a>
-          ) : null}
-        </div>
-      ) : (
-        <div className="grid grid-cols-12 gap-6 px-6 md:px-16 py-24 relative z-10">
-          {eyebrow && (
-            <div className="col-span-12 font-mono text-xs tracking-widest uppercase">
-              {eyebrow}
-            </div>
-          )}
-          {headingPlain && (
-            <h1 className="col-span-12 text-4xl md:text-6xl font-display font-bold text-white">
-              {Array.isArray(headingPlain)
-                ? headingPlain.map((node, i) => <span key={i}>{node}</span>)
-                : headingPlain}
-            </h1>
-          )}
-          {lead && (
-            <p className="col-span-12 text-base md:text-lg text-gray-300 leading-relaxed">
-              {lead}
-            </p>
-          )}
-          {quote && (
-            <blockquote className="col-span-12 border-l-4 pl-4 italic text-gray-400">
-              {quote}
-            </blockquote>
-          )}
-          {ctaLabel && ctaHref && (
-            <a
-              href={ctaHref}
-              className="mt-8 inline-block px-8 py-4 rounded-full font-mono text-sm uppercase tracking-widest font-semibold"
-              style={{
-                backgroundColor: accent === "gold" ? "var(--color-egyptian-gold)" : accent === "cyan" ? "var(--color-neon-cyan)" : accent === "orange" ? "var(--color-eclipse-orange)" : "#ffffff",
-                color: accent === "white" ? "#0a0a0f" : "#0a0a0f",
-              }}
-            >
-              {ctaLabel}
-            </a>
-          )}
-
-          {/* Вариант сцены (раскрывается в следующих тасках) */}
-          <VariantComponent
-            index={index}
-            variant={variant}
-            overlay={overlay}
-            eyebrowPrefix={eyebrowPrefix}
-            eyebrowSuffix={eyebrowSuffix}
-            headingLine1={headingLine1}
-            headingLead={headingLead}
-            headingAccent={headingAccent}
-            lead={lead}
-            headingLines={headingLines}
-            textBlocks={textBlocks}
-            accent={accent}
-            backgroundImage={backgroundImage}
-            quote={quote}
-            quoteAttribution={quoteAttribution}
-            ctaLabel={ctaLabel}
-            ctaHref={ctaHref}
-            svg_caption={svg_caption}
-            microcopy={microcopy}
-            anchor={anchor}
-            artifacts={artifacts}
-            plates={plates}
-            voices={voices}
-            additional_ctas={additional_ctas}
-          />
-        </div>
-      )}
+        {ctaLabel && ctaHref ? (
+          <a
+            href={ctaHref}
+            className="mt-8 inline-block rounded-full px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest"
+            style={{
+              backgroundColor:
+                accent === "gold"
+                  ? "var(--color-egyptian-gold)"
+                  : accent === "cyan"
+                    ? "var(--color-neon-cyan)"
+                    : accent === "orange"
+                      ? "var(--color-eclipse-orange)"
+                      : "#ffffff",
+              color: "#0a0a0f",
+            }}
+          >
+            {ctaLabel}
+          </a>
+        ) : null}
+      </div>
     </section>
   );
 }

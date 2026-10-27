@@ -5,23 +5,10 @@ import { MediaPicker } from "@/lib/core/fields/MediaPicker";
 
 /**
  * Схема блока Scene для Puck.
- * 7 вариантов: mystery, truth, key, elements, keepers, darkness, fifth.
+ * Один универсальный шаблон (Mystery).
  */
 export const SceneSchema: ComponentConfig<SceneProps> = {
   fields: {
-    variant: {
-      type: "radio",
-      label: "Тип сцены (Вариант)",
-      options: [
-        { label: "Mystery (тайна)", value: "mystery" },
-        { label: "Truth (истина)", value: "truth" },
-        { label: "Key (ключ)", value: "key" },
-        { label: "Elements (стихии)", value: "elements" },
-        { label: "Keepers (хранители)", value: "keepers" },
-        { label: "Darkness (тьма)", value: "darkness" },
-        { label: "Fifth (пятый элемент)", value: "fifth" },
-      ],
-    },
     overlay: {
       type: "radio",
       label: "Затемнение фона (Vignette)",
@@ -76,65 +63,8 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     quoteAttribution: { type: "text", contentEditable: true, label: "Автор цитаты" },
     ctaLabel: { type: "text", contentEditable: true, label: "Текст кнопки CTA" },
     ctaHref: { type: "text", contentEditable: true, label: "Ссылка CTA" },
-    svg_caption: { type: "text", contentEditable: true, label: "Подпись к SVG (Scene 2)" },
-    microcopy: { type: "text", contentEditable: true, label: "Мелкий текст (микрокопия, пояснение под CTA)" },
-    anchor: {
-      type: "text",
-      contentEditable: true,
-      label: "ID-якорь для ссылок (напр. register)",
-    },
-    artifacts: {
-      type: "array",
-      label: "Карточки-числа (Scene 3)",
-      arrayFields: {
-        title: { type: "text", contentEditable: true, label: "Заголовок" },
-        sub: { type: "text", contentEditable: true, label: "Подпись" },
-      },
-      defaultItemProps: { title: "", sub: "" },
-      getItemSummary: (item) => item.title || "Карточка",
-    },
-    plates: {
-      type: "array",
-      label: "Плиты стихий (Scene 4)",
-      arrayFields: {
-        name: { type: "text", contentEditable: true, label: "Название" },
-        text: { type: "textarea", contentEditable: true, label: "Текст" },
-        color: {
-          type: "radio",
-          label: "Цвет",
-          options: [
-            { label: "Gold", value: "gold" },
-            { label: "Cyan", value: "cyan" },
-            { label: "Orange", value: "orange" },
-            { label: "White", value: "white" },
-          ],
-        },
-      },
-      defaultItemProps: { name: "", text: "", color: "gold" },
-      getItemSummary: (item) => item.name || "Плита",
-    },
-    voices: {
-      type: "array",
-      label: "Голоса (Scene 5)",
-      arrayFields: {
-        name: { type: "text", contentEditable: true, label: "Имя голоса" },
-      },
-      defaultItemProps: { name: "" },
-      getItemSummary: (item) => item.name || "Голос",
-    },
-    additional_ctas: {
-      type: "array",
-      label: "Доп. ссылки (Scene 7)",
-      arrayFields: {
-        label: { type: "text", contentEditable: true, label: "Текст ссылки" },
-        href: { type: "text", contentEditable: true, label: "URL / якорь" },
-      },
-      defaultItemProps: { label: "", href: "" },
-      getItemSummary: (item) => item.label || "Ссылка",
-    },
   },
   defaultProps: {
-    variant: "mystery",
     overlay: "none",
     eyebrowPrefix: "",
     eyebrowSuffix: "",
@@ -150,13 +80,6 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     quoteAttribution: "",
     ctaLabel: "",
     ctaHref: "",
-    svg_caption: "",
-    microcopy: "",
-    anchor: "",
-    artifacts: [],
-    plates: [],
-    voices: [],
-    additional_ctas: [],
   },
   render: (props) => {
     const { puck, id, ...rest } = props;
