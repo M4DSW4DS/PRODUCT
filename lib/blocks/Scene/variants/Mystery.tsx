@@ -45,13 +45,15 @@ export function Mystery(props: SceneProps) {
   const leadRef = useRef<HTMLParagraphElement>(null);
   const quoteRef = useRef<HTMLQuoteElement>(null);
 
+  const quoteText = props.quote && typeof props.quote === "object" ? (props.quote as { text?: React.ReactNode }).text : "";
+  const quoteAuthor = props.quote && typeof props.quote === "object" ? (props.quote as { author?: React.ReactNode }).author : "";
+
   const {
     index = 0,
     headingLine1,
     headingLead,
     headingAccent,
     lead,
-    quote,
   } = props;
 
   useIsomorphicLayoutEffect(() => {
@@ -151,9 +153,9 @@ if (quoteEl) {
         </h2>
       )}
       {props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>}
-      {quote.text && (
+      {quoteText && (
         <div className="border-l-2 border-egyptian-gold pl-4 text-left">
-          <p className="font-display italic text-xl text-neon-cyan">{quote.text}</p>
+          <p className="font-display italic text-xl text-neon-cyan">{quoteText}</p>
         </div>
       )}
     </div>
