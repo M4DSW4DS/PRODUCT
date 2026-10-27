@@ -33,8 +33,6 @@ export interface SceneProps {
   accent?: "egyptian-gold" | "neon-cyan" | "eclipse-orange" | "white";
   backgroundImage?: string;
   quote: { text: React.ReactNode; author: React.ReactNode };
-  ctaLabel?: string;
-  ctaHref?: string;
   cta?: { label: string; href: string } | null;
   svg_caption?: string;
   microcopy?: string;
@@ -64,17 +62,15 @@ export function Scene({
   accent = "egyptian-gold",
   backgroundImage,
   quote,
-  ctaLabel,
-  ctaHref,
   cta,
 }: SceneProps) {
   const anchorId = `scene-${index}`;
   const overlayBackground = OVERLAY_BACKGROUNDS[overlay];
   const hasOverlay = overlay !== "none" && Boolean(overlayBackground);
   const resolvedCtaLabel =
-    typeof cta === "object" && cta !== null ? cta.label : ctaLabel;
+    typeof cta === "object" && cta !== null ? cta.label : "";
   const resolvedCtaHref =
-    typeof cta === "object" && cta !== null ? cta.href : ctaHref;
+    typeof cta === "object" && cta !== null ? cta.href : "";
 
   return (
     <section

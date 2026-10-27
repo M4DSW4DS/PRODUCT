@@ -31,8 +31,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
         author: { type: "text", contentEditable: true, label: "Автор цитаты" },
       },
     },
-    ctaLabel: { type: "text", contentEditable: true, label: "Текст кнопки CTA" },
-    ctaHref: { type: "text", contentEditable: true, label: "Ссылка кнопки CTA" },
+    cta: { type: "object", label: "Кнопка CTA", objectFields: { label: { type: "text", contentEditable: true, label: "Текст кнопки" }, href: { type: "text", contentEditable: true, label: "Ссылка" } } },
     overlay: {
       type: "radio",
       label: "Затемнение фона (Vignette)",
@@ -50,8 +49,6 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     headingAccent: "",
     lead: "",
     quote: { text: "", author: "" },
-    ctaLabel: "",
-    ctaHref: "",
   },
   render: (props) => {
     const { puck, id, ...rest } = props;
