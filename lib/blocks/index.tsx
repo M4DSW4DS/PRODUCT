@@ -6,9 +6,7 @@ import { TimerSchema } from "./Timer/schema";
 import { FeaturesSchema } from "./Features/schema";
 import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
-import { CtaSchema } from "./CTA/schema";
 import { SceneSchema } from "./Scene/schema";
-import { ConversionSchema } from "./Conversion/schema";
 import { eclipseSceneConfig } from "./EclipseScene/schema";
 
 /**
@@ -19,29 +17,27 @@ import { eclipseSceneConfig } from "./EclipseScene/schema";
  */
 export const blocksConfig: Config = {
   components: {
+    Scene: SceneSchema,
     Heading: HeadingSchema,
     Hero: HeroSchema,
-    Timer: TimerSchema,
     Features: FeaturesSchema,
-    PartnerWidget: PartnerWidgetSchema,
+    Timer: TimerSchema,
     Faq: FaqSchema,
-    Cta: CtaSchema,
-    Scene: SceneSchema,
-    Conversion: ConversionSchema,
+    PartnerWidget: PartnerWidgetSchema,
     EclipseScene: eclipseSceneConfig,
   },
   categories: {
-    "Основные": {
-      components: ["Heading", "Hero", "Cta"],
+    primary: {
+      title: "Основные",
+      components: ["Scene", "Heading", "Hero"],
     },
-    "Контент": {
-      components: ["Features", "Faq", "Conversion"],
+    content: {
+      title: "Контент",
+      components: ["Features", "Timer", "Faq", "PartnerWidget"],
     },
-    "Интерактив": {
-      components: ["Timer", "PartnerWidget"],
-    },
-    "Сцены": {
-      components: ["Scene"],
+    effects: {
+      title: "Эффекты",
+      components: ["EclipseScene"],
     },
   },
   root: {
