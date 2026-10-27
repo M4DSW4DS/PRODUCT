@@ -26,20 +26,13 @@ export interface SceneCta {
 export interface SceneProps {
   index?: number;
   overlay?: "none" | "dusk" | "night";
-  eyebrowPrefix?: string;
-  eyebrowSuffix?: string;
-  /** Устаревшее поле (до разделения заголовка на строки). Поддерживается для
-   *  совместимости со старым контентом: используется, если новые поля пусты. */
   headingLine1?: string;
   headingLead?: string;
   headingAccent?: string;
   lead?: string;
-  headingLines?: { text: string; color: "white" | "gold" | "cyan" | "orange" }[];
-  textBlocks?: { text: string }[];
-  accent?: "gold" | "cyan" | "orange" | "white";
+  accent?: "egyptian-gold" | "neon-cyan" | "eclipse-orange" | "white";
   backgroundImage?: string;
-  quote?: string;
-  quoteAttribution?: string;
+  quote: { text: React.ReactNode; author: React.ReactNode };
   ctaLabel?: string;
   ctaHref?: string;
   svg_caption?: string;
@@ -64,18 +57,12 @@ const OVERLAY_BACKGROUNDS: Record<string, string | undefined> = {
 export function Scene({
   index = 0,
   overlay = "none",
-  eyebrowPrefix,
-  eyebrowSuffix,
   headingLine1,
-  headingLead,
   headingAccent,
   lead,
-  headingLines,
-  textBlocks,
-  accent = "gold",
+  accent = "egyptian-gold",
   backgroundImage,
   quote,
-  quoteAttribution,
   ctaLabel,
   ctaHref,
 }: SceneProps) {
@@ -143,16 +130,12 @@ export function Scene({
       <div className="relative z-10 flex w-full flex-col items-center">
         <Mystery
           index={index}
-          eyebrowPrefix={eyebrowPrefix}
-          eyebrowSuffix={eyebrowSuffix}
           headingLine1={headingLine1}
-          headingLead={headingLead}
           headingAccent={headingAccent}
           lead={lead}
           accent={accent}
           backgroundImage={backgroundImage}
           quote={quote}
-          quoteAttribution={quoteAttribution}
         />
 
         {ctaLabel && ctaHref ? (
@@ -161,11 +144,11 @@ export function Scene({
             className="mt-8 inline-block rounded-full px-8 py-4 font-mono text-sm font-semibold uppercase tracking-widest"
             style={{
               backgroundColor:
-                accent === "gold"
+                accent === "egyptian-gold"
                   ? "var(--color-egyptian-gold)"
-                  : accent === "cyan"
+                  : accent === "neon-cyan"
                     ? "var(--color-neon-cyan)"
-                    : accent === "orange"
+                    : accent === "eclipse-orange"
                       ? "var(--color-eclipse-orange)"
                       : "#ffffff",
               color: "#0a0a0f",

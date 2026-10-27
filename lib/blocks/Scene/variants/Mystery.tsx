@@ -21,15 +21,15 @@ const useIsomorphicLayoutEffect =
  * gold → --color-egyptian-gold, cyan → --color-neon-cyan,
  * orange → --color-eclipse-orange, white → базовый text-white.
  */
-const ACCENT_CLASS: Record<NonNullable<SceneProps["accent"]>, string> = {
-  gold: "text-egyptian-gold",
-  cyan: "text-neon-cyan",
-  orange: "text-eclipse-orange",
+const ACCENT_CLASS_MAP: Record<string, string> = {
+  "egyptian-gold": "text-[#c9a96e]",
+  "neon-cyan": "text-[#00e5ff]",
+  "eclipse-orange": "text-[#ff6b35]",
   white: "text-white",
 };
 
-function accentClass(accent?: SceneProps["accent"]): string {
-  return ACCENT_CLASS[accent ?? "gold"];
+function accentClass(accent?: string): string {
+  return ACCENT_CLASS_MAP[accent ?? "egyptian-gold"] || ""
 }
 
 /**
@@ -40,12 +40,6 @@ function accentClass(accent?: SceneProps["accent"]): string {
  * Таймер (задача T) будет перенесён в слот позже — здесь только разметка.
  */
 export function Mystery(props: SceneProps) {
-  const colorMap: Record<string, string> = {
-    gold: "text-egyptian-gold",
-    cyan: "text-neon-cyan",
-    orange: "text-eclipse-orange",
-    white: "text-white",
-  };
   const rootRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const leadRef = useRef<HTMLParagraphElement>(null);
@@ -53,18 +47,12 @@ export function Mystery(props: SceneProps) {
 
   const {
     index = 0,
-    eyebrowPrefix,
-    eyebrowSuffix,
     headingLine1,
     headingLead,
     headingAccent,
     lead,
     quote,
-    quoteAttribution,
   } = props;
-
-  const prefix = eyebrowPrefix || `SCENE ${String(index + 1).padStart(2, "0")}`;
-  const eyebrow = `${prefix} // ${eyebrowSuffix ?? ""}`.trim();
 
   useIsomorphicLayoutEffect(() => {
     const root = rootRef.current;
@@ -154,36 +142,18 @@ if (quoteEl) {
     };
   }, []);
 
-  const hasHeadingPart2 = Boolean(headingLead || headingAccent);
-
   return (
     <div ref={rootRef} className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto scene-text px-6">
-      {props.eyebrowSuffix && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrowPrefix || "SCENE 01"} {props.eyebrowSuffix}</p>}
-      {props.headingLines?.length ? (
-        <h2 className="font-display text-4xl md:text-6xl mb-6 flex flex-col items-center text-center scene-text">
-          {props.headingLines.map((line, i) => (
-            <span key={i} className={colorMap[line.color] || "text-white"}>{line.text}</span>
-          ))}
-        </h2>
-      ) : (
+      {props.headingLine1 && (
         <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
           {props.headingLine1} <br />
-          <span className="text-egyptian-gold">{props.headingLead} {props.headingAccent}</span>
+          <span className={accentClass(props.headingAccent ?? "")}>{props.headingAccent ?? ""}</span>
         </h2>
       )}
-      {props.textBlocks?.length ? (
-        <div className="flex flex-col gap-4 mb-8">
-          {props.textBlocks.map((block, i) => (
-            <p key={i} className="text-lg text-white/80 scene-text">{block.text}</p>
-          ))}
-        </div>
-      ) : (
-        props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>
-      )}
-      {props.quote && (
+      {props.lead && <p className="text-lg text-white/80 mb-8">{props.lead}</p>}
+      {quote.text && (
         <div className="border-l-2 border-egyptian-gold pl-4 text-left">
-          <p className="font-display italic text-xl text-neon-cyan">«{props.quote}»</p>
-          {props.quoteAttribution && <p className="font-mono text-xs text-white/50 mt-2">— {props.quoteAttribution}</p>}
+          <p className="font-display italic text-xl text-neon-cyan">{quote.text}</p>
         </div>
       )}
     </div>
