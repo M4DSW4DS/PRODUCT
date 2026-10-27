@@ -39,7 +39,24 @@ export type HeroProps = {
   sunTop?: string;
   sunLeft?: string;
   sunSize?: string;
-  sunGlow?: string;
+  sunGlowColor?: string;
+  sunGlowSize?: number;
+  sunGlowOpacity?: string;
+  eclipsePercent?: number;
+  eclipseColor?: string;
+};
+
+const glowColorMap: Record<string, string> = {
+  "neon-cyan": "0, 229, 255",
+  "egyptian-gold": "201, 169, 110",
+  "eclipse-orange": "255, 107, 53",
+  white: "255, 255, 255",
+};
+
+const eclipseColorMap: Record<string, string> = {
+  "cosmic-black": "10, 10, 15",
+  "egyptian-gold": "201, 169, 110",
+  "eclipse-orange": "255, 107, 53",
 };
 
 /**
@@ -116,7 +133,16 @@ export function Hero(props: HeroProps) {
         }}
       >
         <div className="corona-flares" />
-        <div className="sun-body absolute inset-0 rounded-full" style={{ boxShadow: props.sunGlow ?? "0 0 100px rgba(255,180,50,0.9)" }} />
+        <div className="sun-body relative absolute inset-0 rounded-full" style={{ boxShadow: `0 0 ${props.sunGlowSize ?? 100}px rgba(${glowColorMap[props.sunGlowColor ?? "neon-cyan"] ?? "0, 229, 255"}, ${props.sunGlowOpacity ?? "0.75"})` }} />
+        {props.eclipsePercent && props.eclipsePercent > 0 && (
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              backgroundColor: `rgba(${eclipseColorMap[props.eclipseColor ?? "cosmic-black"] ?? "10, 10, 15"}, ${props.eclipsePercent / 100})`,
+            }}
+            aria-hidden="true"
+          />
+        )}
         <div className="moon-body" />
       </div>
 

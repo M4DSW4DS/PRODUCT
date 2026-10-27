@@ -33,7 +33,47 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     sunTop: { type: "text", contentEditable: true, label: "Положение Солнца по вертикали (напр. 40%, 75%)" },
     sunLeft: { type: "text", contentEditable: true, label: "Положение Солнца по горизонтали (напр. 50%)" },
     sunSize: { type: "text", contentEditable: true, label: "Размер Солнца (напр. 400px, 300px)" },
-    sunGlow: { type: "text", contentEditable: true, label: "Свечение Солнца (напр. rgba(255,120,20,0.8))" },
+    sunGlowColor: {
+      type: "radio",
+      label: "Цвет свечения Солнца",
+      options: [
+        { label: "Голубой", value: "neon-cyan" },
+        { label: "Золотой", value: "egyptian-gold" },
+        { label: "Оранжевый", value: "eclipse-orange" },
+        { label: "Белый", value: "white" },
+      ],
+    },
+    sunGlowSize: {
+      type: "number",
+      label: "Размер свечения (px, размытие)",
+      min: 0,
+      max: 300,
+    },
+    sunGlowOpacity: {
+      type: "radio",
+      label: "Яркость свечения",
+      options: [
+        { label: "Слабая (25%)", value: "0.25" },
+        { label: "Средняя (50%)", value: "0.5" },
+        { label: "Сильная (75%)", value: "0.75" },
+        { label: "Максимум (100%)", value: "1" },
+      ],
+    },
+    eclipsePercent: {
+      type: "number",
+      label: "Затмение (%) — затемнение солнца",
+      min: 0,
+      max: 100,
+    },
+    eclipseColor: {
+      type: "radio",
+      label: "Цвет затмения",
+      options: [
+        { label: "Чёрный", value: "cosmic-black" },
+        { label: "Тёмно-золотой", value: "egyptian-gold" },
+        { label: "Тёмно-оранжевый", value: "eclipse-orange" },
+      ],
+    },
   },
   defaultProps: {
     eyebrow: "",
@@ -48,7 +88,11 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
     sunTop: "40%",
     sunLeft: "50%",
     sunSize: "400px",
-    sunGlow: "0 0 100px rgba(255,180,50,0.9)",
+    sunGlowColor: "neon-cyan",
+    sunGlowSize: 100,
+    sunGlowOpacity: "0.75",
+    eclipsePercent: 0,
+    eclipseColor: "cosmic-black",
   },
   render: (props) => (
     <Hero
@@ -58,7 +102,11 @@ export const HeroSchema: ComponentConfig<HeroProps> = {
       sunTop={props.sunTop}
       sunLeft={props.sunLeft}
       sunSize={props.sunSize}
-      sunGlow={props.sunGlow}
+      sunGlowColor={props.sunGlowColor}
+      sunGlowSize={props.sunGlowSize}
+      sunGlowOpacity={props.sunGlowOpacity}
+      eclipsePercent={props.eclipsePercent}
+      eclipseColor={props.eclipseColor}
     />
   ),
 };
