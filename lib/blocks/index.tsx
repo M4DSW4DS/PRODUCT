@@ -11,6 +11,7 @@ import { FaqSchema } from "./Faq/schema";
 import { SceneSchema } from "./Scene/schema";
 import { eclipseSceneConfig } from "./EclipseScene/schema";
 import { EclipseAnimationSchema } from "./EclipseAnimation/schema";
+import { Hero2Schema } from "./Hero2/schema";
 
 /**
  * РЕЕСТР БЛОКОВ.
@@ -31,11 +32,12 @@ export const blocksConfig: Config = {
     PartnerWidget: PartnerWidgetSchema,
     EclipseScene: eclipseSceneConfig,
     EclipseAnimation: EclipseAnimationSchema,
+    Hero2: Hero2Schema,
   },
   categories: {
     primary: {
       title: "Основные",
-      components: ["Scene", "Heading", "Hero"],
+      components: ["Scene", "Heading", "Hero", "Hero2"],
     },
     content: {
       title: "Контент",
