@@ -3,6 +3,7 @@ import type { Config } from "@puckeditor/core";
 import { HeadingSchema } from "./Heading/schema";
 import { HeroSchema } from "./Hero/schema";
 import { Hero2Schema } from "./Hero2/schema";
+import { Hero3Schema } from "./Hero3/schema";
 import { TimerSchema } from "./Timer/schema";
 import { FeaturesSchema } from "./Features/schema";
 import { PartnerWidgetSchema } from "./PartnerWidget/schema";
@@ -22,6 +23,7 @@ export const blocksConfig: Config = {
     Heading: HeadingSchema,
     Hero: HeroSchema,
     Hero2: Hero2Schema,
+    Hero3: Hero3Schema,
     Features: FeaturesSchema,
     Timer: TimerSchema,
     Faq: FaqSchema,
@@ -31,7 +33,7 @@ export const blocksConfig: Config = {
   categories: {
     primary: {
       title: "Основные",
-      components: ["Scene", "Heading", "Hero", "Hero2"],
+      components: ["Scene", "Heading", "Hero", "Hero2", "Hero3"],
     },
     content: {
       title: "Контент",
