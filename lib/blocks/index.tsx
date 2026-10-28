@@ -10,6 +10,7 @@ import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
 import { SceneSchema } from "./Scene/schema";
 import { eclipseSceneConfig } from "./EclipseScene/schema";
+import { EclipseAnimationSchema } from "./EclipseAnimation/schema";
 
 /**
  * РЕЕСТР БЛОКОВ.
@@ -29,6 +30,7 @@ export const blocksConfig: Config = {
     Faq: FaqSchema,
     PartnerWidget: PartnerWidgetSchema,
     EclipseScene: eclipseSceneConfig,
+    EclipseAnimation: EclipseAnimationSchema,
   },
   categories: {
     primary: {
@@ -41,7 +43,7 @@ export const blocksConfig: Config = {
     },
     effects: {
       title: "Эффекты",
-      components: ["EclipseScene"],
+      components: ["EclipseScene", "EclipseAnimation"],
     },
   },
   root: {
