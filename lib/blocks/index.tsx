@@ -4,6 +4,7 @@ import { HeadingSchema } from "./Heading/schema";
 import { HeroSchema } from "./Hero/schema";
 import { TimerSchema } from "./Timer/schema";
 import { Timer1Schema } from "./Timer1/schema";
+import { Timer2Schema } from "./Timer2/schema";
 import { FeaturesSchema } from "./Features/schema";
 import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
@@ -24,6 +25,7 @@ export const blocksConfig: Config = {
     Features: FeaturesSchema,
     Timer: TimerSchema,
     Timer1: Timer1Schema,
+    Timer2: Timer2Schema,
     Faq: FaqSchema,
     PartnerWidget: PartnerWidgetSchema,
     EclipseScene: eclipseSceneConfig,
@@ -35,7 +37,7 @@ export const blocksConfig: Config = {
     },
     content: {
       title: "Контент",
-      components: ["Features", "Timer", "Timer1", "Faq", "PartnerWidget"],
+      components: ["Features", "Timer", "Timer1", "Timer2", "Faq", "PartnerWidget"],
     },
     effects: {
       title: "Эффекты",
