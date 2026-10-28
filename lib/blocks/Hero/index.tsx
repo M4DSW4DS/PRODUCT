@@ -1,133 +1,120 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { EclipseScene } from "../EclipseScene";
+import { useRef, useLayoutEffect, type ReactNode } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ZorgCabinet } from "./internal/ZorgCabinet";
+import { HeroHUD } from "./internal/HeroHUD";
+
+gsap.registerPlugin(ScrollTrigger);
+
+function useGSAP(callback: () => void, config?: { scope?: any }) {
+  useLayoutEffect(() => {
+    const ctx = gsap.context(callback, config?.scope?.current ?? undefined);
+    return () => ctx.revert();
+  }, []);
+}
 
 export type HeroProps = {
-  imageProfile: string;
-  imageFace: string;
-  quoteText: string;
-  sunSize: number;
-  sunTop: number;
-  sunLeft: number;
+  eyebrow: ReactNode;
+  title: ReactNode;
+  subtitle: ReactNode;
+  quote: { text?: ReactNode; author?: ReactNode } | string;
+  cta: { label?: ReactNode; href?: string } | string;
+  accentWord?: ReactNode;
+  accentColor?: string;
+  showTimer?: boolean;
+};
+
+const ACCENT_MAP: Record<string, string> = {
+  "egyptian-gold": "text-[#c9a96e]",
+  "neon-cyan": "text-[#00e5ff]",
+  "eclipse-orange": "text-[#ff6b35]",
+  white: "text-white",
 };
 
 export function Hero(props: HeroProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const img1Ref = useRef<HTMLImageElement>(null);
-  const img2Ref = useRef<HTMLImageElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const showTimer = props.showTimer ?? true;
+  const rootRef = useRef<HTMLElement>(null);
+  const cabinetRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  const quoteText = typeof props.quote === "object" && props.quote !== null ? props.quote.text : "";
+  const quoteAuthor = typeof props.quote === "object" && props.quote !== null ? props.quote.author : "";
+  const ctaLabel = typeof props.cta === "object" && props.cta !== null ? props.cta.label : "";
+  const ctaHref = typeof props.cta === "object" && props.cta !== null ? props.cta.href : "";
 
-    let rafId = 0;
-    const tick = () => {
-      const rect = section.getBoundingClientRect();
-      const totalScroll = rect.height - window.innerHeight;
-      const p = totalScroll > 0 ? Math.max(0, Math.min(1, -rect.top / totalScroll)) : 0;
-      
-      setProgress(p);
+  useGSAP(() => {
+    gsap.fromTo(".hero-text", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
 
-      // 1. Text: rises up (0-0.3), holds (0.3-0.6), flies into depth and fades (0.6-0.9)
-      if (textRef.current) {
-        let textOp = 0;
-        let textY = 100; // Start below
-        let textScale = 1;
-        
-        if (p < 0.3) {
-          textOp = p / 0.3;
-          textY = 100 - (textOp * 100);
-        } else if (p < 0.6) {
-          textOp = 1;
-          textY = 0;
-        } else if (p < 0.9) {
-          const depthP = (p - 0.6) / 0.3;
-          textOp = 1 - depthP;
-          textY = depthP * -150; // Fly up
-          textScale = 1 + (depthP * 1.5); // Fly towards camera
-        } else {
-          textOp = 0;
-        }
-        
-        textRef.current.style.opacity = String(Math.max(0, textOp));
-        textRef.current.style.transform = `translate(-50%, calc(-50% + ${textY}px)) scale(${textScale})`;
-      }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: "top top",
+        end: "+=100%",
+        scrub: 1,
+      },
+    });
 
-      // 2. Image 1 (Profile): slides up and fades out (0.2 - 0.6)
-      if (img1Ref.current) {
-        const op = p > 0.2 ? 1 - (p - 0.2) / 0.4 : 1;
-        const y = p > 0.2 ? -(p - 0.2) * 20 : 0; // Slide up by 20%
-        img1Ref.current.style.opacity = String(Math.max(0, op));
-        img1Ref.current.style.transform = `translateY(${y}%) scale(1.05)`;
-      }
-
-      // 3. Image 2 (Face): slides up from bottom and fades in (0.3 - 0.7)
-      if (img2Ref.current) {
-        const op = p > 0.3 ? (p - 0.3) / 0.4 : 0;
-        const y = p > 0.3 ? 20 - ((p - 0.3) / 0.4) * 20 : 20; // Slide from 20% to 0%
-        img2Ref.current.style.opacity = String(Math.min(1, op));
-        img2Ref.current.style.transform = `translateY(${y}%) scale(1.05)`;
-      }
-
-      rafId = requestAnimationFrame(tick);
-    };
-
-    tick();
-    return () => cancelAnimationFrame(rafId);
-  }, []);
+    // Фон темнеет до 0.8 (20% яркости) и солнце выходит на 1.0 — параллельно, без задержки
+    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
+    tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
+    tl.to(".sun-body", { opacity: 1, duration: 1, ease: "power2.inOut" }, 0);
+  }, { scope: rootRef });
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh] w-full bg-black">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
-        
-        {/* Image 2 (Face) - Base layer */}
-        <img 
-          ref={img2Ref}
-          src={props.imageFace} 
-          alt="Face" 
-          className="absolute inset-0 w-full h-full object-cover opacity-0 origin-bottom"
+    <section ref={rootRef} className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black">
+      <ZorgCabinet ref={cabinetRef} />
+
+      {/* Сфера солнца — фиксированные дефолты, без админки */}
+      <div
+        className="space-viewport absolute z-20 pointer-events-none mix-blend-mode-screen"
+        style={{
+          top: "40%",
+          left: "50%",
+          width: "400px",
+          height: "400px",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <div className="corona-flares" />
+        <div
+          className="sun-body relative absolute inset-0 rounded-full"
+          style={{ boxShadow: "0 0 100px rgba(0, 229, 255, 0.75)" }}
         />
-
-        {/* Image 1 (Profile) - Top layer, slides up */}
-        <img 
-          ref={img1Ref}
-          src={props.imageProfile} 
-          alt="Profile" 
-          className="absolute inset-0 w-full h-full object-cover origin-top"
-        />
-
-        {/* Eclipse Scene - Parallax layer */}
-        <div 
-          className="absolute inset-0 z-10 pointer-events-none transition-transform duration-100 ease-out"
-          style={{ transform: `translateY(${progress * -15}%) scale(${1 + progress * 0.2})` }}
-        >
-          <EclipseScene
-            size={props.sunSize}
-            height={props.sunSize}
-            top={props.sunTop}
-            left={props.sunLeft}
-            progress={progress * 100}
-            autoPlay={false}
-            playDuration={1}
-            showCorona={true}
-            darkenScene={false}
-          />
-        </div>
-
-        {/* Text */}
-        <div 
-          ref={textRef}
-          className="absolute top-1/2 left-1/2 z-20 opacity-0 text-center pointer-events-none w-full px-4 mix-blend-screen"
-        >
-          <h2 className="font-display text-5xl md:text-7xl text-white tracking-[0.15em] uppercase drop-shadow-[0_0_30px_rgba(0,229,255,0.8)]">
-            {props.quoteText}
-          </h2>
-        </div>
-
+        <div className="moon-body" />
       </div>
+
+      <div className="hero-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6 pointer-events-auto">
+        {props.eyebrow && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrow}</p>}
+        {props.title && (
+          <h1 className="font-display text-5xl md:text-7xl text-white mb-6 leading-tight">
+            {props.title}
+            {props.accentWord && (
+              <span className={ACCENT_MAP[props.accentColor ?? "egyptian-gold"] ?? ""}> {props.accentWord}</span>
+            )}
+          </h1>
+        )}
+        {props.subtitle && <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">{props.subtitle}</p>}
+        {quoteText && (
+          <div className="mb-8">
+            <p className="font-display italic text-xl text-neon-cyan">{quoteText}</p>
+            {quoteAuthor && <p className="font-mono text-xs text-white/50 mt-2">{quoteAuthor}</p>}
+          </div>
+        )}
+        {ctaLabel && (
+          <a href={ctaHref || "#"} className="inline-block border-2 border-egyptian-gold text-egyptian-gold px-8 py-3 font-mono uppercase tracking-widest hover:bg-egyptian-gold hover:text-black transition-colors pointer-events-auto">
+            {ctaLabel}
+          </a>
+        )}
+      </div>
+
+      <div className="absolute bottom-[4vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
+        <HeroHUD timerRef={timerRef} showTimer={showTimer} />
+      </div>
+
+      <div className="hero-dark-overlay absolute inset-0 z-20 bg-cosmic-black opacity-0 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0f] to-transparent z-20 pointer-events-none" />
     </section>
   );
 }

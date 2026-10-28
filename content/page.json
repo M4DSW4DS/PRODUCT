@@ -6,50 +6,51 @@
   },
   "content": [
     {
-      "type": "Hero",
+      "type": "Hero2",
       "props": {
-        "eyebrow": "",
-        "title": "",
-        "subtitle": " ",
-        "quote": " Солнце над Египтом , угаснет ",
-        "quoteAttribution": "Luxor 2 августа 2027 года",
-        "ctaLabel": "",
-        "ctaHref": "",
-        "hudLabel": "System Ready // Countdown",
-        "hudFooter": "ORBIT · EARTH · EGYPT",
-        "showTimer": true,
-        "showCalendar": false,
-        "id": "Hero-97f575b7-4c0f-441e-af33-145e6bfe96f2"
+        "imageProfile": "/hero/zorg-cabinet.png",
+        "imageFace": "/hero/zorg-cabinet2.png",
+        "quoteText": "Солнце Египта, Угаснет",
+        "sphereSize": 380,
+        "sphereTop": 42,
+        "sphereLeft": 44,
+        "id": "Hero2-2c76da18-2468-4c06-94ad-ff1a5864bb73"
       }
     },
     {
-      "type": "Scene",
+      "type": "Hero3",
       "props": {
-        "id": "Scene-02",
-        "variant": "mystery",
-        "overlay": "night",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "",
-        "svg_caption": "Координаты пика NASA: 25°43' N, 32°36' E. Время: 13:05.",
-        "accent": "gold",
-        "backgroundImage": "/EXPER/scene-02..png",
-        "quoteAttribution": "ZORG",
-        "textBlocks": [
-          {
-            "text": ""
-          }
-        ],
-        "headingLines": [
-          {
-            "text": "Новая строка",
-            "color": "white"
-          },
-          {
-            "text": "Новая строка",
-            "color": "white"
-          }
-        ],
-        "quote": " И я знаю когда "
+        "imageProfile": "/hero/zorg-cabinet.png",
+        "imageFace": "/hero/zorg-cabinet2.png",
+        "quoteText": "Солнце Египта, Угаснет",
+        "sunSize": 380,
+        "sunTop": 42,
+        "sunLeft": 44,
+        "id": "Hero3-b6bda7d0-2d9d-490a-bd75-72d335a240b8"
+      }
+    },
+    {
+      "type": "Hero4",
+      "props": {
+        "imageProfile": "/hero/zorg-cabinet.png",
+        "imageFace": "/hero/zorg-cabinet2.png",
+        "quoteText": "Солнце Египта, Угаснет",
+        "sunSize": 380,
+        "sunTop": 42,
+        "sunLeft": 44,
+        "id": "Hero4-b7b345fc-0bdb-4edb-a3cc-88636033a8ed"
+      }
+    },
+    {
+      "type": "Hero5",
+      "props": {
+        "imageProfile": "/hero/zorg-cabinet.png",
+        "imageFace": "/hero/zorg-cabinet2.png",
+        "quoteText": "Солнце Египта, Угаснет",
+        "sunSize": 380,
+        "sunTop": 42,
+        "sunLeft": 44,
+        "id": "Hero5-a6b0e291-2df9-470d-85d1-a25e19bec2ea"
       }
     },
     {
@@ -77,207 +78,6 @@
       }
     },
     {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-06",
-        "variant": "mystery",
-        "overlay": "none",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "",
-        "headingLine1": "",
-        "headingLead": "",
-        "headingAccent": "",
-        "quote": "Места полностью забронированы. \nНо время не имеет значения, когда на кону твоя жизнь.\n Делай свой ход",
-        "quoteAttribution": "",
-        "accent": "orange",
-        "backgroundImage": "/EXPER/scene-06.jpg",
-        "anchor": "",
-        "headingLines": [],
-        "textBlocks": []
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-04",
-        "variant": "mystery",
-        "overlay": "none",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "",
-        "headingLine1": "                                                                              ",
-        "headingLead": "",
-        "headingAccent": "",
-        "lead": "Земля. Вода. Огонь. Воздух. Каждая — точка на карте. Вместе — укажут путь к затмению.",
-        "plates": [
-          {
-            "name": "Огонь",
-            "text": "Взрыв протуберанцев проявится в небе при сорока трех градусах жары на земле.",
-            "color": "orange"
-          },
-          {
-            "name": "Вода",
-            "text": "Черный Нил остановит течение бликов, превращаясь в ртутное зеркало во тьме.",
-            "color": "cyan"
-          },
-          {
-            "name": "Земля",
-            "text": "Древний некрополь Фив мгновенно сбросит семь градусов тепла за три минуты пика.",
-            "color": "gold"
-          },
-          {
-            "name": "Воздух",
-            "text": "Лунная тень на скорости звука обрушит ледяной шквал ветра в атмосферу.",
-            "color": "white"
-          }
-        ],
-        "accent": "cyan",
-        "backgroundImage": "/EXPER/scene-04.jpg",
-        "headingLines": [],
-        "textBlocks": [
-          {
-            "text": "Земля. Вода. Огонь. Воздух. Каждая — точка на карте. Вместе — укажут путь к затмению."
-          }
-        ]
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-03",
-        "variant": "mystery",
-        "overlay": "none",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "Каменный прибор",
-        "headingLine1": "Шесть минут ночи",
-        "headingLead": "",
-        "headingAccent": "в Храме Солнца.",
-        "lead": "Карнак. Храм, построенный как научный инструмент. 2000 лет строительства. Главная ось ориентирована на восход Солнца.",
-        "artifacts": [
-          {
-            "title": "82° в зените",
-            "sub": "Прямо над головой"
-          },
-          {
-            "title": "Менее 5%",
-            "sub": "Риск облаков в августе"
-          },
-          {
-            "title": "6 мин 23 сек",
-            "sub": "Пик Saros 136"
-          },
-          {
-            "title": "0 мест",
-            "sub": "Группа укомплектована"
-          },
-          {
-            "title": "",
-            "sub": ""
-          }
-        ],
-        "accent": "gold",
-        "backgroundImage": "/EXPER/scene-03..jpg",
-        "headingLines": [
-          {
-            "text": "Шесть минут ночи",
-            "color": "white"
-          },
-          {
-            "text": "в Храме Солнца.",
-            "color": "gold"
-          }
-        ],
-        "textBlocks": [
-          {
-            "text": "Карнак. Храм, построенный как научный инструмент. 2000 лет строительства. Главная ось ориентирована на восход Солнца."
-          }
-        ]
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-05",
-        "variant": "mystery",
-        "overlay": "none",
-        "eyebrowPrefix": "",
-        "eyebrowSuffix": "",
-        "headingLine1": "Кто останется в точке?",
-        "headingLead": "Пять голосов",
-        "headingAccent": "одного финала",
-        "lead": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет.  Где в эту секунду будешь ты?",
-        "voices": [
-          {
-            "name": "Жрец"
-          },
-          {
-            "name": "Пилот"
-          },
-          {
-            "name": "Посланник"
-          },
-          {
-            "name": "Инженер"
-          },
-          {
-            "name": "Участник"
-          }
-        ],
-        "accent": "cyan",
-        "backgroundImage": "/EXPER/scene-05..jpg",
-        "headingLines": [
-          {
-            "text": "Кто останется в точке?",
-            "color": "white"
-          },
-          {
-            "text": "Пять голосов",
-            "color": "white"
-          },
-          {
-            "text": "одного финала",
-            "color": "gold"
-          }
-        ],
-        "textBlocks": [
-          {
-            "text": "Жрец слышит зов. Корбен проверяет приборы. Лилу хочет почувствовать мрак сама. Зорг знает, что расчеты безупречны. Солнце угаснет.  Где в эту секунду будешь ты?"
-          }
-        ]
-      }
-    },
-    {
-      "type": "Scene",
-      "props": {
-        "id": "Scene-07",
-        "variant": "mystery",
-        "overlay": "none",
-        "eyebrowPrefix": "669",
-        "eyebrowSuffix": "// ПЯТЫЙ ЭЛЕМЕНТ",
-        "headingLine1": "Стань пятым элементом",
-        "headingLead": "",
-        "headingAccent": "иии",
-        "lead": "2 августа 2027 года. Луксор. Основной состав экспедиции Астролагеря укомплектован на 100%. \nТвой единственный способ перехватить освободившийся билет — войти в резиервный лист ожидания прямо сейчас.",
-        "ctaLabel": "",
-        "ctaHref": "",
-        "microcopy": "БЕЗ РЕГИСТРАЦИИ НА САЙТЕ · ТОЛЬКО ВНЕШНИЙ РЕДИРЕКТ",
-        "accent": "cyan",
-        "backgroundImage": "/scenes/scene-07.jpg",
-        "quote": "",
-        "quoteAttribution": "",
-        "plates": [],
-        "headingLines": [],
-        "textBlocks": []
-      }
-    },
-    {
-      "type": "PartnerWidget",
-      "props": {
-        "id": "PartnerWidget-1",
-        "src": "https://timepad.ru/event/embed/123456/",
-        "height": "600"
-      }
-    },
-    {
       "type": "Faq",
       "props": {
         "title": "Частые вопросы",
@@ -292,27 +92,6 @@
           }
         ],
         "id": "Faq-a457bfc7-23e6-4067-8ab0-32140496d322"
-      }
-    },
-    {
-      "type": "Faq",
-      "props": {
-        "id": "Faq-1",
-        "title": "У тебя есть вопросы ?",
-        "items": [
-          {
-            "question": "Нужен ли свой хостинг?",
-            "answer": "Нет, конструктор работает в браузере, а готовую страницу разворачивают на хостинге за минуты."
-          },
-          {
-            "question": "",
-            "answer": "Нет. Мы — витрина: форма регистрации, оплата и обработка персональных данных работают внутри виджета TimePad — оператор ПД на стороне сервиса."
-          },
-          {
-            "question": "",
-            "answer": "Да, Pollinations.ai — открытый сервис: генерация по промпту с фиксированным seed, без ключей и оплаты."
-          }
-        ]
       }
     }
   ],
