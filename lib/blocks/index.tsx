@@ -12,6 +12,8 @@ import { SceneSchema } from "./Scene/schema";
 import { eclipseSceneConfig } from "./EclipseScene/schema";
 import { EclipseAnimationSchema } from "./EclipseAnimation/schema";
 import { Hero2Schema } from "./Hero2/schema";
+import { TextBlockSchema } from "./TextBlock/schema";
+import { GridBlockSchema } from "./GridBlock/schema";
 
 /**
  * РЕЕСТР БЛОКОВ.
@@ -33,6 +35,8 @@ export const blocksConfig: Config = {
     EclipseScene: eclipseSceneConfig,
     EclipseAnimation: EclipseAnimationSchema,
     Hero2: Hero2Schema,
+    TextBlock: TextBlockSchema,
+    GridBlock: GridBlockSchema,
   },
   categories: {
     primary: {
@@ -41,7 +45,7 @@ export const blocksConfig: Config = {
     },
     content: {
       title: "Контент",
-      components: ["Features", "Timer", "Timer1", "Timer2", "Faq", "PartnerWidget"],
+      components: ["Features", "Timer", "Timer1", "Timer2", "Faq", "PartnerWidget", "TextBlock", "GridBlock"],
     },
     effects: {
       title: "Эффекты",

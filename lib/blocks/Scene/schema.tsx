@@ -1,65 +1,29 @@
 import type { ComponentConfig } from "@puckeditor/core";
 import { Scene } from "./index";
 import type { SceneProps } from "./index";
-import { MediaPicker } from "@/lib/core/fields/MediaPicker";
 
-/**
- * Схема блока Scene для Puck.
- * Один универсальный шаблон (Mystery).
- */
 export const SceneSchema: ComponentConfig<SceneProps> = {
   fields: {
-    backgroundImage: { type: "custom", label: "Фоновое изображение (загрузить или выбрать из галереи)", render: ({ value, onChange }) => <MediaPicker value={value} onChange={onChange} /> },
-    headingLine1: { type: "text", contentEditable: true, label: "Заголовок" },
-    headingAccent: { type: "text", contentEditable: true, label: "Акцентное слово в заголовке" },
-    accent: {
-      type: "radio",
-      label: "Акцентный цвет",
-      options: [
-        { label: "Золото", value: "egyptian-gold" },
-        { label: "Голубой", value: "neon-cyan" },
-        { label: "Оранжевый", value: "eclipse-orange" },
-        { label: "Белый", value: "white" },
-      ],
-    },
-    lead: { type: "text", contentEditable: true, label: "Основной текст" },
-    quote: {
-      type: "object",
-      label: "Цитата",
-      objectFields: {
-        text: { type: "textarea", contentEditable: true, label: "Текст цитаты" },
-        author: { type: "text", contentEditable: true, label: "Автор цитаты" },
-      },
-    },
-    cta: { type: "object", label: "Кнопка CTA", objectFields: { label: { type: "text", contentEditable: true, label: "Текст кнопки" }, href: { type: "text", contentEditable: true, label: "Ссылка" } } },
+    backgroundImage: { type: "text", label: "Фоновое изображение (URL)" },
     overlay: {
       type: "radio",
-      label: "Затемнение фона (Vignette)",
+      label: "Затемнение фона",
       options: [
         { label: "Без наложения", value: "none" },
-        { label: "Сумерки (dusk)", value: "dusk" },
-        { label: "Ночь (night)", value: "night" },
+        { label: "Сумерки", value: "dusk" },
+        { label: "Ночь", value: "night" },
       ],
+    },
+    content: {
+      type: "slot",
+      label: "Элементы внутри сцены (Текст, Сетки, Анимации)",
+      allow: ["TextBlock", "GridBlock", "EclipseAnimation", "Features"],
     },
   },
   defaultProps: {
-    overlay: "none",
     backgroundImage: "",
-    headingLine1: "",
-    headingAccent: "",
-    lead: "",
-    quote: { text: "", author: "" },
+    overlay: "none",
+    content: [],
   },
-  render: (props) => {
-    const { puck, id, ...rest } = props;
-    const fromId =
-      typeof id === "string" ? parseInt(id.replace(/\D/g, ""), 10) - 1 : 0;
-    const index =
-      typeof (puck as any)?.index === "number"
-        ? (puck as any).index
-        : Number.isFinite(fromId) && fromId >= 0
-          ? fromId
-          : 0;
-    return <Scene {...rest} index={index} />;
-  },
+  render: (props) => <Scene {...props} />,
 };
