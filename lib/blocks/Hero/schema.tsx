@@ -4,54 +4,20 @@ import type { HeroProps } from "./index";
 
 export const HeroSchema: ComponentConfig<HeroProps> = {
   fields: {
-    eyebrow: { type: "text", contentEditable: true, label: "Надпись над заголовком (eyebrow)" },
-    title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
-    subtitle: { type: "textarea", contentEditable: true, label: "Подзаголовок (subtitle)" },
-    quote: {
-      type: "object",
-      label: "Цитата (quote)",
-      objectFields: {
-        text: { type: "textarea", contentEditable: true, label: "Текст цитаты (text)" },
-        author: { type: "text", contentEditable: true, label: "Автор цитаты (author)" },
-      },
-    },
-    cta: {
-      type: "object",
-      label: "Кнопка (cta)",
-      objectFields: {
-        label: { type: "text", contentEditable: true, label: "Текст кнопки (label)" },
-        href: { type: "text", label: "Ссылка кнопки (href)" },
-      },
-    },
-    accentWord: { type: "text", contentEditable: true, label: "Акцентное слово (accentWord)" },
-    accentColor: {
-      type: "radio",
-      label: "Акцентный цвет (accentColor)",
-      options: [
-        { label: "Золотой", value: "egyptian-gold" },
-        { label: "Голубой", value: "neon-cyan" },
-        { label: "Оранжевый", value: "eclipse-orange" },
-        { label: "Белый", value: "white" },
-      ],
-    },
-    showTimer: {
-      type: "radio",
-      label: "Таймер (showTimer)",
-      options: [
-        { label: "Да", value: true },
-        { label: "Нет", value: false },
-      ],
-    },
+    imageProfile: { type: "text", label: "Картинка 1 (Профиль) — путь" },
+    imageFace: { type: "text", label: "Картинка 2 (Лицо) — путь" },
+    quoteText: { type: "text", contentEditable: true, label: "Текст (Солнце Египта...)" },
+    sunSize: { type: "number", label: "Размер EclipseScene (px)", min: 100, max: 800 },
+    sunTop: { type: "number", label: "Позиция EclipseScene по вертикали (%)", min: 0, max: 100 },
+    sunLeft: { type: "number", label: "Позиция EclipseScene по горизонтали (%)", min: 0, max: 100 },
   },
   defaultProps: {
-    eyebrow: "",
-    title: "",
-    subtitle: "",
-    quote: { text: "", author: "" },
-    cta: { label: "", href: "" },
-    accentWord: "",
-    accentColor: "egyptian-gold",
-    showTimer: true,
+    imageProfile: "/hero/zorg-cabinet.png",
+    imageFace: "/hero/zorg-cabinet2.png",
+    quoteText: "Солнце Египта, Угаснет",
+    sunSize: 380,
+    sunTop: 42,
+    sunLeft: 44,
   },
   render: (props) => <Hero {...props} />,
 };
