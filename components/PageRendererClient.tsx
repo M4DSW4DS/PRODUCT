@@ -1,6 +1,6 @@
 "use client";
 
-import { Render } from "@puckeditor/core/rsc";
+import { Render } from "@puckeditor/core";
 import type { Data } from "@puckeditor/core";
 import { blocksConfig } from "@/lib/blocks";
 
