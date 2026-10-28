@@ -6,51 +6,23 @@
   },
   "content": [
     {
-      "type": "Hero2",
+      "type": "Hero",
       "props": {
-        "imageProfile": "/hero/zorg-cabinet.png",
-        "imageFace": "/hero/zorg-cabinet2.png",
-        "quoteText": "Солнце Египта, Угаснет",
-        "sphereSize": 380,
-        "sphereTop": 42,
-        "sphereLeft": 44,
-        "id": "Hero2-2c76da18-2468-4c06-94ad-ff1a5864bb73"
-      }
-    },
-    {
-      "type": "Hero3",
-      "props": {
-        "imageProfile": "/hero/zorg-cabinet.png",
-        "imageFace": "/hero/zorg-cabinet2.png",
-        "quoteText": "Солнце Египта, Угаснет",
-        "sunSize": 380,
-        "sunTop": 42,
-        "sunLeft": 44,
-        "id": "Hero3-b6bda7d0-2d9d-490a-bd75-72d335a240b8"
-      }
-    },
-    {
-      "type": "Hero4",
-      "props": {
-        "imageProfile": "/hero/zorg-cabinet.png",
-        "imageFace": "/hero/zorg-cabinet2.png",
-        "quoteText": "Солнце Египта, Угаснет",
-        "sunSize": 380,
-        "sunTop": 42,
-        "sunLeft": 44,
-        "id": "Hero4-b7b345fc-0bdb-4edb-a3cc-88636033a8ed"
-      }
-    },
-    {
-      "type": "Hero5",
-      "props": {
-        "imageProfile": "/hero/zorg-cabinet.png",
-        "imageFace": "/hero/zorg-cabinet2.png",
-        "quoteText": "Солнце Египта, Угаснет",
-        "sunSize": 380,
-        "sunTop": 42,
-        "sunLeft": 44,
-        "id": "Hero5-a6b0e291-2df9-470d-85d1-a25e19bec2ea"
+        "eyebrow": "",
+        "title": "",
+        "subtitle": "",
+        "quote": {
+          "text": "",
+          "author": ""
+        },
+        "cta": {
+          "label": "EDIT",
+          "href": "http://localhost:3000/admin"
+        },
+        "accentWord": "",
+        "accentColor": "egyptian-gold",
+        "showTimer": true,
+        "id": "Hero-ddb1966f-ce3e-4871-a944-91db87e57e6b"
       }
     },
     {
@@ -92,6 +64,16 @@
           }
         ],
         "id": "Faq-a457bfc7-23e6-4067-8ab0-32140496d322"
+      }
+    },
+    {
+      "type": "Timer1",
+      "props": {
+        "title": "До затмения осталось",
+        "targetDate": "2027-08-02T13:02:00+03:00",
+        "accentColor": "egyptian-gold",
+        "showLabels": true,
+        "id": "Timer1-1d24291b-36e5-4e49-8dbc-d42ec16d34e2"
       }
     }
   ],
