@@ -1,70 +1,114 @@
 "use client";
 
-import { useRef, useLayoutEffect, type ReactNode } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useEffect, useState, type ReactNode } from "react";
 import { ZorgCabinet } from "./internal/ZorgCabinet";
-import { HeroHUD } from "./internal/HeroHUD";
-
-gsap.registerPlugin(ScrollTrigger);
-
-function useGSAP(callback: () => void, config?: { scope?: any }) {
-  useLayoutEffect(() => {
-    const ctx = gsap.context(callback, config?.scope?.current ?? undefined);
-    return () => ctx.revert();
-  }, []);
-}
 
 export type HeroProps = {
-  eyebrow: ReactNode;
-  title: ReactNode;
-  subtitle: ReactNode;
-  quote: { text?: ReactNode; author?: ReactNode } | string;
-  cta: { label?: ReactNode; href?: string } | string;
+  eyebrow?: ReactNode;
+  title?: ReactNode;
+  subtitle?: ReactNode;
+  quote?: { text?: ReactNode; author?: ReactNode } | string;
+  cta?: { label?: ReactNode; href?: string } | string;
   accentWord?: ReactNode;
   accentColor?: string;
   showTimer?: boolean;
+  titleSize?: "sm" | "md" | "lg" | "xl";
+  subtitleSize?: "sm" | "md" | "lg";
 };
 
-const ACCENT_MAP: Record<string, string> = {
-  "egyptian-gold": "text-[#c9a96e]",
-  "neon-cyan": "text-[#00e5ff]",
-  "eclipse-orange": "text-[#ff6b35]",
-  white: "text-white",
+const TITLE_SIZE: Record<string, string> = {
+  sm: "text-3xl md:text-4xl",
+  md: "text-4xl md:text-5xl",
+  lg: "text-5xl md:text-7xl",
+  xl: "text-6xl md:text-8xl",
+};
+
+const SUBTITLE_SIZE: Record<string, string> = {
+  sm: "text-base md:text-lg",
+  md: "text-lg md:text-xl",
+  lg: "text-xl md:text-2xl",
 };
 
 export function Hero(props: HeroProps) {
-  const showTimer = props.showTimer ?? true;
   const rootRef = useRef<HTMLElement>(null);
-  const cabinetRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const scrollRef = useRef<number | null>(null);
 
-  const quoteText = typeof props.quote === "object" && props.quote !== null ? props.quote.text : "";
-  const quoteAuthor = typeof props.quote === "object" && props.quote !== null ? props.quote.author : "";
-  const ctaLabel = typeof props.cta === "object" && props.cta !== null ? props.cta.label : "";
-  const ctaHref = typeof props.cta === "object" && props.cta !== null ? props.cta.href : "";
+  // prefers-reduced-motion check
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
-  useGSAP(() => {
-    gsap.fromTo(".hero-text", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" });
+  // IntersectionObserver for entry animation
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: "top top",
-        end: "+=100%",
-        scrub: 1,
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setVisible(true);
+          }
+        });
       },
-    });
+      { threshold: 0.2 }
+    );
 
-    // Фон темнеет до 0.8 (20% яркости) и солнце выходит на 1.0 — параллельно, без задержки
-    tl.to(".hero-text, .hero-desk-ui", { opacity: 0, duration: 1 }, 0);
-    tl.to(".hero-dark-overlay", { opacity: 0.8, duration: 1 }, 0);
-    tl.to(".sun-body", { opacity: 1, duration: 1, ease: "power2.inOut" }, 0);
-  }, { scope: rootRef });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Parallax on scroll using requestAnimationFrame
+  useEffect(() => {
+    if (reduced) return;
+
+    const el = rootRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      if (reduced) return;
+      cancelAnimationFrame(scrollRef.current!);
+      scrollRef.current = requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const viewportH = window.innerHeight;
+        const scrollProgress = Math.max(0, Math.min(1, 1 - rect.top / viewportH));
+        // Parallax: translate Y by scrollProgress * -20%
+        const parallaxY = scrollProgress * -20;
+        // Apply to sun/corona elements
+        const sun = document.querySelector(".sun-body");
+        const corona = document.querySelector(".corona-flares");
+        if (sun) {
+          sun.style.transform = `translate3d(0, ${parallaxY}px, 0)`;
+        }
+        if (corona) {
+          corona.style.transform = `translate3d(0, ${parallaxY * 0.5}px, 0)`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // initial
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(scrollRef.current!);
+    };
+  }, [reduced]);
 
   return (
-    <section ref={rootRef} className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black">
-      <ZorgCabinet ref={cabinetRef} />
+    <section
+      ref={rootRef}
+      className="relative h-[100dvh] w-full overflow-hidden bg-cosmic-black"
+      style={{
+        transition: reduced ? "none" : "",
+      }}
+    >
+      <ZorgCabinet />
 
       {/* Сфера солнца — фиксированные дефолты, без админки */}
       <div
@@ -80,37 +124,81 @@ export function Hero(props: HeroProps) {
         <div className="corona-flares" />
         <div
           className="sun-body relative absolute inset-0 rounded-full"
-          style={{ boxShadow: "0 0 100px rgba(0, 229, 255, 0.75)" }}
+          style={{
+            boxShadow: "0 0 100px rgba(0, 229, 255, 0.75)",
+            transition: reduced ? "transform 0s" : "transform 600ms ease-out",
+          }}
         />
         <div className="moon-body" />
       </div>
 
       <div className="hero-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full max-w-4xl px-6 pointer-events-auto">
-        {props.eyebrow && <p className="font-mono text-sm tracking-widest text-egyptian-gold mb-4">{props.eyebrow}</p>}
+        {props.eyebrow && (
+          <p
+            className={`
+              font-mono text-sm tracking-widest text-egyptian-gold mb-4
+              ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+              transition-all duration-800 ease-out
+            `}
+          >
+            {props.eyebrow}
+          </p>
+        )}
         {props.title && (
-          <h1 className="font-display text-5xl md:text-7xl text-white mb-6 leading-tight">
+          <h1
+            className={`
+              ${TITLE_SIZE[props.titleSize || "lg"]}
+              mb-6 leading-tight
+              ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}
+              transition-all duration-800 ease-out
+            `}
+          >
             {props.title}
             {props.accentWord && (
-              <span className={ACCENT_MAP[props.accentColor ?? "egyptian-gold"] ?? ""}> {props.accentWord}</span>
+              <span
+                className={props.accentColor ? ACCENT_MAP[props.accentColor] : ""}
+              >
+                {props.accentWord}
+              </span>
             )}
           </h1>
         )}
-        {props.subtitle && <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">{props.subtitle}</p>}
-        {quoteText && (
+        {props.subtitle && (
+          <p
+            className={`
+              ${SUBTITLE_SIZE[props.subtitleSize || "md"]}
+              text-white/80 mb-8 max-w-2xl mx-auto
+              ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+              transition-all duration-800 ease-out delay-200
+            `}
+          >
+            {props.subtitle}
+          </p>
+        )}
+        {props.quoteText && (
           <div className="mb-8">
-            <p className="font-display italic text-xl text-neon-cyan">{quoteText}</p>
-            {quoteAuthor && <p className="font-mono text-xs text-white/50 mt-2">{quoteAuthor}</p>}
+            <p className="font-display italic text-xl text-neon-cyan">
+              {props.quoteText}
+            </p>
+            {props.quoteAuthor && (
+              <p className="font-mono text-xs text-white/50 mt-2">
+                {props.quoteAuthor}
+              </p>
+            )}
           </div>
         )}
-        {ctaLabel && (
-          <a href={ctaHref || "#"} className="inline-block border-2 border-egyptian-gold text-egyptian-gold px-8 py-3 font-mono uppercase tracking-widest hover:bg-egyptian-gold hover:text-black transition-colors pointer-events-auto">
-            {ctaLabel}
+        {props.ctaLabel && props.ctaHref && (
+          <a
+            href={props.ctaHref || "#"}
+            className="inline-block border-2 border-egyptian-gold text-egyptian-gold px-8 py-3 font-mono uppercase tracking-widest hover:bg-egyptian-gold hover:text-black transition-colors pointer-events-auto"
+          >
+            {props.ctaLabel}
           </a>
         )}
       </div>
 
       <div className="absolute bottom-[4vh] left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-6 hero-desk-ui">
-        <HeroHUD timerRef={timerRef} showTimer={showTimer} />
+        <div>{props.showTimer !== false && <div>Timer</div>}</div>
       </div>
 
       <div className="hero-dark-overlay absolute inset-0 z-20 bg-cosmic-black opacity-0 pointer-events-none" />
