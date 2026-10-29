@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Config } from "@puckeditor/core";
+import type { Config, ComponentConfig } from "@puckeditor/core";
 import { HeadingSchema } from "./Heading/schema";
 import { HeroSchema } from "./Hero/schema";
 import { Timer1Schema } from "./Timer1/schema";
@@ -7,6 +7,7 @@ import { Timer2Schema } from "./Timer2/schema";
 import { FeaturesSchema } from "./Features/schema";
 import { PartnerWidgetSchema } from "./PartnerWidget/schema";
 import { FaqSchema } from "./Faq/schema";
+import { CinematicHeroSchema } from "./CinematicHero/schema";
 import { SceneSchema } from "./Scene/schema";
 import { eclipseSceneConfig } from "./EclipseScene/schema";
 import { TextBlockSchema } from "./TextBlock/schema";
@@ -31,6 +32,7 @@ export const blocksConfig: Config = {
     EclipseScene: eclipseSceneConfig,
     TextBlock: TextBlockSchema,
     GridBlock: GridBlockSchema,
+    CinematicHero: CinematicHeroSchema as ComponentConfig<any>,
   },
   categories: {
     primary: {
@@ -44,6 +46,10 @@ export const blocksConfig: Config = {
     effects: {
       title: "Эффекты",
       components: ["EclipseScene"],
+    },
+    "Визуальные эффекты": {
+      title: "Визуальные эффекты",
+      components: ["CinematicHero"],
     },
   },
   root: {
