@@ -4,11 +4,11 @@ import type { FeaturesProps } from "./index";
 
 export const FeaturesSchema: ComponentConfig<FeaturesProps> = {
   fields: {
-    title: { type: "text", contentEditable: true, label: "Заголовок блока" },
-    speed: { type: "number", label: "Скорость прокрутки (пиксели/кадр)", min: 0.5, max: 10 },
+    title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
+    speed: { type: "number", label: "Скорость (speed)", min: 0.5, max: 10 },
     items: {
       type: "array",
-      label: "Карточки (преимущества)",
+      label: "Элементы (items)",
       getItemSummary: (item) => item.title || "Новая карточка",
       defaultItemProps: {
         icon: "⚡",
@@ -17,10 +17,10 @@ export const FeaturesSchema: ComponentConfig<FeaturesProps> = {
         modalText: "Развернутое описание для модального окна.",
       },
       arrayFields: {
-        icon: { type: "text", label: "Иконка (эмодзи)" },
-        title: { type: "text", label: "Заголовок" },
-        description: { type: "textarea", label: "Краткое описание (на карточке)" },
-        modalText: { type: "textarea", label: "Развернутый текст (в модальном окне)" },
+        icon: { type: "text", label: "Иконка (icon)" },
+        title: { type: "text", label: "Заголовок (title)" },
+        description: { type: "textarea", label: "Описание (description)" },
+        modalText: { type: "textarea", label: "Текст модалки (modalText)" },
       },
     },
   },

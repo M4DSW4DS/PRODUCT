@@ -4,22 +4,22 @@ import type { Timer2Props } from "./index";
 
 export const Timer2Schema: ComponentConfig<Timer2Props> = {
   fields: {
-    targetDate: { type: "text", label: "Целевая дата (ISO)" },
+    targetDate: { type: "text", label: "Дата цели (targetDate)" },
     size: {
       type: "radio",
-      label: "Размер цифр",
+      label: "Размер (size)",
       options: [
         { label: "Мелкий", value: "sm" },
         { label: "Средний", value: "md" },
         { label: "Крупный", value: "lg" },
       ],
     },
-    glow: { type: "radio", label: "Свечение (Glow)", options: [{ label: "Вкл", value: true }, { label: "Выкл", value: false }] },
-    cardBg: { type: "radio", label: "Фон-карточка", options: [{ label: "Вкл", value: true }, { label: "Выкл", value: false }] },
+    glow: { type: "radio", label: "Свечение (glow)", options: [{ label: "Вкл", value: true }, { label: "Выкл", value: false }] },
+    cardBg: { type: "radio", label: "Фон карточки (cardBg)", options: [{ label: "Вкл", value: true }, { label: "Выкл", value: false }] },
     labelDays: { type: "text", label: "Подпись: Дни" },
-    labelHours: { type: "text", label: "Подпись: Часы" },
-    labelMinutes: { type: "text", label: "Подпись: Минуты" },
-    labelSeconds: { type: "text", label: "Подпись: Секунды" },
+    labelHours: { type: "text", label: "Подпись часов (labelHours)" },
+    labelMinutes: { type: "text", label: "Подпись минут (labelMinutes)" },
+    labelSeconds: { type: "text", label: "Подпись секунд (labelSeconds)" },
   },
   defaultProps: {
     targetDate: "2027-08-02T13:02:00+03:00",

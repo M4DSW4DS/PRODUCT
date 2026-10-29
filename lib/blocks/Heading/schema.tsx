@@ -8,10 +8,10 @@ import type { HeadingProps } from "./index";
  */
 export const HeadingSchema: ComponentConfig<HeadingProps> = {
   fields: {
-    title: { type: "text", contentEditable: true, label: "Заголовок (основной текст блока)" },
+    title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
     level: {
       type: "radio",
-      label: "Уровень заголовка (H1–H6)",
+      label: "Уровень (level)",
       options: [
         { label: "H1", value: "h1" },
         { label: "H2", value: "h2" },
@@ -20,7 +20,7 @@ export const HeadingSchema: ComponentConfig<HeadingProps> = {
     },
     align: {
       type: "radio",
-      label: "Выравнивание (слева / по центру / справа)",
+      label: "Выравнивание (align)",
       options: [
         { label: "Слева", value: "left" },
         { label: "Центр", value: "center" },

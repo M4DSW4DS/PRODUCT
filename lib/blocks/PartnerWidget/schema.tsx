@@ -8,12 +8,12 @@ import type { PartnerWidgetProps } from "./index";
  */
 export const PartnerWidgetSchema: ComponentConfig<PartnerWidgetProps> = {
   fields: {
-    title: { type: "text", label: "Заголовок" },
-    subtitle: { type: "textarea", label: "Подзаголовок" },
-    src: { type: "text", label: "URL виджета (iframe)" },
-    height: { type: "text", label: "Высота iframe (px)" },
-    fallbackUrl: { type: "text", label: "Резервная ссылка" },
-    fallbackText: { type: "text", label: "Текст резервной ссылки" },
+    title: { type: "text", label: "Заголовок (title)" },
+    subtitle: { type: "textarea", label: "Подзаголовок (subtitle)" },
+    src: { type: "text", label: "Источник (src)" },
+    height: { type: "text", label: "Высота (height)" },
+    fallbackUrl: { type: "text", label: "Резервный URL (fallbackUrl)" },
+    fallbackText: { type: "text", label: "Резервный текст (fallbackText)" },
   },
   defaultProps: {
     title: "Регистрация на событие",

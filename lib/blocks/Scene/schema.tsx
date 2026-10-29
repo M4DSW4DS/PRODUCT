@@ -4,10 +4,10 @@ import type { SceneProps } from "./index";
 
 export const SceneSchema: ComponentConfig<SceneProps> = {
   fields: {
-    backgroundImage: { type: "text", label: "Фоновое изображение (URL)" },
+    backgroundImage: { type: "text", label: "Фоновое изображение (backgroundImage)" },
     overlay: {
       type: "radio",
-      label: "Затемнение фона",
+      label: "Затемнение (overlay)",
       options: [
         { label: "Без наложения", value: "none" },
         { label: "Сумерки", value: "dusk" },
@@ -16,7 +16,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     },
     content: {
       type: "slot",
-      label: "Элементы внутри сцены (Текст, Сетки, Анимации)",
+      label: "Содержимое (content)",
       allow: ["TextBlock", "GridBlock", "Features"],
     },
   },

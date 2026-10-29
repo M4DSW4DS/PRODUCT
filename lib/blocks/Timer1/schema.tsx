@@ -4,11 +4,11 @@ import type { Timer1Props } from "./index";
 
 export const Timer1Schema: ComponentConfig<Timer1Props> = {
   fields: {
-    title: { type: "text", contentEditable: true, label: "Заголовок над таймером" },
-    targetDate: { type: "text", label: "Целевая дата (ISO, напр. 2027-08-02T13:02:00+03:00)" },
+    title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
+    targetDate: { type: "text", label: "Дата цели (targetDate)" },
     accentColor: {
       type: "radio",
-      label: "Акцентный цвет",
+      label: "Акцентный цвет (accentColor)",
       options: [
         { label: "Золотой", value: "egyptian-gold" },
         { label: "Голубой", value: "neon-cyan" },

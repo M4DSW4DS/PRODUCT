@@ -6,37 +6,37 @@ export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
   fields: {
     height: {
       type: "number",
-      label: "Высота блока (px, занимаемое место на странице)",
+      label: "Высота (height)",
       min: 200,
       max: 2000,
     },
     size: {
       type: "number",
-      label: "Размер солнца (px)",
+      label: "Размер (size)",
       min: 100,
       max: 1400,
     },
     top: {
       type: "number",
-      label: "Позиция Y (% от верха контейнера)",
+      label: "Смещение сверху (top)",
       min: 0,
       max: 100,
     },
     left: {
       type: "number",
-      label: "Позиция X (% от левого края)",
+      label: "Смещение слева (left)",
       min: 0,
       max: 100,
     },
     progress: {
       type: "number",
-      label: "Стадия затмения (0 — новолуние, 100 — полное затмение)",
+      label: "Прогресс (progress)",
       min: 0,
       max: 100,
     },
     autoPlay: {
       type: "radio",
-      label: "Авто-проигрывание при появлении",
+      label: "Автовоспроизведение (autoPlay)",
       options: [
         { label: "Выкл", value: "no" },
         { label: "Вкл", value: "yes" },
@@ -44,13 +44,13 @@ export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
     },
     playDuration: {
       type: "number",
-      label: "Длительность авто-проигрывания (сек)",
+      label: "Длительность (playDuration)",
       min: 1,
       max: 30,
     },
     showCorona: {
       type: "radio",
-      label: "Показывать корону (всполохи)",
+      label: "Показывать корону (showCorona)",
       options: [
         { label: "Вкл", value: "yes" },
         { label: "Выкл", value: "no" },
@@ -58,7 +58,7 @@ export const eclipseSceneConfig: ComponentConfig<EclipseSceneProps> = {
     },
     darkenScene: {
       type: "radio",
-      label: "Затемнять фон при затмении",
+      label: "Затемнять сцену (darkenScene)",
       options: [
         { label: "Выкл", value: "no" },
         { label: "Вкл", value: "yes" },

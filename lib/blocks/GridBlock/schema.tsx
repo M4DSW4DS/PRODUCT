@@ -4,17 +4,17 @@ import type { GridBlockProps } from "./index";
 
 export const GridBlockSchema: ComponentConfig<GridBlockProps> = {
   fields: {
-    columns: { type: "radio", label: "Колонки", options: [ { label: "2", value: "2" }, { label: "3", value: "3" }, { label: "4", value: "4" } ] },
+    columns: { type: "radio", label: "Колонка (columns)", options: [ { label: "2", value: "2" }, { label: "3", value: "3" }, { label: "4", value: "4" } ] },
     items: {
       type: "array",
-      label: "Элементы сетки",
+      label: "Элементы (items)",
       getItemSummary: (item) => (typeof item.title === "string" ? item.title : "Элемент"),
       defaultItemProps: { id: "item-1", image: "", title: "Заголовок", description: "Описание элемента" },
       arrayFields: {
-        id: { type: "text", label: "ID" },
-        image: { type: "text", label: "Картинка (URL)" },
-        title: { type: "text", contentEditable: true, label: "Заголовок" },
-        description: { type: "textarea", contentEditable: true, label: "Описание" },
+        id: { type: "text", label: "ID (id)" },
+        image: { type: "text", label: "Изображение (image)" },
+        title: { type: "text", contentEditable: true, label: "Заголовок (title)" },
+        description: { type: "textarea", contentEditable: true, label: "Описание (description)" },
       },
     },
   },
