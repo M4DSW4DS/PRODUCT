@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+!DEPLOY.md
+.env
+.env.*
+!.env.example
+npm-debug.log*
+.DS_Store
+report_*.txt
+task_report.md
+handshake_report.md
