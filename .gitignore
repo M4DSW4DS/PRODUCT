@@ -50,3 +50,4 @@ screenshot*.js
 # next.js / dependencies (unanchored)
 .next/
 node_modules/
+report_*.txt
