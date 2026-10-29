@@ -51,3 +51,8 @@ screenshot*.js
 .next/
 node_modules/
 report_*.txt
+
+# Cline report artifacts
+task_report.md
+handshake_report.md
+*.report.md
