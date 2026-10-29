@@ -17,7 +17,7 @@ export const SceneSchema: ComponentConfig<SceneProps> = {
     content: {
       type: "slot",
       label: "Элементы внутри сцены (Текст, Сетки, Анимации)",
-      allow: ["TextBlock", "GridBlock", "EclipseAnimation", "Features"],
+      allow: ["TextBlock", "GridBlock", "Features"],
     },
   },
   defaultProps: {
